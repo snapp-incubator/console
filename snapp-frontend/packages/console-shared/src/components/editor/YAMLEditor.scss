@@ -1,0 +1,14 @@
+.ocs-yaml-editor {
+  &__root {
+    flex: 1;
+    position: relative;
+  }
+
+  &__wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+}

@@ -1,0 +1,6 @@
+reviewers:
+  - cyril-ui-developer
+approvers:
+  - jotak
+labels:
+  - kind/i18n

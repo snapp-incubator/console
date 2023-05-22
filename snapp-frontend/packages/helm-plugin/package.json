@@ -1,0 +1,23 @@
+{
+  "name": "@console/helm-plugin",
+  "version": "0.0.0-fixed",
+  "description": "Helm plugin contributes helm related features to Developer Console UI.",
+  "private": true,
+  "scripts": {
+    "coverage": "yarn test --coverage --collectCoverageFrom='[\"packages/helm-plugin/src/**\",\"!**/__tests__/**\",\"!packages/helm-plugin/src/test/**\"]'",
+    "lint": "yarn --cwd ../.. eslint packages/helm-plugin",
+    "test": "yarn --cwd ../.. test packages/helm-plugin"
+  },
+  "consolePlugin": {
+    "entry": "src/plugin.ts",
+    "exposedModules": {
+      "helmActions": "src/actions",
+      "helmCatalog": "src/catalog",
+      "helmComponents": "src/components",
+      "helmTopology": "src/topology",
+      "helmTopologySidebar": "src/topology/sidebar",
+      "helmUtils": "src/utils",
+      "helmProviders": "src/providers"
+    }
+  }
+}

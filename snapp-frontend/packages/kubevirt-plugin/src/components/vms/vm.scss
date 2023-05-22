@@ -1,0 +1,23 @@
+.kv-vm-list {
+  // Give kebab from last row enough space so it will be included in WindowScroller computation
+  padding-bottom: 15em;
+}
+
+.kv-vm-row_status-extra-label {
+  color: var(--pf-global--Color--100);
+}
+
+.kv-vm-quickstart-icon {
+  margin-right: var(--pf-global--spacer--sm);
+}
+
+.kv-vm-resource--details-item {
+  display: inline-block;
+  p.text-muted {
+    color: unset;
+  }
+}
+
+.kv-vm-resource--link-pending-changes {
+  margin-left: var(--pf-global--spacer--sm);
+}

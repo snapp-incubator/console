@@ -1,0 +1,37 @@
+import * as React from 'react';
+import { QuickStartCatalogPage as PfQuickStartCatalogPage } from '@patternfly/quickstarts';
+import { Helmet } from 'react-helmet';
+import { useTranslation } from 'react-i18next';
+import { LoadingBox } from '@console/internal/components/utils';
+import QuickStartsLoader from './loader/QuickStartsLoader';
+
+import './QuickStartCatalogPage.scss';
+
+const QuickStartCatalogPage: React.FC = () => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <Helmet>
+        <title>{t('console-app~Quick Starts')}</title>
+      </Helmet>
+      <QuickStartsLoader>
+        {(quickStarts, loaded) =>
+          loaded ? (
+            <PfQuickStartCatalogPage
+              quickStarts={quickStarts}
+              showFilter
+              title={t('console-app~Quick Starts')}
+              hint={t(
+                'console-app~Learn how to create, import, and run applications on OpenShift with step-by-step instructions and tasks.',
+              )}
+            />
+          ) : (
+            <LoadingBox />
+          )
+        }
+      </QuickStartsLoader>
+    </>
+  );
+};
+
+export default QuickStartCatalogPage;

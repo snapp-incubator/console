@@ -1,0 +1,41 @@
+@import '../../../../../public/style/vars';
+
+.ocs-page-layout {
+  &__content {
+    padding:  $pf-global-gutter--md $pf-global-gutter;
+    background-color: var(--pf-global--BackgroundColor--200);
+    @media (min-width: $pf-global--breakpoint--xl) {
+      padding-left: $pf-global-gutter--md;
+      padding-right: $pf-global-gutter--md;
+    }
+
+    flex: 1;
+
+    &.is-dark {
+      background: var(--pf-global--BackgroundColor--100);
+    }
+  }
+
+  &__header {
+    background-color: var(--pf-global--BackgroundColor--light-100);
+  }
+
+  &__hint {
+    padding-bottom: var(--pf-global--spacer--md);
+    padding: 0 $pf-global-gutter $pf-global-gutter--md;
+
+    @media (min-width: $pf-global--breakpoint--xl) {
+      padding-left: $pf-global-gutter--md;
+      padding-right: $pf-global-gutter--md;
+    }
+  }
+
+  &__title {
+    padding: 0 $pf-global-gutter;
+
+    @media (min-width: $pf-global--breakpoint--xl) {
+      padding-left: $pf-global-gutter--md;
+      padding-right: $pf-global-gutter--md;
+    }
+  }
+}

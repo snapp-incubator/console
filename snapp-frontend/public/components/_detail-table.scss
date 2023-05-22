@@ -1,0 +1,60 @@
+.co-detail-table {
+  text-align: center;
+  border-width: 1px;
+  max-width: 800px;
+  white-space: nowrap;
+
+  &--lg {
+    max-width: 900px;
+  }
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  &,
+  &__section {
+    border-color: var(--pf-global--BorderColor--300);
+    border-style: solid;
+  }
+
+  &__section {
+    align-items: center;
+    border-width: 1px 1px 0 0;
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: center;
+    padding: 20px 10px;
+    margin-right: -1px;
+    margin-top: -1px;
+
+    &--last {
+      border-right-width: 0;
+    }
+
+    &-header {
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+  }
+
+  $bracket-height: 48px;
+  &__bracket {
+    width: 12px;
+    height: $bracket-height;
+    background: url('../imgs/bracket.svg') center center no-repeat;
+    background-size: 12px $bracket-height;
+    padding: 0 20px;
+  }
+
+  &__breakdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: $bracket-height - 1px;
+    text-align: left;
+  }
+}

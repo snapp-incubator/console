@@ -1,0 +1,8 @@
+reviewers:
+  - TheRealJon
+  - spadgett
+approvers:
+  - TheRealJon
+  - spadgett
+labels:
+  - component/olm

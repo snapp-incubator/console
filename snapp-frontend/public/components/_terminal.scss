@@ -1,0 +1,38 @@
+@import '~xterm/css/xterm.css';
+
+$console-z-index: $zindex-navbar-fixed + 20;
+$console-collapse-link-z-index: $console-z-index + 20;
+
+.co-terminal > .terminal {
+  color: $pf-color-white;
+  padding: 10px;
+  background-color: $pf-color-black-1000;
+}
+
+.co-terminal > .terminal.fullscreen {
+  z-index: $console-z-index; // in fullscreen mode, to get above $zindex-navbar-fixed
+}
+
+.co-terminal {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background-color: $pf-color-black-1000;
+  position: relative;
+  > .terminal {
+    height: 100%;
+  }
+}
+
+.co-terminal-collapse-link.pf-c-button {
+  background: rgba(0, 0, 0, 0.75) !important;
+  color: $pf-color-blue-300;
+  position: fixed;
+  right: 18px;
+  top: 4px;
+  z-index: $console-collapse-link-z-index; // in fullscreen mode, to get above console's z-index
+}
+
+.default-overflow {
+  overflow: visible !important;
+}
