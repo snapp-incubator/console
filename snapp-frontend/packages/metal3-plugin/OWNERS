@@ -1,0 +1,10 @@
+reviewers:
+  - jtomasek
+  - honza
+  - flofuchs
+approvers:
+  - jtomasek
+  - honza
+  - flofuchs
+labels:
+  - component/metal3

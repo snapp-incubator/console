@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "outDir": "./public/dist/build/",
+    "target": "es2016",
+    "jsx": "react",
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "noUnusedLocals": true,
+    "typeRoots": ["node_modules/@types", "@types"],
+    "types": ["node", "jest", "cypress", "cypress-axe", "cypress-file-upload", "console"]
+  },
+  "exclude": [
+    ".yarn",
+    "**/node_modules",
+    "**/dist",
+    "packages/console-dynamic-plugin-sdk/scripts"
+  ],
+  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx", "**/*.json"]
+}

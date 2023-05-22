@@ -1,0 +1,21 @@
+.oc-kebab {
+  &__popper-items {
+    position: initial !important;
+  }
+
+  &__sub.pf-c-dropdown__menu-item {
+    --pf-c-dropdown__menu-item--PaddingRight: var(--pf-global--spacer--lg);
+
+    position: relative;
+  }
+
+  &__arrow {
+    position: absolute;
+    right: var(--pf-global--spacer--xs);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+.oc-kebab__icon {
+  margin-right: calc(2 * var(--pf-c-dropdown__toggle-icon--MarginRight));
+}

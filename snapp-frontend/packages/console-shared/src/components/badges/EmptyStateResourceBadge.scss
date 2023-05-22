@@ -1,0 +1,10 @@
+.ocs-empty-state-resource-badge {
+  margin-bottom: var(--pf-global--spacer--md);
+  &--badge {
+    &.pf-c-badge {
+      --pf-c-badge--Color: var(--pf-global--palette--white);
+      --pf-c-badge--FontSize: var(--pf-global--icon--FontSize--md);
+      --pf-c-badge--BackgroundColor: var(--pf-global--Color--400);
+    }
+  }
+}

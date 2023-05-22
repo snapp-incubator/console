@@ -1,0 +1,48 @@
+.co-label.pf-c-label {
+  --pf-c-label__text--MaxWidth: 100%;
+}
+
+.co-label,
+.co-label-group > *,
+.co-label-group li,
+.co-label-group ul {
+  min-width: 0;
+}
+
+.co-label-group {
+  max-width: 100%;
+}
+
+.co-label__key,
+.co-label__value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+tags-input {
+  min-width: 100%;
+}
+
+tags-input .tags {
+  align-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pf-global--spacer--xs);
+  min-height: 120px;
+
+  > span {
+    display: contents; // enable truncation in the edit labels modal
+  }
+}
+
+tags-input .tags .input {
+  background: transparent;
+  border: 1px solid transparent;
+  flex-grow: 1;
+  outline: none;
+}
+
+tags-input .tags .input.invalid-tag {
+  color: var(--pf-global--danger-color--100);
+}

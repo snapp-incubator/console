@@ -1,0 +1,118 @@
+$overview-sidebar-width: 550px;
+
+.overview {
+  overflow: hidden; // hide .overview__sidebar box-shadow at top
+  position: relative;
+
+  .overview__main-column {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .overview__sidebar {
+    background: #fff;
+    bottom: 0;
+    box-shadow: var(--pf-global--BoxShadow--md);
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: calc(100% - 15px);
+    z-index: 5;
+    @media(min-width: $screen-sm-min) {
+      max-width: $overview-sidebar-width;
+    }
+  }
+
+  .overview__sidebar-appear {
+    opacity: 0;
+    transform: translateX(10%);
+  }
+
+  .overview__sidebar-appear-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+      opacity 175ms ease-out,
+      transform 225ms ease-out;
+  }
+
+  &.overview--sidebar-shown {
+    .overview__sidebar {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media(min-width: $screen-lg-min) {
+      .overview__main-column {
+        margin-right: $overview-sidebar-width;
+      }
+    }
+  }
+}
+
+.overview__sidebar-pane-body {
+  padding: 0 20px;
+  min-height: 200px;
+}
+
+.overview__sidebar-pane-head {
+  padding-top: 5px;
+
+  .co-m-pane__heading {
+    font-size: var(--pf-global--FontSize--xl);
+    margin: 0 20px var(--pf-global--spacer--md);
+  }
+
+  .co-actions-menu {
+    margin-top: -3px;
+  }
+}
+
+.overview__pod-donut-sm {
+  width: var(--pf-global--icon--FontSize--lg);
+}
+
+.resource-overview {
+  height: 100%;
+  min-height: 0;
+  padding-bottom: 30px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.resource-overview__body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pf-global--spacer--lg);
+}
+
+.resource-overview__details,
+.resource-overview__summary {
+  flex: 1;
+  min-width: 200px;
+}
+
+.resource-overview__pod-counts {
+  width: 100%;
+}
+
+.sidebar__section-heading {
+  font-size: 18px;
+  margin: 30px 0 10px;
+}
+
+.sidebar__section-view-all {
+  font-size: 14px;
+  margin-left: var(--pf-global--spacer--sm);
+}
+
+.sidebar__section-owner-operator-heading {
+  display: flex;
+}
+
+.sidebar__section-owner-reference-operator {
+  padding-left: var(--pf-global--spacer--sm);
+}

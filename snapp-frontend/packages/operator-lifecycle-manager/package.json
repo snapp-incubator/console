@@ -1,0 +1,20 @@
+{
+  "name": "@console/operator-lifecycle-manager",
+  "version": "0.0.0-fixed",
+  "description": "A management framework for extending Kubernetes with Operators",
+  "main": "src/index.ts",
+  "private": true,
+  "dependencies": {
+    "@console/plugin-sdk": "0.0.0-fixed"
+  },
+  "consolePlugin": {
+    "entry": "src/plugin.tsx",
+    "exposedModules": {
+      "utils": "src/utils/index.ts",
+      "topology": "src/components/topology",
+      "topologySidebar": "src/components/topology/sidebar",
+      "actions": "src/actions",
+      "install": "src/components/operator-install-page"
+    }
+  }
+}

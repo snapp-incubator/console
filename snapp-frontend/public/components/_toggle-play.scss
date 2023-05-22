@@ -1,0 +1,24 @@
+.co-toggle-play.pf-c-button {
+  background-color: var(--pf-global--BackgroundColor--100);
+  border: var(--pf-global--BorderWidth--lg) solid var(--pf-global--BorderColor--100);
+  border-radius: 50%;
+  height: 32px;
+  margin-right: 15px;
+  padding: 0;
+  width: 32px;
+
+  // play icon
+  &.co-toggle-play--inactive:before {
+    @include font-awesome-free-solid;
+    content: fa-content($fa-var-play);
+  }
+  // pause icon
+  &.co-toggle-play--active:before {
+    @include font-awesome-free-solid;
+    content: fa-content($fa-var-pause);
+  }
+
+  &.co-toggle-play--active {
+    border-color: var(--pf-global--palette--green-300); // brighter green that works for both light and dark themes
+  }
+}

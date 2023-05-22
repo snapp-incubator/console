@@ -1,0 +1,84 @@
+html,
+body,
+#app,
+.pf-c-drawer {
+  height: 100%;
+}
+
+#app,
+#content {
+  display: flex;
+  flex-basis: 100%;
+  flex-direction: column;
+  height: 100%;
+}
+
+#content-scrollable {
+  overflow: auto;
+  height: 100%;
+}
+.co-m-page__body {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.co-m-app__content {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  height: 100%; // doesn't work on safari without height
+}
+
+.co-m-app__content > .pf-c-page {
+  height: 0;
+  flex: 1;
+}
+
+.co-p-has-sidebar {
+  position: relative;
+  display: flex;
+  flex: 1;
+  height: 100%;
+
+  &__body {
+    flex: 1 1 auto;
+  }
+
+  &__close-button {
+    font-size: 21px !important;
+    line-height: 1 !important;
+    padding: 0 !important;
+  }
+
+  &__sidebar {
+    position: relative;
+    @media (min-width: $screen-md-min) {
+      flex: 1 0 auto;
+      overflow-y: auto;
+    }
+
+    &--bordered {
+      @media (max-width: $screen-sm-max) {
+        border-top: var(--pf-global--BorderWidth--sm) solid var(--pf-global--BorderColor--100);
+      }
+      @media (min-width: $screen-md-min) {
+        border-left: var(--pf-global--BorderWidth--sm) solid var(--pf-global--BorderColor--100);
+      }
+    }
+  }
+
+  &__sidebar-body {
+    position: absolute;
+    width: 100%;
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  &__sidebar-heading {
+    @include co-break-word;
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+}

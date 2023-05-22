@@ -1,0 +1,42 @@
+# OpenShift Console API
+
+<%# Table of contents _%>
+<% apis.forEach((api, index) => { _%>
+<%- index + 1 %>. <%- api.doc.deprecated ? '[DEPRECATED]' : '' %> [`<%- api.name %>`](#<%- toLowerCase(api.name) %>)
+<% }); _%>
+
+<%# Generate one section per extension type _%>
+<% apis.forEach((api) => { _%>
+---
+
+## `<%- api.name %>`
+
+### Summary <%- api.doc.deprecated ? '[DEPRECATED]' : '' %>
+
+<%- printComments((api.doc.deprecated ? api.doc.deprecated : '') + api.doc.summary) || '(not available)' %>
+
+<% if(api.doc.example) { %>
+
+### Example
+
+<%- api.doc.example  %>
+
+<% } %>
+
+<% if(api.doc.parameters?.length > 0) { %>
+### Parameters
+
+| Parameter Name | Description |
+| -------------- | ----------- |
+<% api.doc.parameters.forEach((param) => { _%>
+| `<%- param.parameterName %>` | <%- removeNewLines(param.description) %> |
+<% }); _%>
+<% } %>
+
+<% if(api.doc.returns) { %>
+### Returns
+
+<%- printComments(api.doc.returns) %>
+
+<% } %>
+<% }); _%>

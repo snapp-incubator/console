@@ -1,0 +1,42 @@
+// Base element styles.
+// Please DO NOT add rules of this type.
+
+dd {
+  margin-bottom: var(--pf-global--spacer--lg);
+}
+
+dd:last-child {
+  margin-bottom: 0;
+}
+
+dl {
+  margin: 0;
+}
+
+// match pf4 styling / table col head styling
+dt {
+  font-weight: var(--pf-global--FontWeight--bold);
+}
+
+fieldset {
+  border: 0;
+}
+
+input[type="number"] {
+  -webkit-appearance: textfield;
+  appearance: textfield;
+  max-width: 100px;
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+input[type="radio"] {
+  margin-right: 7px;
+}
+
+ol,
+ul {
+  padding-left: 20px;
+}
