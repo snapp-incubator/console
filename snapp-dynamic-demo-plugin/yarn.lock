@@ -73,7 +73,7 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@openshift-console/dynamic-plugin-sdk-webpack@file:../frontend/packages/console-dynamic-plugin-sdk/dist/webpack":
+"@openshift-console/dynamic-plugin-sdk-webpack@file:../snapp-frontend/packages/console-dynamic-plugin-sdk/dist/webpack":
   version "0.0.0-fixed"
   dependencies:
     ajv "^6.12.3"
@@ -85,7 +85,7 @@
     semver "6.x"
     webpack "^5.73.0"
 
-"@openshift-console/dynamic-plugin-sdk@file:../frontend/packages/console-dynamic-plugin-sdk/dist/core":
+"@openshift-console/dynamic-plugin-sdk@file:../snapp-frontend/packages/console-dynamic-plugin-sdk/dist/core":
   version "0.0.0-fixed"
   dependencies:
     "@patternfly/quickstarts" "2.4.0"
@@ -106,7 +106,7 @@
     typesafe-actions "^4.2.1"
     whatwg-fetch "2.x"
 
-"@openshift-console/plugin-shared@file:../frontend/packages/console-plugin-shared/dist":
+"@openshift-console/plugin-shared@file:../snapp-frontend/packages/console-plugin-shared/dist":
   version "0.0.2"
   dependencies:
     classnames "2.x"
