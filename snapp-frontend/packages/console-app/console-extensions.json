@@ -456,6 +456,23 @@
     }
   },
   {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "add",
+      "perspective": "admin",
+      "name": "%devconsole~+Add%",
+      "href": "/add",
+      "namespaced": true,
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-add",
+        "data-test-id": "+Add-header"
+      }
+    },
+    "flags": {
+      "required": ["OPENSHIFT"]
+    }
+  },
+  {
     "type": "console.navigation/section",
     "properties": {
       "perspective": "admin",
@@ -465,13 +482,50 @@
     }
   },
   {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "topology",
+      "perspective": "admin",
+      "name": "%devconsole~Topology%",
+      "href": "/topology",
+      "insertAfter": "home",
+      "namespaced": true,
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-topology",
+        "data-test-id": "topology-header"
+      }
+    },
+    "flags": {
+      "required": ["OPENSHIFT"]
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "observe",
+      "perspective": "admin",
+      "name": "%devconsole~Observe%",
+      "href": "/dev-monitoring",
+      "namespaced": true,
+      "insertAfter": "topology",
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-monitoring",
+        "data-tour-id": "tour-monitoring-nav",
+        "data-test-id": "monitoring-header"
+      }
+    },
+    "flags": {
+      "required": ["OPENSHIFT", "MONITORING"]
+    }
+  },
+  {
     "type": "console.navigation/section",
     "properties": {
       "perspective": "admin",
       "id": "operators",
       "name": "%console-app~Operators%",
       "dataAttributes": { "data-quickstart-id": "qs-nav-operators" },
-      "insertAfter": "home"
+      "insertAfter": "observe"
     }
   },
   {
@@ -1778,90 +1832,6 @@
           }
         }
       }
-    }
-  },
-  {
-    "type": "console.navigation/section",
-    "properties": {
-      "perspective": "admin",
-      "id": "developers",
-      "insertAfter": "home",
-      "name": "%devconsole~Developers%",
-      "dataAttributes": { "data-quickstart-id": "qs-nav-developers" }
-    }
-  },
-  {
-    "type": "console.navigation/href",
-    "properties": {
-      "id": "add",
-      "perspective": "admin",
-      "section": "developers",
-      "name": "%devconsole~+Add%",
-      "href": "/add",
-      "namespaced": true,
-      "dataAttributes": {
-        "data-quickstart-id": "qs-nav-add",
-        "data-test-id": "+Add-header"
-      }
-    },
-    "flags": {
-      "required": ["OPENSHIFT"]
-    }
-  },
-  {
-    "type": "console.navigation/href",
-    "properties": {
-      "id": "topology",
-      "perspective": "admin",
-      "section": "developers",
-      "name": "%devconsole~Topology%",
-      "href": "/topology",
-      "namespaced": true,
-      "dataAttributes": {
-        "data-quickstart-id": "qs-nav-topology",
-        "data-test-id": "topology-header"
-      }
-    },
-    "flags": {
-      "required": ["OPENSHIFT"]
-    }
-  },
-  {
-    "type": "console.navigation/href",
-    "properties": {
-      "id": "observe",
-      "perspective": "admin",
-      "section": "developers",
-      "name": "%devconsole~Observe%",
-      "href": "/dev-monitoring",
-      "namespaced": true,
-      "dataAttributes": {
-        "data-quickstart-id": "qs-nav-monitoring",
-        "data-tour-id": "tour-monitoring-nav",
-        "data-test-id": "monitoring-header"
-      }
-    },
-    "flags": {
-      "required": ["OPENSHIFT", "MONITORING"]
-    }
-  },
-  {
-    "type": "console.navigation/href",
-    "properties": {
-      "id": "search",
-      "perspective": "admin",
-      "section": "developers",
-      "name": "%devconsole~Search%",
-      "href": "/search-page",
-      "namespaced": true,
-      "dataAttributes": {
-        "data-quickstart-id": "qs-nav-search",
-        "data-tour-id": "tour-search-nav",
-        "data-test-id": "search-header"
-      }
-    },
-    "flags": {
-      "required": ["OPENSHIFT"]
     }
   }
 ]
