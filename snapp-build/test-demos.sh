@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-pushd dynamic-demo-plugin
+pushd ../snapp-dynamic-demo-plugin
 
 # Check for outdated yarn.lock file
 if [[ -n "$(git status --porcelain -- yarn.lock)" ]]; then

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd frontend
+cd ../snapp-frontend
 
 if [ ! -d node_modules ]; then
   yarn install
