@@ -460,7 +460,7 @@
     "properties": {
       "id": "add",
       "perspective": "admin",
-      "name": "%devconsole~+Add%",
+      "name": "%console-app~+Add%",
       "href": "/add",
       "namespaced": true,
       "dataAttributes": {
@@ -486,7 +486,7 @@
     "properties": {
       "id": "topology",
       "perspective": "admin",
-      "name": "%devconsole~Topology%",
+      "name": "%console-app~Topology%",
       "href": "/topology",
       "insertAfter": "home",
       "namespaced": true,
@@ -504,7 +504,7 @@
     "properties": {
       "id": "observe",
       "perspective": "admin",
-      "name": "%devconsole~Observe%",
+      "name": "%console-app~Observe%",
       "href": "/dev-monitoring",
       "namespaced": true,
       "insertAfter": "topology",
