@@ -1,14 +1,14 @@
 # OpenShift Console Demo Plugin
 
 This project emulates a standalone repository hosting a sample
-[dynamic plugin](/snapp-frontend/packages/console-dynamic-plugin-sdk/README.md) for OpenShift Console.
+[dynamic plugin](/frontend/packages/console-dynamic-plugin-sdk/README.md) for OpenShift Console.
 
 It is meant to serve as a reference for Console plugin developers and for testing dynamic plugin
 capabilities via end-to-end tests.
 
 ## Local development
 
-1. `yarn --cwd ../snapp-frontend install` to install dependant snapp-frontend resources
+1. `yarn --cwd ../frontend install` to install dependant frontend resources
 2. `yarn install` to install plugin dependencies
 3. `yarn build` to build the plugin, generating output to `dist` directory
 4. `yarn http-server` to start an HTTP server hosting the generated assets
@@ -54,7 +54,7 @@ systemctl reboot
 ```
 
 See the plugin development section in
-[Console Dynamic Plugins README](/snapp-frontend/packages/console-dynamic-plugin-sdk/README.md) for details
+[Console Dynamic Plugins README](/frontend/packages/console-dynamic-plugin-sdk/README.md) for details
 on how to run Bridge using local plugins.
 
 ## Deployment on cluster
