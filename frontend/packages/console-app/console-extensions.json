@@ -54,6 +54,13 @@
     }
   },
   {
+    "type": "console.redux-reducer",
+    "properties": {
+      "scope": "console",
+      "reducer": { "$codeRef": "reduxReducer" }
+    }
+  },
+  {
     "type": "console.navigation/resource-cluster",
     "properties": {
       "id": "volumesnapshotcontents",
@@ -448,6 +455,23 @@
     }
   },
   {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "add",
+      "perspective": "admin",
+      "name": "%console-app~+Add%",
+      "href": "/add",
+      "namespaced": true,
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-add",
+        "data-test-id": "+Add-header"
+      }
+    },
+    "flags": {
+      "required": ["OPENSHIFT"]
+    }
+  },
+  {
     "type": "console.navigation/section",
     "properties": {
       "perspective": "admin",
@@ -457,13 +481,50 @@
     }
   },
   {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "topology",
+      "perspective": "admin",
+      "name": "%console-app~Topology%",
+      "href": "/topology",
+      "insertAfter": "home",
+      "namespaced": true,
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-topology",
+        "data-test-id": "topology-header"
+      }
+    },
+    "flags": {
+      "required": ["OPENSHIFT"]
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "observe",
+      "perspective": "admin",
+      "name": "%console-app~Observe%",
+      "href": "/dev-monitoring",
+      "namespaced": true,
+      "insertAfter": "topology",
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-monitoring",
+        "data-tour-id": "tour-monitoring-nav",
+        "data-test-id": "monitoring-header"
+      }
+    },
+    "flags": {
+      "required": ["OPENSHIFT", "MONITORING"]
+    }
+  },
+  {
     "type": "console.navigation/section",
     "properties": {
       "perspective": "admin",
       "id": "operators",
       "name": "%console-app~Operators%",
       "dataAttributes": { "data-quickstart-id": "qs-nav-operators" },
-      "insertAfter": "home"
+      "insertAfter": "observe"
     }
   },
   {
@@ -753,7 +814,8 @@
         "version": "v1",
         "kind": "DaemonSet"
       }
-    }
+    },
+    "flags": { "required": ["CAN_LIST_NS"] }
   },
   {
     "type": "console.navigation/resource-ns",
@@ -811,7 +873,8 @@
         "group": "policy",
         "version": "v1",
         "kind": "PodDisruptionBudget"
-      }
+      },
+      "flags": { "required": ["CAN_LIST_NS"] }
     }
   },
   {
@@ -914,7 +977,8 @@
         "version": "v1",
         "kind": "StorageClass"
       }
-    }
+    },
+    "flags": { "required": ["CAN_LIST_NS"] }
   },
   {
     "type": "console.navigation/resource-ns",
@@ -944,7 +1008,8 @@
         "version": "v1",
         "kind": "VolumeSnapshotClass"
       }
-    }
+    },
+    "flags": { "required": ["CAN_LIST_NS"] }
   },
   {
     "type": "console.navigation/resource-ns",
