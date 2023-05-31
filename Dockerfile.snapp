@@ -10,8 +10,10 @@ ADD . /go/src/github.com/openshift/console/
 WORKDIR /go/src/github.com/openshift/console/
 RUN ./build-backend.sh
 RUN cd frontend
-RUN yarn install
-RUN yarn run build
+RUN cd frontend && \
+    yarn config set registry ${NPM_PROXY_ADDRESS} && \
+    yarn install
+RUN cd frontend && yarn run build
 
 
 ##################################################
