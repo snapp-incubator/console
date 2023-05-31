@@ -4,8 +4,6 @@
 ARG NPM_PROXY_ADDRESS="https://repo.snapp.tech/repository/npm-proxy"
 
 FROM quay.io/coreos/tectonic-console-builder:v25 AS gobuilder
-#ENV http_proxy=http://snapp-mirror:TmfBZb68qjGGF6feBdqX@mirror-fra-1.snappcloud.io:30128
-#ENV https_proxy=http://snapp-mirror:TmfBZb68qjGGF6feBdqX@mirror-fra-1.snappcloud.io:30128
 RUN yarn config set registry ${NPM_PROXY_ADDRESS}
 RUN mkdir -p /go/src/github.com/openshift/console/
 ADD . /go/src/github.com/openshift/console/
