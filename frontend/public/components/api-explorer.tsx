@@ -18,7 +18,7 @@ import { sortable } from '@patternfly/react-table';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 
-import { ALL_NAMESPACES_KEY, FLAGS, APIError, labelKeyForNodeKind } from '@console/shared';
+import { ALL_NAMESPACES_KEY, FLAGS, APIError, getTitleForNodeKind } from '@console/shared';
 import { PageTitleContext } from '@console/shared/src/components/pagetitle/PageTitleContext';
 import { Page, PageHeading, useAccessReview } from '@console/internal/components/utils';
 
@@ -503,9 +503,7 @@ const APIResourceAccessReview: React.FC<APIResourceTabProps> = ({
       resource: plural,
       verb,
     };
-    k8sCreate(accessReviewModel, req, { ns: namespace })
-      .then(setAccessResponse)
-      .catch(setError);
+    k8sCreate(accessReviewModel, req, { ns: namespace }).then(setAccessResponse).catch(setError);
   }, [apiGroup, apiVersion, plural, namespace, verb]);
 
   if (error) {
@@ -765,7 +763,7 @@ const APIResourcePage_ = ({
 
   const titleProviderValues = {
     telemetryPrefix: kindObj?.kind,
-    titlePrefix: labelKeyForNodeKind(kindObj?.kind),
+    titlePrefix: getTitleForNodeKind(kindObj?.kind),
   };
 
   return (
