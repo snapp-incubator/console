@@ -9,8 +9,9 @@ RUN mkdir -p /go/src/github.com/openshift/console/
 ADD . /go/src/github.com/openshift/console/
 WORKDIR /go/src/github.com/openshift/console/
 RUN ./build-backend.sh
-RUN ./build-frontend.sh
-
+RUN cd frontend
+RUN yarn install
+RUN yarn run build
 
 
 ##################################################
