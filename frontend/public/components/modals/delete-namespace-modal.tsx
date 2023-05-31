@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 // FIXME upgrading redux types is causing many errors at this time
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@console/internal/redux';

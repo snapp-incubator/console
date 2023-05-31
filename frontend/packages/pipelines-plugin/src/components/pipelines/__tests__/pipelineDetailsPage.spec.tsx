@@ -4,7 +4,7 @@ import { mount, ReactWrapper } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { SemVer } from 'semver';
-import * as rbacModule from '@console/dynamic-plugin-sdk/src/app/components/utils/rbac';
+import * as sdkUtils from '@console/dynamic-plugin-sdk';
 import useActivePerspective from '@console/dynamic-plugin-sdk/src/perspective/useActivePerspective';
 import { ErrorPage404 } from '@console/internal/components/error';
 import { DetailsPage } from '@console/internal/components/factory/';
@@ -20,7 +20,7 @@ import {
 } from '../../../test-data/tekon-config-data';
 import { PipelineRunKind } from '../../../types';
 import { getPipelineKebabActions } from '../../../utils/pipeline-actions';
-import * as triggerHooksModule from '../../pipelineruns/triggered-by/hooks';
+import * as utils from '../../pipelineruns/triggered-by';
 import { PipelineMetricsLevel } from '../const';
 import * as hookUtils from '../hooks';
 import { MetricsQueryPrefix } from '../pipeline-metrics/pipeline-metrics-utils';
@@ -29,12 +29,12 @@ import * as configUtils from '../utils/pipeline-config';
 import * as operatorUtils from '../utils/pipeline-operator';
 import * as triggerUtils from '../utils/triggers';
 
-const menuActions = jest.spyOn(triggerHooksModule, 'useMenuActionsWithUserAnnotation');
+const menuActions = jest.spyOn(utils, 'useMenuActionsWithUserAnnotation');
 const breadCrumbs = jest.spyOn(hookUtils, 'usePipelinesBreadcrumbsFor');
 const templateNames = jest.spyOn(triggerUtils, 'usePipelineTriggerTemplateNames');
 const latestPipelineRun = jest.spyOn(hookUtils, 'useLatestPipelineRun');
 const operatorVersion = jest.spyOn(operatorUtils, 'usePipelineOperatorVersion');
-const spyUseAccessReview = jest.spyOn(rbacModule, 'useAccessReview');
+const spyUseAccessReview = jest.spyOn(sdkUtils, 'useAccessReview');
 const spyPipelineConfig = jest.spyOn(configUtils, 'usePipelineConfig');
 
 const useActivePerspectiveMock = useActivePerspective as jest.Mock;

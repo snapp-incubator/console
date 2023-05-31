@@ -75,7 +75,7 @@ import { consolePluginModal } from '@console/shared/src/components/modals';
 import { RedExclamationCircleIcon } from '@console/shared/src/components/status/icons';
 import { CONSOLE_OPERATOR_CONFIG_NAME } from '@console/shared/src/constants';
 import { useActiveNamespace } from '@console/shared/src/hooks/redux-selectors';
-import { useActiveCluster } from '@console/shared/src/hooks/useActiveCluster'; // TODO remove multicluster
+import { useActiveCluster } from '@console/shared/src/hooks/useActiveCluster';
 import { useK8sModel } from '@console/shared/src/hooks/useK8sModel';
 import { isPluginEnabled } from '@console/shared/src/utils';
 import { GLOBAL_OPERATOR_NAMESPACES, GLOBAL_COPIED_CSV_NAMESPACE } from '../const';
@@ -581,7 +581,7 @@ export const ClusterServiceVersionList: React.FC<ClusterServiceVersionListProps>
 }) => {
   const { t } = useTranslation();
   const activeNamespace = useActiveNamespace();
-  const [cluster] = useActiveCluster(); // TODO remove multicluster
+  const [cluster] = useActiveCluster();
   const nameHeader: Header = {
     title: t('olm~Name'),
     sortField: 'metadata.name',
@@ -655,7 +655,7 @@ export const ClusterServiceVersionList: React.FC<ClusterServiceVersionListProps>
       }
 
       if (
-        window.SERVER_FLAGS.copiedCSVsDisabled[cluster] && // TODO remove multicluster
+        window.SERVER_FLAGS.copiedCSVsDisabled[cluster] &&
         operator.metadata.namespace === GLOBAL_COPIED_CSV_NAMESPACE &&
         activeNamespace !== GLOBAL_COPIED_CSV_NAMESPACE
       ) {
@@ -723,12 +723,7 @@ export const ClusterServiceVersionList: React.FC<ClusterServiceVersionListProps>
 
 export const ClusterServiceVersionsPage: React.FC<ClusterServiceVersionsPageProps> = (props) => {
   const { t } = useTranslation();
-  const [cluster] = useActiveCluster(); // TODO remove multicluster
-  const [canListAllSubscriptions] = useAccessReview({
-    group: SubscriptionModel.apiGroup,
-    resource: SubscriptionModel.plural,
-    verb: 'list',
-  });
+  const [cluster] = useActiveCluster();
   const title = t('olm~Installed Operators');
   const olmURL = getDocumentationURL(documentationURLs.operators);
   const helpText = (
@@ -773,7 +768,7 @@ export const ClusterServiceVersionsPage: React.FC<ClusterServiceVersionsPageProp
         {...props}
         resources={[
           ...(!GLOBAL_OPERATOR_NAMESPACES.includes(props.namespace) &&
-          window.SERVER_FLAGS.copiedCSVsDisabled[cluster] // TODO remove multicluster
+          window.SERVER_FLAGS.copiedCSVsDisabled[cluster]
             ? [
                 {
                   kind: referenceForModel(ClusterServiceVersionModel),
@@ -790,7 +785,6 @@ export const ClusterServiceVersionsPage: React.FC<ClusterServiceVersionsPageProp
           {
             kind: referenceForModel(SubscriptionModel),
             prop: 'subscriptions',
-            namespace: canListAllSubscriptions ? undefined : props.namespace,
             optional: true,
           },
           {
@@ -1234,7 +1228,6 @@ export const ClusterServiceVersionDetailsPage: React.FC<ClusterServiceVersionsDe
     [csv, subscriptions],
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const menuActions = React.useCallback(
     !subscription
       ? () => [Kebab.factory.Delete(ClusterServiceVersionModel, csv)]

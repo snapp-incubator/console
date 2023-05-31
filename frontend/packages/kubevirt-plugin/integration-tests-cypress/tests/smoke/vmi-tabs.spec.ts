@@ -28,7 +28,9 @@ describe('smoke tests', () => {
   describe('visit vmi tabs', () => {
     before(() => {
       cy.visitVMsList();
-      cy.byLegacyTestID(vmiName).should('exist').click();
+      cy.byLegacyTestID(vmiName)
+        .should('exist')
+        .click();
     });
 
     it('vmi overview tab is loaded', () => {

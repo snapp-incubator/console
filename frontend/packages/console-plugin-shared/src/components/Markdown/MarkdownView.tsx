@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
 import * as cx from 'classnames';
 import * as _ from 'lodash';
@@ -168,7 +167,6 @@ const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
   const id = React.useMemo(() => _.uniqueId('markdown'), []);
   return (
     <div className={cx('co-markdown-view', { 'is-empty': isEmpty })} id={id}>
-      {/* eslint-disable-next-line react/no-danger */}
       <div dangerouslySetInnerHTML={{ __html: markup }} />
       <RenderExtension renderExtension={renderExtension} selector={`#${id}`} markup={markup} />
     </div>
@@ -188,7 +186,6 @@ const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
   const [loaded, setLoaded] = React.useState(false);
   const htmlTagElement = frame?.contentDocument?.documentElement;
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateDimensions = React.useCallback(
     _.debounce(() => {
       if (!frame?.contentWindow?.document?.body?.firstElementChild) {

@@ -3,7 +3,7 @@ import { listPage } from '../views/list-page';
 
 declare global {
   namespace Cypress {
-    interface Chainable {
+    interface Chainable<Subject> {
       isPseudoLocalized(): Chainable<Element>;
       testI18n(selectors?: string[], testIDs?: string[]): Chainable<Element>;
     }

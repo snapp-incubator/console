@@ -7,7 +7,7 @@ export {}; // needed in files which don't have an import to trigger ES6 module u
 
 declare global {
   namespace Cypress {
-    interface Chainable {
+    interface Chainable<Subject> {
       alertTitleShouldContain(title: string): Chainable<Element>;
       clickNavLink(path: [string, string]): Chainable<Element>;
       selectByDropDownText(selector: string, dropdownText: string): Chainable<Element>;
@@ -22,7 +22,6 @@ declare global {
       dropdownSwitchTo(dropdownMenuOption: string): Chainable<Element>;
       isDropdownVisible(): Chainable<Element>;
       checkErrors(): Chainable<Element>;
-      waitUntilEnabled(selector: string): Chainable<Element>;
     }
   }
 }
@@ -35,12 +34,16 @@ Cypress.Commands.add('clickNavLink', (path: [string, string]) => {
   cy.get(`[data-component="pf-nav-expandable"]`) // this assumes all top level menu items are expandable
     .contains(path[0])
     .click(); // open top, expandable menu
-  cy.get('#page-sidebar').contains(path[1]).click();
+  cy.get('#page-sidebar')
+    .contains(path[1])
+    .click();
 });
 
 Cypress.Commands.add('selectByDropDownText', (selector: string, dropdownText: string) => {
   cy.get(selector).click();
-  cy.get('li').contains(dropdownText).click({ force: true });
+  cy.get('li')
+    .contains(dropdownText)
+    .click({ force: true });
 });
 
 Cypress.Commands.add(
@@ -54,11 +57,17 @@ Cypress.Commands.add(
 
 Cypress.Commands.add('verifyDropdownselected', (selector: string) => {
   cy.get(selector).should('be.visible');
-  cy.get(selector).click().get('.pf-c-dropdown__menu').should('be.visible');
+  cy.get(selector)
+    .click()
+    .get('.pf-c-dropdown__menu')
+    .should('be.visible');
 });
 
 Cypress.Commands.add('mouseHover', (selector: string) => {
-  cy.get(selector).invoke('show').should('be.visible').trigger('mouseover', { force: true });
+  cy.get(selector)
+    .invoke('show')
+    .should('be.visible')
+    .trigger('mouseover', { force: true });
 });
 
 Cypress.Commands.add(
@@ -66,14 +75,21 @@ Cypress.Commands.add(
   (selector: string, dropdownText: string) => {
     cy.get(selector).click();
     cy.byLegacyTestID('dropdown-text-filter').type(dropdownText);
-    cy.get('ul[role="listbox"]').find('li').contains(dropdownText).click();
+    cy.get('ul[role="listbox"]')
+      .find('li')
+      .contains(dropdownText)
+      .click();
   },
 );
 
 Cypress.Commands.add('selectActionsMenuOption', (actionsMenuOption: string) => {
-  cy.byLegacyTestID('actions-menu-button').should('be.visible').click();
+  cy.byLegacyTestID('actions-menu-button')
+    .should('be.visible')
+    .click();
   app.waitForLoad();
-  cy.byTestActionID(actionsMenuOption).should('be.visible').click();
+  cy.byTestActionID(actionsMenuOption)
+    .should('be.visible')
+    .click();
 });
 
 Cypress.Commands.add('dropdownSwitchTo', (dropdownMenuOption: string) => {
@@ -131,25 +147,5 @@ Cypress.Commands.add('checkErrors', () => {
     } else if ($body.find('button[aria-label="Close"]').length !== 0) {
       cy.get('button[aria-label="Close"]').click({ force: true });
     }
-  });
-});
-
-Cypress.Commands.add('waitUntilEnabled', (selector, timeout = 20000) => {
-  const start = new Date().getTime();
-
-  return cy.get(selector).then(($el) => {
-    return new Promise((resolve, reject) => {
-      const checkEnabled = () => {
-        if ($el.is(':enabled')) {
-          resolve($el);
-        } else if (new Date().getTime() - start > timeout) {
-          reject(new Error(`Timed out waiting for ${selector} to become enabled`));
-        } else {
-          setTimeout(checkEnabled, 100);
-        }
-      };
-
-      checkEnabled();
-    });
   });
 });

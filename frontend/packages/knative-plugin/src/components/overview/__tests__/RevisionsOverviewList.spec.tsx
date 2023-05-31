@@ -3,8 +3,7 @@ import { Button } from '@patternfly/react-core';
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as _ from 'lodash';
 import { Link } from 'react-router-dom';
-import { SidebarSectionHeading } from '@console/internal/components/utils';
-import * as rbacModule from '@console/internal/components/utils/rbac';
+import * as utils from '@console/internal/components/utils';
 import { referenceForModel } from '@console/internal/module/k8s';
 import { RevisionModel } from '../../../models';
 import { MockKnativeResources } from '../../../topology/__tests__/topology-knative-test-data';
@@ -21,7 +20,7 @@ describe('RevisionsOverviewList', () => {
   let spyUseAccessReview;
 
   beforeEach(() => {
-    spyUseAccessReview = jest.spyOn(rbacModule, 'useAccessReview');
+    spyUseAccessReview = jest.spyOn(utils, 'useAccessReview');
     spyUseAccessReview.mockReturnValue(true);
     wrapper = shallow(
       <RevisionsOverviewList
@@ -36,8 +35,13 @@ describe('RevisionsOverviewList', () => {
   });
 
   it('should have title Revisions', () => {
-    expect(wrapper.find(SidebarSectionHeading)).toHaveLength(1);
-    expect(wrapper.find(SidebarSectionHeading).at(0).props().text).toEqual('Revisions');
+    expect(wrapper.find(utils.SidebarSectionHeading)).toHaveLength(1);
+    expect(
+      wrapper
+        .find(utils.SidebarSectionHeading)
+        .at(0)
+        .props().text,
+    ).toEqual('Revisions');
   });
 
   it('should show info if no Revisions present, link for all revisions should not be shown and traffic split button should be disabled', () => {
@@ -46,7 +50,12 @@ describe('RevisionsOverviewList', () => {
     );
     expect(wrapper.find(Link)).toHaveLength(0);
     expect(wrapper.text().includes('No Revisions found for this resource.')).toBe(true);
-    expect(wrapper.find(Button).at(0).props().isDisabled).toBe(true);
+    expect(
+      wrapper
+        .find(Button)
+        .at(0)
+        .props().isDisabled,
+    ).toBe(true);
   });
 
   it('should show Resource Link if number of revisions is more than MAX_REVISIONS', () => {
@@ -64,8 +73,18 @@ describe('RevisionsOverviewList', () => {
       'q',
       `serving.knative.dev/service=${MockKnativeResources.ksservices.data[0].metadata?.name}`,
     );
-    expect(wrapper.find(Link).at(0).props().to).toEqual(`${url}?${params.toString()}`);
-    expect(wrapper.find(Link).at(0).props().children).toEqual('View all (4)');
+    expect(
+      wrapper
+        .find(Link)
+        .at(0)
+        .props().to,
+    ).toEqual(`${url}?${params.toString()}`);
+    expect(
+      wrapper
+        .find(Link)
+        .at(0)
+        .props().children,
+    ).toEqual('View all (4)');
   });
 
   it('should not show Resource Link if number of revisions is less than MAX_REVISIONS', () => {
@@ -74,8 +93,18 @@ describe('RevisionsOverviewList', () => {
 
   it('should have button for traffic distribution and enabled', () => {
     expect(wrapper.find(Button)).toHaveLength(1);
-    expect(wrapper.find(Button).at(0).props().children).toEqual('Set traffic distribution');
-    expect(wrapper.find(Button).at(0).props().isDisabled).toBe(false);
+    expect(
+      wrapper
+        .find(Button)
+        .at(0)
+        .props().children,
+    ).toEqual('Set traffic distribution');
+    expect(
+      wrapper
+        .find(Button)
+        .at(0)
+        .props().isDisabled,
+    ).toBe(false);
   });
 
   it('should call setTrafficDistributionModal on click', () => {

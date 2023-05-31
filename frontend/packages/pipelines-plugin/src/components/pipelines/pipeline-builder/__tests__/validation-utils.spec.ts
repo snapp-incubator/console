@@ -49,7 +49,9 @@ describe('Pipeline Build validation schema', () => {
 
   describe('Base form validation', () => {
     it('should pass if there is at least one Task', async () => {
-      await withFormData(formDataBasicPassState).then(hasResults).catch(shouldHavePassed);
+      await withFormData(formDataBasicPassState)
+        .then(hasResults)
+        .catch(shouldHavePassed);
     });
 
     it('should fail if there is an invalid name', async () => {

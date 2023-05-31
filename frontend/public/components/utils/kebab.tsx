@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as _ from 'lodash-es';
 import * as React from 'react';
 import * as classNames from 'classnames';
@@ -662,7 +661,6 @@ export type ResourceKebabProps = {
   terminatingTooltip?: string;
 };
 
-// eslint-disable-next-line no-redeclare
 type KebabSubMenu = {
   label?: string;
   labelKey?: string;

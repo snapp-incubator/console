@@ -15,11 +15,13 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "comment": true,
     "ecmaFeatures": {
       "jsx": true
     },
     "extraFileExtensions": [".json"],
-    "ecmaVersion": 2018
+    "ecmaVersion": 2017,
+    "sourceType": "module"
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint"],
   "rules": {
@@ -43,7 +45,6 @@
     "no-else-return": ["error"],
     "no-global-strict": 0,
     "no-irregular-whitespace": ["error"],
-    "no-redeclare": "off",
     "no-shadow": ["error"],
     "no-underscore-dangle": 0,
     "@typescript-eslint/no-unused-vars": [
@@ -75,8 +76,5 @@
     "react": {
       "version": "detect"
     }
-  },
-  "globals": {
-    "JSX": "readonly"
   }
 }

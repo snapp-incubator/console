@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore: FIXME missing exports due to out-of-sync @types/react-redux version
 import { useSelector } from 'react-redux';
 import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watch-hook';

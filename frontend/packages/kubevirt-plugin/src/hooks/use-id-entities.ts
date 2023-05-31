@@ -3,7 +3,7 @@ import { IDEntity } from '../types';
 
 export const useIDEntities = <T extends IDEntity = IDEntity>(
   initialEntities: T[] = [],
-): UseIDEntitiesValues<T> => {
+): useIDEntitiesValues<T> => {
   const [entities, setEntities] = React.useState<T[]>(initialEntities);
   const [initialEntitiesChanged, setInitialEntitiesChanged] = React.useState<boolean>(false);
 
@@ -49,7 +49,7 @@ export const useIDEntities = <T extends IDEntity = IDEntity>(
   ];
 };
 
-type UseIDEntitiesValues<T> = [
+type useIDEntitiesValues<T> = [
   T[], // Entities
   React.Dispatch<React.SetStateAction<T[]>>, // setEntities()
   (newEntity: T) => void, // addEntity()

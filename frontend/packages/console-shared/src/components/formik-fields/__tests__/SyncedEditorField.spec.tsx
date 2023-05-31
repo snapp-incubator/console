@@ -6,10 +6,10 @@ import * as _ from 'lodash';
 import { LoadingBox } from '@console/internal/components/utils';
 import { EditorType } from '../../synced-editor/editor-toggle';
 import { useEditorType } from '../../synced-editor/useEditorType';
-import CodeEditorField from '../CodeEditorField';
 import DynamicFormField from '../DynamicFormField';
 import RadioGroupField from '../RadioGroupField';
 import SyncedEditorField from '../SyncedEditorField';
+import YAMLEditorField from '../YAMLEditorField';
 
 jest.mock('formik', () => ({
   useField: jest.fn(() => [{ value: 'form' }, {}]),
@@ -32,7 +32,7 @@ describe('SyncedEditorField', () => {
 
   const mockEditors = {
     form: <DynamicFormField name="formData" schema={{}} />,
-    yaml: <CodeEditorField name="yamlData" showSamples />,
+    yaml: <YAMLEditorField name="yamlData" showSamples />,
   };
 
   const props: SyncedEditorFieldProps = {
@@ -60,7 +60,12 @@ describe('SyncedEditorField', () => {
     mockUseEditorType.mockReturnValue([EditorType.Form, jest.fn(), true]);
     wrapper = shallow(<SyncedEditorField {...props} />);
     expect(wrapper.find(RadioGroupField).exists()).toBe(true);
-    expect(wrapper.find(RadioGroupField).first().props().isInline).toBe(true);
+    expect(
+      wrapper
+        .find(RadioGroupField)
+        .first()
+        .props().isInline,
+    ).toBe(true);
   });
 
   it('should render dynamic form field if useEditorType returns form', () => {
@@ -74,7 +79,7 @@ describe('SyncedEditorField', () => {
     mockUseField.mockReturnValue([{ value: EditorType.YAML }, {}]);
     mockUseEditorType.mockReturnValue([EditorType.YAML, jest.fn(), true]);
     wrapper = shallow(<SyncedEditorField {...props} />);
-    expect(wrapper.find(CodeEditorField).exists()).toBe(true);
+    expect(wrapper.find(YAMLEditorField).exists()).toBe(true);
   });
 
   it('should disable corresponding radio button if any editor context is disabled', () => {
@@ -83,7 +88,12 @@ describe('SyncedEditorField', () => {
     const newProps = _.cloneDeep(props);
     newProps.yamlContext.isDisabled = true;
     wrapper = shallow(<SyncedEditorField {...newProps} />);
-    expect(wrapper.find(RadioGroupField).first().props().options[1].isDisabled).toBe(true);
+    expect(
+      wrapper
+        .find(RadioGroupField)
+        .first()
+        .props().options[1].isDisabled,
+    ).toBe(true);
   });
 
   it('should show an alert if form context is disaled', () => {
@@ -93,9 +103,12 @@ describe('SyncedEditorField', () => {
     newProps.formContext.isDisabled = true;
     wrapper = shallow(<SyncedEditorField {...newProps} />);
     expect(wrapper.find(Alert).exists()).toBe(true);
-    expect(wrapper.find(Alert).first().props().title).toBe(
-      'Form view is disabled for this chart because the schema is not available',
-    );
+    expect(
+      wrapper
+        .find(Alert)
+        .first()
+        .props().title,
+    ).toBe('Form view is disabled for this chart because the schema is not available');
   });
 
   it('should render LoadingBox if useEditorType returns false for loaded', () => {

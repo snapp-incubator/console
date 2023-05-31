@@ -23,7 +23,7 @@ const GitOpsList: React.FC<GitOpsListProps> = ({ appGroups, emptyStateMsg }) => 
 
   const hasSyncStatus: boolean =
     appGroups?.some(
-      ({ sync_status }) => sync_status, // eslint-disable-line @typescript-eslint/naming-convention
+      ({ sync_status }) => sync_status /* eslint-disable-line @typescript-eslint/camelcase */,
     ) || false;
   return (
     <div className="gop-gitops-list">

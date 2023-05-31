@@ -11,10 +11,16 @@ describe('DraggableCoreIFrameFix', () => {
     const data = {} as DraggableData;
     const wrapper = shallow(<DraggableCoreIFrameFix onStart={onStart} onStop={onStop} />);
 
-    wrapper.find(DraggableCore).props().onStart(event, data);
+    wrapper
+      .find(DraggableCore)
+      .props()
+      .onStart(event, data);
     expect(document.body.className).toBe('ocs-draggable-core-iframe-fix');
 
-    wrapper.find(DraggableCore).props().onStop(event, data);
+    wrapper
+      .find(DraggableCore)
+      .props()
+      .onStop(event, data);
     expect(document.body.className).toBe('');
 
     expect(onStart).toHaveBeenCalledWith(event, data);

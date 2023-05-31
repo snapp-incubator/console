@@ -57,9 +57,8 @@ const filters = (t: TFunction): RowFilter<VirtualMachineTemplateBundle>[] => [
   },
 ];
 
-const VirtualMachineTemplatesPage: React.FC<
-  VirtualMachineTemplatesPageProps & React.ComponentProps<typeof ListPage>
-> = (props) => {
+const VirtualMachineTemplatesPage: React.FC<VirtualMachineTemplatesPageProps &
+  React.ComponentProps<typeof ListPage>> = (props) => {
   const { t } = useTranslation();
   const { skipAccessReview, noProjectsAvailable, showTitle } = props?.customData || {};
   const namespace = props.match.params.ns;
@@ -143,9 +142,8 @@ const VirtualMachineTemplatesPage: React.FC<
     },
     createLink: (itemName: string) => {
       const customize = itemName === VMWizardName.WIZARD ? '/customize' : '';
-      return `/k8s/ns/${
-        namespace || 'default'
-      }/${VIRTUALMACHINES_TEMPLATES_BASE_URL}/~new${customize}?mode=template`;
+      return `/k8s/ns/${namespace ||
+        'default'}/${VIRTUALMACHINES_TEMPLATES_BASE_URL}/~new${customize}?mode=template`;
     },
   };
 

@@ -73,7 +73,11 @@ describe('Pipeline Success Ratio Graph', () => {
     expect(PipelineSuccessRatioDonutWrapper.find(LoadingInline).exists()).toBe(false);
     expect(PipelineSuccessRatioDonutWrapper.find(GraphEmpty).exists()).toBe(false);
     expect(
-      PipelineSuccessRatioDonutWrapper.find(Measure).dive().dive().find(TimeSeriesChart).exists(),
+      PipelineSuccessRatioDonutWrapper.find(Measure)
+        .dive()
+        .dive()
+        .find(TimeSeriesChart)
+        .exists(),
     ).toBe(true);
   });
 });

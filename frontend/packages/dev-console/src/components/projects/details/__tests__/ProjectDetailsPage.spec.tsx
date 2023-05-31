@@ -2,8 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import * as _ from 'lodash';
 import { DetailsPage } from '@console/internal/components/factory';
-import { BreadCrumbs } from '@console/internal/components/utils';
-import * as rbacModule from '@console/internal/components/utils/rbac';
+import * as utils from '@console/internal/components/utils';
 import CreateProjectListPage from '../../CreateProjectListPage';
 import { ProjectDetailsPage, PageContents } from '../ProjectDetailsPage';
 
@@ -13,7 +12,7 @@ let spyUseAccessReview;
 
 describe('ProjectDetailsPage', () => {
   beforeEach(() => {
-    spyUseAccessReview = jest.spyOn(rbacModule, 'useAccessReview');
+    spyUseAccessReview = jest.spyOn(utils, 'useAccessReview');
   });
 
   afterEach(() => {
@@ -38,7 +37,7 @@ describe('ProjectDetailsPage', () => {
     // Currently rendering the breadcrumbs will buck-up against the redirects and not work as expected
     const component = shallow(<ProjectDetailsPage match={testProjectMatch} />);
 
-    expect(component.find(BreadCrumbs).exists()).not.toBe(true);
+    expect(component.find(utils.BreadCrumbs).exists()).not.toBe(true);
   });
 
   it('should not render the Project Access tab if user has no access to role bindings', () => {

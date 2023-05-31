@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router-dom';
-import * as rbacModule from '@console/internal/components/utils/rbac';
+import * as utils from '@console/internal/components/utils';
 import { BuildDecoratorBubble } from '@console/topology/src/components/graph-view';
 import * as taskRunsUtils from '../../../components/taskruns/useTaskRuns';
 import { ConnectedPipelineRunDecorator } from '../PipelineRunDecorator';
@@ -12,7 +12,7 @@ const spyUseTaskRuns = jest.spyOn(taskRunsUtils, 'useTaskRuns');
 describe('PipelineRunDecorator renders', () => {
   let spyUseAccessReview;
   beforeEach(() => {
-    spyUseAccessReview = jest.spyOn(rbacModule, 'useAccessReview');
+    spyUseAccessReview = jest.spyOn(utils, 'useAccessReview');
     spyUseAccessReview.mockReturnValue(true);
     spyUseTaskRuns.mockReturnValue([[], true]);
   });

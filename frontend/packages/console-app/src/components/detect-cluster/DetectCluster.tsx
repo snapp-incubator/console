@@ -1,4 +1,3 @@
-// TODO remove multicluster
 import * as React from 'react';
 import { ClusterContext, useValuesForClusterContext } from './cluster';
 

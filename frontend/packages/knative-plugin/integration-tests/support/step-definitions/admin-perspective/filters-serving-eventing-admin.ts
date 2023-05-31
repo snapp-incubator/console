@@ -23,7 +23,9 @@ When('user clicks on dropdown button', () => {
 
 When('user selects Name', () => {
   cy.get(eventingPO.filter.Toolbar).within(() => {
-    cy.get(eventingPO.filter.Type).contains('Name').click();
+    cy.get(eventingPO.filter.Type)
+      .contains('Name')
+      .click();
   });
 });
 
@@ -37,7 +39,9 @@ Then('user will see KSVC by name {string}', (serviceName: string) => {
 });
 
 Then('user will see Clear all filters', () => {
-  cy.get(eventingPO.filter.Toolbar).contains('Clear all filters').should('exist');
+  cy.get(eventingPO.filter.Toolbar)
+    .contains('Clear all filters')
+    .should('exist');
 });
 
 Given('user has selected Routes tab', () => {
@@ -46,7 +50,9 @@ Given('user has selected Routes tab', () => {
 
 When('user selects Label', () => {
   cy.get(eventingPO.filter.Toolbar).within(() => {
-    cy.get(eventingPO.filter.Type).contains('Label').click();
+    cy.get(eventingPO.filter.Type)
+      .contains('Label')
+      .click();
   });
 });
 
@@ -65,7 +71,9 @@ Then('user will see message {string}', (revisionMessage) => {
 
 When('user enters {string} in Label filter', (filterName: string) => {
   cy.get(eventingPO.filter.labelInput).type(filterName);
-  cy.get(eventingPO.filter.labelSuggestion).eq(0).click();
+  cy.get(eventingPO.filter.labelSuggestion)
+    .eq(0)
+    .click();
 });
 
 Given('user has created ApiServer Source', () => {
@@ -86,7 +94,9 @@ Given('user has created Container Source', () => {
 
 Given('user is at Event Sources tab', () => {
   operatorsPage.navigateToEventingPage();
-  cy.get(eventingPO.createEventDropDownMenu).contains('Create').click({ force: true });
+  cy.get(eventingPO.createEventDropDownMenu)
+    .contains('Create')
+    .click({ force: true });
   cy.get(eventingPO.eventSourcesTab).click();
 });
 

@@ -85,8 +85,12 @@ describe('ServiceRow', () => {
     const readyColData = wrapper.find(TableData).at(6);
     const reasonColData = wrapper.find(TableData).at(7);
     expect(readyColData.props().children).toEqual('False');
-    expect(reasonColData.dive().find(ClampedText).at(0).props().children).toEqual(
-      'Something went wrong.',
-    );
+    expect(
+      reasonColData
+        .dive()
+        .find(ClampedText)
+        .at(0)
+        .props().children,
+    ).toEqual('Something went wrong.');
   });
 });

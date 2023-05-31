@@ -85,7 +85,10 @@ export class Wizard {
 
   async closeWizard() {
     await click(view.cancelButton);
-    await browser.switchTo().alert().accept();
+    await browser
+      .switchTo()
+      .alert()
+      .accept();
   }
 
   async next(ignoreWarnings: boolean = false) {

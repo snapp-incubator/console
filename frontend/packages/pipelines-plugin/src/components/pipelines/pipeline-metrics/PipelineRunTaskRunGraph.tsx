@@ -58,7 +58,7 @@ const PipelineRunTaskRunGraph: React.FC<PipelineMetricsGraphProps> = ({
   const getCustomTaskName = (task: string): string =>
     taskNameMap[task] ? taskNameMap[task] : task;
 
-  const pipelineTaskRunData = React.useMemo(() => runData?.data?.result ?? [], [runData]);
+  const pipelineTaskRunData = runData?.data?.result ?? [];
   React.useEffect(() => {
     if (!loaded && onInitialLoad) {
       onInitialLoad({

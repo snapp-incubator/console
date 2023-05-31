@@ -47,7 +47,7 @@ const PipelineSuccessRatioDonut: React.FC<PipelineMetricsGraphProps> = ({
     queryPrefix,
     metricsLevel,
   });
-  const pipelineSuccessData = React.useMemo(() => runData?.data?.result ?? [], [runData]);
+  const pipelineSuccessData = runData?.data?.result ?? [];
 
   React.useEffect(() => {
     if (!loaded && onInitialLoad) {
@@ -110,7 +110,7 @@ const PipelineSuccessRatioDonut: React.FC<PipelineMetricsGraphProps> = ({
       },
     };
   }
-  const successValue = _.find(finalArray, { x: 'success' })?.count ?? 0;
+  const successValue = _.find(finalArray, { x: 'success' })?.['count'] ?? 0;
   const successData = _.sortBy(finalArray, 'sortOrder');
   const OVERLAP = 20;
   return (

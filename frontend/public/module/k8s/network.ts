@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import * as React from 'react';
 import { useK8sGet } from '../../components/utils/k8s-get-hook';
 import { K8sResourceKind } from './types';

@@ -7,7 +7,9 @@ When('user right clicks on topology empty graph', () => {
 });
 
 When('user selects {string} option from Add to Project context menu', (option: string) => {
-  cy.get(topologyPO.graph.contextMenuOptions.addToProject).focus().trigger('mouseover');
+  cy.get(topologyPO.graph.contextMenuOptions.addToProject)
+    .focus()
+    .trigger('mouseover');
   cy.byTestActionID(option).click({ force: true });
 });
 

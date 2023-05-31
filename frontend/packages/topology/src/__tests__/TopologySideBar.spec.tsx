@@ -27,7 +27,11 @@ describe('TopologySideBar:', () => {
     mockUserSettings.mockReturnValue([100, () => {}, true]);
     const onClose = jest.fn();
     const wrapper = shallow(<TopologySideBar onClose={onClose} />);
-    wrapper.find(CloseButton).shallow().find(Button).simulate('click');
+    wrapper
+      .find(CloseButton)
+      .shallow()
+      .find(Button)
+      .simulate('click');
     expect(onClose).toHaveBeenCalled();
   });
 });

@@ -36,7 +36,9 @@ When('user clicks on the Event Source card on the Add page', () => {
 });
 
 When('user clicks on the Create Event Source button on side bar', () => {
-  cy.get(eventSourcePO.addButton).contains('Create Event Source').click({ force: true });
+  cy.get(eventSourcePO.addButton)
+    .contains('Create Event Source')
+    .click({ force: true });
 });
 
 When('user selects Form view', () => {
@@ -54,7 +56,9 @@ When('user selects Resource radio button', () => {
 When('user selects {string} as a resource', (resourceName: string) => {
   cy.get(eventSourcePO.createPingSource.resourceDropDownField).click();
   cy.get(eventSourcePO.createPingSource.resourceSearch).type(resourceName);
-  cy.get(eventSourcePO.createPingSource.resourceDropDownItem).eq(0).click({ force: true });
+  cy.get(eventSourcePO.createPingSource.resourceDropDownItem)
+    .eq(0)
+    .click({ force: true });
 });
 
 When('user clicks on the Create button', () => {
@@ -74,7 +78,9 @@ Given('user is at the Ping Source Create page', () => {
   addPage.selectCardFromOptions(addOptions.EventSource);
   eventSourcesPage.search('Ping Source');
   eventSourcesPage.clickEventSourceType('PingSource');
-  cy.get(eventSourcePO.addButton).contains('Create Event Source').click({ force: true });
+  cy.get(eventSourcePO.addButton)
+    .contains('Create Event Source')
+    .click({ force: true });
 });
 
 When('user selects the YAML View', () => {

@@ -28,8 +28,18 @@ describe('TrafficSplittingModal', () => {
     wrapper.find('form').simulate('submit', {
       preventDefault: () => {},
     });
-    expect(wrapper.find(ModalSubmitFooter).first().props().inProgress).toBe(true);
-    expect(wrapper.find(ModalSubmitFooter).first().props().errorMessage).toEqual('checkErrorProp');
+    expect(
+      wrapper
+        .find(ModalSubmitFooter)
+        .first()
+        .props().inProgress,
+    ).toBe(true);
+    expect(
+      wrapper
+        .find(ModalSubmitFooter)
+        .first()
+        .props().errorMessage,
+    ).toEqual('checkErrorProp');
   });
 
   it('should call handleSubmit on submit', () => {

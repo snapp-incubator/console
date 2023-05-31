@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
 export enum displayOptions {
   PodCount = 'Pod Count',
   Labels = 'Labels',

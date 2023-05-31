@@ -39,7 +39,9 @@ describe('kubevirt PVC upload', () => {
       for (const img of imageFormats) {
         cy.exec(`touch ${img} || true`);
         cy.dropFile(img, img.split('/').pop(), '.pf-c-file-upload');
-        cy.get('.pf-c-alert__title').contains('File type extension').should('not.exist');
+        cy.get('.pf-c-alert__title')
+          .contains('File type extension')
+          .should('not.exist');
       }
     });
 

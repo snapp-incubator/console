@@ -7,7 +7,7 @@ import Shadow = Cypress.Shadow;
 export {};
 declare global {
   namespace Cypress {
-    interface Chainable {
+    interface Chainable<Subject> {
       byTestID(
         selector: string,
         options?: Partial<Loggable & Timeoutable & Withinable & Shadow>,

@@ -66,7 +66,9 @@ const ToastProvider: React.FC = ({ children }) => {
                       removeToast(toast.id);
                     }}
                   />
-                ) : undefined
+                ) : (
+                  undefined
+                )
               }
               actionLinks={
                 toast.actions?.length > 0 ? (
@@ -87,7 +89,9 @@ const ToastProvider: React.FC = ({ children }) => {
                       </AlertActionLink>
                     ))}
                   </>
-                ) : undefined
+                ) : (
+                  undefined
+                )
               }
             >
               {toast.content}

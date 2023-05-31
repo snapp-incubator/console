@@ -53,7 +53,12 @@ describe('KubeVirt VMI detail - editing', () => {
     'ID(CNV-4043) nic row kebab button is disabled',
     async () => {
       await vmi.navigateToTab(TAB.NetworkInterfaces);
-      expect(resourceRows.first().$('[data-test-id=kebab-button]').isEnabled()).toBe(false);
+      expect(
+        resourceRows
+          .first()
+          .$('[data-test-id=kebab-button]')
+          .isEnabled(),
+      ).toBe(false);
     },
     VM_CREATE_AND_EDIT_TIMEOUT_SECS,
   );
@@ -72,7 +77,12 @@ describe('KubeVirt VMI detail - editing', () => {
     async () => {
       await vmi.navigateToTab(TAB.Disks);
       await browser.wait(until.presenceOf(disksView.diskRows));
-      expect(resourceRows.first().$('[data-test-id="kebab-button"]').isEnabled()).toBe(false);
+      expect(
+        resourceRows
+          .first()
+          .$('[data-test-id="kebab-button"]')
+          .isEnabled(),
+      ).toBe(false);
     },
     VM_CREATE_AND_EDIT_TIMEOUT_SECS,
   );

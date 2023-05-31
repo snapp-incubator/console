@@ -13,7 +13,6 @@ export class NoModelError extends CustomError {
   }
 }
 
-// TODO remove multicluster
 export const makeReduxID = (k8sKind: K8sModel, query: Query, cluster?: string) => {
   let qs = '';
   if (!_.isEmpty(query)) {
@@ -80,7 +79,6 @@ export const getReduxData = (immutableData, resource: WatchK8sResource) => {
   return null;
 };
 
-// TODO remove multicluster
 export const getIDAndDispatch: GetIDAndDispatch<SDKStoreState> = (resource, k8sModel, cluster) => {
   if (!k8sModel || !resource) {
     return null;

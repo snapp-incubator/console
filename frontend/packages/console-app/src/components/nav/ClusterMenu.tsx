@@ -100,7 +100,6 @@ const ClusterGroup: React.FC<{
   );
 };
 
-// TODO remove multicluster
 const ClusterMenu = () => {
   const { t } = useTranslation();
   const [filterText, setFilterText] = React.useState('');

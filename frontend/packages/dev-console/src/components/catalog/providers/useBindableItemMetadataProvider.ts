@@ -36,7 +36,11 @@ const useBindableItemMetadataProvider: ExtensionHook<CatalogItemMetadataProvider
           (value) =>
             value.kind === item.data.kind &&
             value.version === item.data.version &&
-            value.group === item.data.name.split('.').slice(1).join('.'),
+            value.group ===
+              item.data.name
+                .split('.')
+                .slice(1)
+                .join('.'),
         )
       ) {
         return bindableMetadata.current;

@@ -36,7 +36,9 @@ When('user clicks Create button in side bar', () => {
 
 When('user enters name as {string} in Create knative Serving page', (name: string) => {
   cy.get(catalogPO.createKnativeServing.logo).should('be.visible');
-  cy.get(catalogPO.createKnativeServing.name).clear().type(name);
+  cy.get(catalogPO.createKnativeServing.name)
+    .clear()
+    .type(name);
 });
 
 When('user clicks create button in Create knative Serving page', () => {
@@ -72,7 +74,9 @@ Given('user has installed Crunchy Postgres for Kubernetes operator', () => {
 });
 
 Given('user enters {string} in Filter by keyword', (filterName: string) => {
-  cy.get(catalogPO.filterKeyword).scrollIntoView().click();
+  cy.get(catalogPO.filterKeyword)
+    .scrollIntoView()
+    .click();
   cy.get(catalogPO.filterKeyword).type(filterName);
 });
 
@@ -80,7 +84,9 @@ Then(
   'user will see {string} label associated with {string} card',
   (labelName: string, catalogName: string) => {
     cy.get(`[data-test^="OperatorBackedService-${catalogName}"]`).within(() => {
-      cy.get(catalogPO.batchLabel).should('be.visible').contains(labelName);
+      cy.get(catalogPO.batchLabel)
+        .should('be.visible')
+        .contains(labelName);
     });
   },
 );
@@ -89,7 +95,9 @@ Then(
   'user will see {string} label in {string} sidebar',
   (labelName: string, catalogName: string) => {
     cy.get(`[data-test^="OperatorBackedService-${catalogName}"]`).click();
-    cy.get(catalogPO.batchLabel).should('be.visible').contains(labelName);
+    cy.get(catalogPO.batchLabel)
+      .should('be.visible')
+      .contains(labelName);
   },
 );
 

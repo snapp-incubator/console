@@ -10,7 +10,9 @@ import {
 
 before(() => {
   cy.login();
-  cy.document().its('readyState').should('eq', 'complete');
+  cy.document()
+    .its('readyState')
+    .should('eq', 'complete');
   verifyAndInstallKnativeOperator();
 
   //  To ignore the resizeObserverLoopErrors on CI, adding below code

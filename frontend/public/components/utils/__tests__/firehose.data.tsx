@@ -28,7 +28,7 @@ export const podList = {
 };
 
 export const firehoseChildPropsWithoutModels = {
-  cluster: 'local-cluster', // TODO remove multicluster
+  cluster: 'local-cluster',
   inFlight: false,
   k8sModels: ImmutableMap({}),
   reduxIDs: [],

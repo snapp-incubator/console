@@ -46,7 +46,10 @@ const MonitoringAlertsDecorator: React.FC<MonitoringAlertsDecoratorType> = ({
   const showSidebar = (e: React.MouseEvent) => {
     e.stopPropagation();
     showMonitoringOverview();
-    element.getGraph().getController().fireEvent(SELECTION_EVENT, [element.getId()]);
+    element
+      .getGraph()
+      .getController()
+      .fireEvent(SELECTION_EVENT, [element.getId()]);
   };
 
   if (shouldHideMonitoringAlertDecorator(severityAlertType)) return null;

@@ -68,7 +68,10 @@ describe('markdown-view', () => {
     );
     expect(renderExtension).toHaveBeenCalledWith(
       document,
-      `#${view.first().getDOMNode().getAttribute('id')}`,
+      `#${view
+        .first()
+        .getDOMNode()
+        .getAttribute('id')}`,
     );
   });
 });

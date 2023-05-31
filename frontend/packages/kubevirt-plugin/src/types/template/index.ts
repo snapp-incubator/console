@@ -1,7 +1,6 @@
 import { Map } from 'immutable';
 import { TemplateKind } from '@console/internal/module/k8s';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 enum commonTemplatesValidationRules {
   integer = 'integer',
   string = 'string',

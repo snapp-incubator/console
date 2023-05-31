@@ -12,45 +12,51 @@ export const ConnectionFormContextProvider: React.FC<{
   const [datacenter, setDatacenter] = React.useState<string>('');
   const [defaultDatastore, setDefaultDatastore] = React.useState<string>('');
   const [folder, setFolder] = React.useState<string>('');
-  const [vCenterCluster, setVCenterCluster] = React.useState<string>('');
   const [isDirty, setDirty] = React.useState(false);
 
-  const value = React.useMemo<ConnectionFormContextData>(() => {
-    const formFunction = (func: (v: string) => void) => (val: string) => {
-      func(val);
-      setDirty(true);
-    };
-
-    const setters = {
-      setVcenter,
-      setUsername,
-      setPassword,
-      setDatacenter,
-      setDefaultDatastore,
-      setFolder,
-      setVCenterCluster,
-    };
-    const values = {
-      vcenter,
-      username,
-      password,
-      datacenter,
-      defaultDatastore,
-      folder,
-      vCenterCluster,
-    };
-
-    return {
-      values,
-      setters: Object.keys(setters).reduce((acc, curr) => {
-        acc[curr] = formFunction(setters[curr]);
-        return acc;
-      }, {} as ConnectionFormContextData['setters']),
+  const value = React.useMemo(
+    (): ConnectionFormContextData => ({
       isDirty,
       setDirty,
-      isValid: Object.values(values).every((v) => v?.trim()),
-    };
-  }, [datacenter, defaultDatastore, folder, isDirty, password, username, vcenter, vCenterCluster]);
+
+      vcenter,
+      setVcenter: (v) => {
+        setDirty(true);
+        setVcenter(v);
+      },
+
+      username,
+      setUsername: (v) => {
+        setDirty(true);
+        setUsername(v);
+      },
+
+      password,
+      setPassword: (v) => {
+        setDirty(true);
+        setPassword(v);
+      },
+
+      datacenter,
+      setDatacenter: (v) => {
+        setDirty(true);
+        setDatacenter(v);
+      },
+
+      defaultDatastore,
+      setDefaultDatastore: (v) => {
+        setDirty(true);
+        setDefaultDatastore(v);
+      },
+
+      folder,
+      setFolder: (v) => {
+        setDirty(true);
+        setFolder(v);
+      },
+    }),
+    [datacenter, defaultDatastore, folder, isDirty, password, username, vcenter],
+  );
 
   return <ConnectionFormContext.Provider value={value}>{children}</ConnectionFormContext.Provider>;
 };

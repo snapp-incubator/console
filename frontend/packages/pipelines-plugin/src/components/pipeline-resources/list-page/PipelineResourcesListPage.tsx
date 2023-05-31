@@ -58,13 +58,11 @@ interface PipelineResourcesListPageProps {
   hideBadge?: boolean;
 }
 
-const PipelineResourcesListPage: React.FC<
-  Omit<
-    React.ComponentProps<typeof ListPage>,
-    'canCreate' | 'kind' | 'ListComponent' | 'rowFilters'
-  > &
-    PipelineResourcesListPageProps
-> = (props) => {
+const PipelineResourcesListPage: React.FC<Omit<
+  React.ComponentProps<typeof ListPage>,
+  'canCreate' | 'kind' | 'ListComponent' | 'rowFilters'
+> &
+  PipelineResourcesListPageProps> = (props) => {
   const { t } = useTranslation();
   const badge = usePipelineTechPreviewBadge(props.namespace);
   return (

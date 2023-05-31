@@ -18,8 +18,7 @@ export const withUserSettings = <Props extends WithUserSettingsProps<T>, T = str
       <WrappedComponent {...props} userSettingState={state} setUserSettingState={setState} />
     ) : null;
   };
-  Component.displayName = `withUserSettings(${
-    WrappedComponent.displayName || WrappedComponent.name
-  })`;
+  Component.displayName = `withUserSettings(${WrappedComponent.displayName ||
+    WrappedComponent.name})`;
   return Component;
 };

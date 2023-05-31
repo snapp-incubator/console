@@ -7,7 +7,6 @@ export enum CatalogItemTypes {
   TEKTONHUB_TASK = 'TektonHubTask',
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export enum sampleVersions {
   VERSION_01 = '0.1',
   VERSION_02 = '0.2',
@@ -299,11 +298,11 @@ export const sampleTaskWithMultipleVersions = {
     description: >-
       This task runs commands against the cluster where the task run is
       being executed.
-
+  
       OpenShift is a Kubernetes distribution from Red Hat which provides oc,
       the OpenShift CLI that complements kubectl for simplifying deployment
       and configuration applications on OpenShift.
-
+  
     params:
     - name: SCRIPT
       description: The OpenShift CLI arguments to run
@@ -355,11 +354,11 @@ export const sampleTaskWithMultipleVersions = {
             description: >-
               This task runs commands against the cluster provided by user
               and if not provided then where the Task is being executed.
-
+          
               OpenShift is a Kubernetes distribution from Red Hat which provides oc,
               the OpenShift CLI that complements kubectl for simplifying deployment
               and configuration applications on OpenShift.
-
+          
             params:
               - name: SCRIPT
                 description: The OpenShift CLI arguments to run
@@ -374,14 +373,14 @@ export const sampleTaskWithMultipleVersions = {
                 image: quay.io/openshift/origin-cli:$(params.VERSION)
                 script: |
                   #!/usr/bin/env bash
-
+          
                   [[ "$(workspaces.manifest-dir.bound)" == "true" ]] && \
                   cd $(workspaces.manifest-dir.path)
-
+          
                   [[ "$(workspaces.kubeconfig-dir.bound)" == "true" ]] && \
                   [[ -f $(workspaces.kubeconfig-dir.path)/kubeconfig ]] && \
                   export KUBECONFIG=$(workspaces.kubeconfig-dir.path)/kubeconfig
-
+          
                   $(params.SCRIPT)`,
 };
 

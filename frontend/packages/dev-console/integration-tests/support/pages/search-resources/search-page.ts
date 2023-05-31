@@ -6,8 +6,12 @@ import { navigateToAdminMenu } from '../app';
 const dataTestIdPref: string = 'data-test-id';
 
 function performResourceSearching(resourceName: string) {
-  cy.get('div').contains('Resources').click();
-  cy.get('input[placeholder="Select Resource"]').clear().type(resourceName);
+  cy.get('div')
+    .contains('Resources')
+    .click();
+  cy.get('input[placeholder="Select Resource"]')
+    .clear()
+    .type(resourceName);
   cy.get(`input[id$=${resourceName}]`).click();
 }
 
@@ -37,6 +41,8 @@ export const searchResource = {
   },
 
   selectSearchedItem: (searchedItem: string) => {
-    cy.get(`[${dataTestIdPref}^=${searchedItem}]`).should('be.visible').click();
+    cy.get(`[${dataTestIdPref}^=${searchedItem}]`)
+      .should('be.visible')
+      .click();
   },
 };

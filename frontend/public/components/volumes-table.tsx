@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as _ from 'lodash-es';

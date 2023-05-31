@@ -33,7 +33,7 @@ export const PVCType: React.FC<PVCTypeProps> = ({ state, dispatch }) => {
   };
 
   // Fix for updating the storage class by force rerender
-  const forceUpdate = React.useCallback(() => updateState(undefined), []);
+  const forceUpdate = React.useCallback(() => updateState({}), []);
 
   React.useEffect(() => {
     forceUpdate();

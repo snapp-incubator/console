@@ -49,7 +49,9 @@ Given('user is at the Topology page', () => {
 });
 
 When('user clicks on {string} link in the topology page', (addLink) => {
-  cy.get(topologyPO.graph.addLink).should('be.visible').should('have.text', addLink);
+  cy.get(topologyPO.graph.addLink)
+    .should('be.visible')
+    .should('have.text', addLink);
   cy.get(topologyPO.graph.addLink).click();
 });
 
@@ -60,7 +62,14 @@ Then('user will be redirected to Add page', () => {
 });
 
 When('user clicks on {string} link in the empty topology page', (build: string) => {
-  cy.byTestID(build.toLowerCase().replace(/\s+/g, '-').trim()).should('be.visible').click();
+  cy.byTestID(
+    build
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .trim(),
+  )
+    .should('be.visible')
+    .click();
   cy.log(`Quick search bar can be seen with ${build} link`);
 });
 
@@ -129,11 +138,15 @@ When('user is at Topology page chart view', () => {
 });
 
 When('user clicks the filter by resource on top', () => {
-  cy.get(topologyPO.filterByResourceDropDown).should('be.visible').click();
+  cy.get(topologyPO.filterByResourceDropDown)
+    .should('be.visible')
+    .click();
 });
 
 When('user clicks on {string} option', (resourceType: string) => {
-  cy.byTestID(resourceType).should('be.visible').click();
+  cy.byTestID(resourceType)
+    .should('be.visible')
+    .click();
 });
 
 Then('user can see only the {string} workload', (workload: string) => {
@@ -142,11 +155,17 @@ Then('user can see only the {string} workload', (workload: string) => {
 
 When('user selects {string} option in filter menu', (searchType: string) => {
   cy.get('#toggle-id').click();
-  cy.get("[role='menu']").find('li').contains(searchType).should('be.visible').click();
+  cy.get("[role='menu']")
+    .find('li')
+    .contains(searchType)
+    .should('be.visible')
+    .click();
 });
 
 When('user searches for label {string}', (search: string) => {
-  cy.get(topologyPO.search).clear().type(search);
+  cy.get(topologyPO.search)
+    .clear()
+    .type(search);
   cy.get('.co-suggestion-box__suggestions')
     .find('button')
     .contains(search)
@@ -211,12 +230,16 @@ When('user clicks on {string} option from context menu', (actionItem: string) =>
 
 Then('user will see {string} modal', (modalName: string) => {
   app.waitForLoad();
-  cy.get('[aria-label="Modal"]').should('be.visible').should('contain', modalName);
+  cy.get('[aria-label="Modal"]')
+    .should('be.visible')
+    .should('contain', modalName);
 });
 
 Then('user will see alert {string}', (alertName: string) => {
   app.waitForDocumentLoad();
-  cy.get('[aria-label="Default Alert"]').should('be.visible').should('contain', alertName);
+  cy.get('[aria-label="Default Alert"]')
+    .should('be.visible')
+    .should('contain', alertName);
   modal.cancel();
 });
 
@@ -337,7 +360,9 @@ When('user selects Redis and clicks on Create', () => {
 
 When('user selects Nodejs and clicks on Install Helm Charts', () => {
   cy.get(chartAreaPO.filterItem).type('nodejs');
-  cy.get(chartAreaPO.helmNodejs).eq(0).click();
+  cy.get(chartAreaPO.helmNodejs)
+    .eq(0)
+    .click();
   cy.get(chartAreaPO.overlayCreate).click({ force: true });
 });
 
@@ -348,7 +373,9 @@ When('user selects Api Server Source and clicks on Create Event Source', () => {
 });
 
 When('user clicks on Create button', () => {
-  cy.get(chartAreaPO.contentScrollable).contains('Create').click();
+  cy.get(chartAreaPO.contentScrollable)
+    .contains('Create')
+    .click();
 });
 
 Then(
@@ -405,11 +432,15 @@ Given(
 );
 
 When('user clicks on service binding connector', () => {
-  cy.byLegacyTestID('edge-handler').should('be.visible').click();
+  cy.byLegacyTestID('edge-handler')
+    .should('be.visible')
+    .click();
 });
 
 When('user clicks on the service binding name {string} at the sidebar', (bindingName: string) => {
-  cy.byLegacyTestID(`${bindingName}`).should('be.visible').click();
+  cy.byLegacyTestID(`${bindingName}`)
+    .should('be.visible')
+    .click();
 });
 
 Then('user will see {string} Status on Service binding details page', (status: string) => {

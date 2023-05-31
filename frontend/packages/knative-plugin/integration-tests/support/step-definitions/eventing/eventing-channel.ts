@@ -29,7 +29,9 @@ When('user clicks on the Channel card', () => {
 });
 
 Then('user clicks on YAML view', () => {
-  cy.get(eventingPO.channel.yamlView).should('be.visible').click();
+  cy.get(eventingPO.channel.yamlView)
+    .should('be.visible')
+    .click();
 });
 
 Then('user can see reate button enabled', () => {
@@ -38,7 +40,9 @@ Then('user can see reate button enabled', () => {
 
 When('user selects auto selected InMemoryChannel from Type dropdown', () => {
   cy.get(eventingPO.channel.selectChannel).click();
-  cy.get(eventingPO.channel.channelDropdown).contains('InMemoryChannel').click();
+  cy.get(eventingPO.channel.channelDropdown)
+    .contains('InMemoryChannel')
+    .click();
 });
 
 When('user selects Application', () => {
@@ -47,7 +51,9 @@ When('user selects Application', () => {
 });
 
 When('user enters the name of the Channel {string}', (channelName: string) => {
-  cy.get(eventingPO.channel.name).clear().type(channelName);
+  cy.get(eventingPO.channel.name)
+    .clear()
+    .type(channelName);
 });
 
 When('user clicks on the Create button', () => {
@@ -70,7 +76,9 @@ When('user clicks on the Event Source card', () => {
 
 When('user selects Ping Source card', () => {
   cy.get(eventingPO.pingSource.create).click();
-  cy.get(eventingPO.createCatalog).contains('Create Event Source').click({ force: true });
+  cy.get(eventingPO.createCatalog)
+    .contains('Create Event Source')
+    .click({ force: true });
 });
 
 When('user enters Schedule', () => {
@@ -82,11 +90,15 @@ When('user selects the channel {string} from Resource dropdown', (channelName: s
   cy.get(eventSourcePO.createPingSource.resourceToggleButton).click();
   cy.get(eventSourcePO.createPingSource.resourceDropDownField).click();
   cy.get(eventSourcePO.createPingSource.resourceFilter).type(channelName);
-  cy.get(eventSourcePO.createPingSource.resourceDropDownItem).eq(0).click();
+  cy.get(eventSourcePO.createPingSource.resourceDropDownItem)
+    .eq(0)
+    .click();
 });
 
 When('user enters name of the ping source {string}', (sourceName: string) => {
-  cy.get(eventSourcePO.createPingSource.name).clear().type(sourceName);
+  cy.get(eventSourcePO.createPingSource.name)
+    .clear()
+    .type(sourceName);
 });
 
 Then('user will see that event source is connected to channel', () => {
@@ -102,11 +114,15 @@ Then('user will see the Context Menu for channel', () => {
 });
 
 Then('user will see option {string}', (optionName: string) => {
-  cy.get(eventingPO.channel.contextMenuItem).contains(optionName).should('be.visible');
+  cy.get(eventingPO.channel.contextMenuItem)
+    .contains(optionName)
+    .should('be.visible');
 });
 
 When('user clicks on the {string}', (optionName: string) => {
-  cy.get(eventingPO.channel.contextMenuItem).contains(optionName).click();
+  cy.get(eventingPO.channel.contextMenuItem)
+    .contains(optionName)
+    .click();
 });
 
 When('user will click on the Application dropdown on the modal', () => {
@@ -114,7 +130,9 @@ When('user will click on the Application dropdown on the modal', () => {
 });
 
 When('user selects the Application {string}', (applicationName: string) => {
-  cy.get(eventingPO.channel.applicationItem).contains(applicationName).click();
+  cy.get(eventingPO.channel.applicationItem)
+    .contains(applicationName)
+    .click();
 });
 
 When('user clicks on Save button', () => {
@@ -147,15 +165,21 @@ When('user clicks on the Save button on the modal to save annotation and close t
 
 When('user selects the Application in the dropdown {string}', (appName: string) => {
   cy.get(eventingPO.channel.applicationDropDown).click();
-  cy.get(eventingPO.channel.applicationItem).contains(appName).click();
+  cy.get(eventingPO.channel.applicationItem)
+    .contains(appName)
+    .click();
 });
 
 When('user selects the {string} item', (applicationName: string) => {
-  cy.get(eventingPO.channel.dropDownMenu).contains(applicationName).click();
+  cy.get(eventingPO.channel.dropDownMenu)
+    .contains(applicationName)
+    .click();
 });
 
 When('user adds the label {string}', (label: string) => {
-  cy.get(eventingPO.channel.labelTagsInput).click().type(label);
+  cy.get(eventingPO.channel.labelTagsInput)
+    .click()
+    .type(label);
 });
 
 When('user clicks on the Save button on the modal to save labels and close the modal', () => {
@@ -168,7 +192,9 @@ When('user clicks on the Channel {string} to open the sidebar', (channelName: st
 });
 
 When('user opens the {string} tab', (tabName: string) => {
-  cy.get(eventingPO.channel.sidebarTab).contains(tabName).click();
+  cy.get(eventingPO.channel.sidebarTab)
+    .contains(tabName)
+    .click();
 });
 
 Then('user will see the newly added label {string}', (label: string) => {
@@ -179,8 +205,12 @@ When(
   'user adds the annotation {string} and type {string}',
   (annotationName: string, type: string) => {
     cy.get(eventingPO.channel.addAnnotations).click();
-    cy.get(eventingPO.channel.keyAnnotations).last().type(annotationName);
-    cy.get(eventingPO.channel.valueAnnotations).last().type(type);
+    cy.get(eventingPO.channel.keyAnnotations)
+      .last()
+      .type(annotationName);
+    cy.get(eventingPO.channel.valueAnnotations)
+      .last()
+      .type(type);
   },
 );
 
@@ -189,7 +219,9 @@ Then(
   (annotationName: string, type: string) => {
     topologyPage.clickOnNode('ping-source');
     topologyPage.clickOnNode('channel-test');
-    cy.get(eventingPO.channel.sidebarTab).contains('Details').should('exist');
+    cy.get(eventingPO.channel.sidebarTab)
+      .contains('Details')
+      .should('exist');
     cy.get(eventingPO.channel.editAnnotations).click();
     cy.byTestID('pairs-list-name').should('have.value', annotationName);
     cy.byTestID('pairs-list-value').should('have.value', type);
@@ -213,7 +245,9 @@ Then('user will not see channel {string}', (channelName: string) => {
 });
 
 Then('user will see the {string} tab', (tabName: string) => {
-  cy.get(eventingPO.channel.sidebarTab).contains(tabName).should('exist');
+  cy.get(eventingPO.channel.sidebarTab)
+    .contains(tabName)
+    .should('exist');
 });
 
 Then('user will see name of channel', () => {
@@ -245,9 +279,13 @@ Given(
       'channel-application',
     );
     topologyPage.rightClickOnNode('channel-test');
-    cy.get(eventingPO.channel.contextMenu).contains('Add Subscription').click();
+    cy.get(eventingPO.channel.contextMenu)
+      .contains('Add Subscription')
+      .click();
     cy.get(eventingPO.channel.subscriberInput).click();
-    cy.get(eventingPO.channel.applicationItem).contains(serviceName).click();
+    cy.get(eventingPO.channel.applicationItem)
+      .contains(serviceName)
+      .click();
     cy.get(eventingPO.channel.save).click();
   },
 );
@@ -265,5 +303,7 @@ Given(
 );
 
 Then('user will see the Event Sources sinked to channel', () => {
-  cy.get(eventingPO.channel.resourceItem).contains('ping-source').should('exist');
+  cy.get(eventingPO.channel.resourceItem)
+    .contains('ping-source')
+    .should('exist');
 });

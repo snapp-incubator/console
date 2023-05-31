@@ -1,6 +1,5 @@
 import * as _ from 'lodash';
-import * as k8sResourceModule from '@console/dynamic-plugin-sdk/src/utils/k8s/k8s-resource';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import * as k8s from '@console/internal/module/k8s';
 import {
   SERVERLESS_FUNCTION_LABEL,
   SERVERLESS_FUNCTION_LABEL_DEPRECATED,
@@ -198,14 +197,14 @@ describe('knative topology utils', () => {
   });
 
   it('expect isServerlessFunction to return results if an element has necessary labels', () => {
-    const sampleKnResource: K8sResourceKind = {
+    const sampleKnResource: k8s.K8sResourceKind = {
       ...MockKnativeResources.ksservices.data[0],
       metadata: { labels: { [SERVERLESS_FUNCTION_LABEL]: 'true' } },
     };
     expect(isServerlessFunction(sampleKnResource)).toBe(true);
 
     // TODO: remove test case for deprecated label for serverless function
-    const sampleKnResourceDep: K8sResourceKind = {
+    const sampleKnResourceDep: k8s.K8sResourceKind = {
       ...MockKnativeResources.ksservices.data[0],
       metadata: { labels: { [SERVERLESS_FUNCTION_LABEL_DEPRECATED]: 'true' } },
     };
@@ -215,9 +214,7 @@ describe('knative topology utils', () => {
 
 describe('Knative Topology Utils', () => {
   beforeAll(() => {
-    jest
-      .spyOn(k8sResourceModule, 'k8sUpdate')
-      .mockImplementation((model, data) => Promise.resolve({ data }));
+    jest.spyOn(k8s, 'k8sUpdate').mockImplementation((model, data) => Promise.resolve({ data }));
   });
 
   afterAll(() => {

@@ -56,7 +56,12 @@ describe('ResourceLimitSection', () => {
 
   it('should render container name for resource limit section', () => {
     const wrapper = shallow(<ResourceLimitSection {...resourceLimitSectionProps} />);
-    expect(wrapper.find('span').at(0).props().children).toContainEqual('nodejs-container');
+    expect(
+      wrapper
+        .find('span')
+        .at(0)
+        .props().children,
+    ).toContainEqual('nodejs-container');
   });
 
   it('should not render container for resource limit section', () => {

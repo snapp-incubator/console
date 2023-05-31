@@ -40,7 +40,9 @@ const enableDemoPlugin = (enable: boolean) => {
     'include',
     'k8s/cluster/operator.openshift.io~v1~Console/cluster/console-plugins',
   );
-  cy.get('.co-resource-item__resource-name').byLegacyTestID(PLUGIN_NAME).should('be.visible');
+  cy.get('.co-resource-item__resource-name')
+    .byLegacyTestID(PLUGIN_NAME)
+    .should('be.visible');
   cy.byLegacyTestID(PLUGIN_NAME)
     .parents('tr')
     .within(() => {

@@ -1,10 +1,9 @@
-/* eslint-disable tsdoc/syntax */
 import * as _ from 'lodash-es';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { safeLoad, safeLoadAll, safeDump } from 'js-yaml';
 import { connect } from 'react-redux';
-import { ActionGroup, Alert, Button, Checkbox } from '@patternfly/react-core';
+import { ActionGroup, Alert, Button } from '@patternfly/react-core';
 import { DownloadIcon, InfoCircleIcon } from '@patternfly/react-icons';
 import { Trans, withTranslation } from 'react-i18next';
 
@@ -14,12 +13,9 @@ import {
   getBadgeFromType,
   withPostFormSubmissionCallback,
   getResourceSidebarSamples,
-  SHOW_YAML_EDITOR_TOOLTIPS_USER_SETTING_KEY,
-  SHOW_YAML_EDITOR_TOOLTIPS_LOCAL_STORAGE_KEY,
-  useUserSettingsCompatibility,
 } from '@console/shared';
-import CodeEditor from '@console/shared/src/components/editor/CodeEditor';
-import CodeEditorSidebar from '@console/shared/src/components/editor/CodeEditorSidebar';
+import YAMLEditor from '@console/shared/src/components/editor/YAMLEditor';
+import YAMLEditorSidebar from '@console/shared/src/components/editor/YAMLEditorSidebar';
 import '@console/shared/src/components/editor/theme';
 import { fold } from '@console/shared/src/components/editor/yaml-editor-utils';
 import { downloadYaml } from '@console/shared/src/components/editor/yaml-download-utils';
@@ -71,22 +67,11 @@ const WithYamlTemplates = (Component) =>
     const [templateExtensions, resolvedTemplates] = useResolvedExtensions(
       React.useCallback((e) => isYAMLTemplate(e) && e.properties.model.kind === kind, [kind]),
     );
-    const [showTooltips, setShowTooltips] = useUserSettingsCompatibility(
-      SHOW_YAML_EDITOR_TOOLTIPS_USER_SETTING_KEY,
-      SHOW_YAML_EDITOR_TOOLTIPS_LOCAL_STORAGE_KEY,
-      true,
-      true,
-    );
 
     return !resolvedTemplates ? (
       <LoadingBox />
     ) : (
-      <Component
-        templateExtensions={templateExtensions}
-        showTooltips={showTooltips}
-        setShowTooltips={setShowTooltips}
-        {...props}
-      />
+      <Component templateExtensions={templateExtensions} {...props} />
     );
   };
 
@@ -109,7 +94,6 @@ export const EditYAML_ = connect(stateToProps)(
             stale: false,
             sampleObj: props.sampleObj,
             showSidebar: !!props.create,
-            hover: true,
             owner: null,
           };
           this.monacoRef = React.createRef();
@@ -509,21 +493,8 @@ export const EditYAML_ = connect(stateToProps)(
               return;
             }
             if (objs.length === 1) {
-              if (
-                objs[0]?.apiVersion === 'v1' &&
-                objs[0]?.kind?.includes('List') &&
-                objs[0]?.items
-              ) {
-                if (objs[0]?.items?.length > 0) {
-                  objs = objs[0].items;
-                } else {
-                  this.handleError(t('public~"items" list is empty'));
-                  return;
-                }
-              } else {
-                this.save();
-                return;
-              }
+              this.save();
+              return;
             } else if (objs.length === 0) {
               return;
             }
@@ -598,10 +569,6 @@ export const EditYAML_ = connect(stateToProps)(
           window.dispatchEvent(new Event('sidebar_toggle'));
         };
 
-        toggleShowTooltips = (showTooltips) => {
-          this.props.setShowTooltips(showTooltips);
-        };
-
         sanitizeYamlContent = (id, yaml, kind) => {
           const contentObj = this.getYamlContent_(id, yaml, kind);
           const sanitizedYaml = this.convertObjToYAMLString(contentObj);
@@ -625,12 +592,10 @@ export const EditYAML_ = connect(stateToProps)(
             onChange = () => null,
             t,
             models,
-            showTooltips,
           } = this.props;
           const klass = classNames('co-file-dropzone-container', {
             'co-file-dropzone--drop-over': isOver,
           });
-          this?.monacoRef.current?.editor.updateOptions({ hover: showTooltips });
 
           const {
             errors,
@@ -676,17 +641,6 @@ export const EditYAML_ = connect(stateToProps)(
                 {t('public~View sidebar')}
               </Button>
             ) : null;
-          const tooltipCheckBox = (
-            <Checkbox
-              label={t('public~Show tooltips')}
-              id="showTooltips"
-              isChecked={showTooltips}
-              data-checked-state={showTooltips}
-              onChange={(checked) => {
-                this.toggleShowTooltips(checked);
-              }}
-            />
-          );
 
           const editYamlComponent = (
             <div className="co-file-dropzone co-file-dropzone__flex">
@@ -723,14 +677,12 @@ export const EditYAML_ = connect(stateToProps)(
                       className={classNames('yaml-editor', customClass)}
                       ref={(r) => (this.editor = r)}
                     >
-                      <CodeEditor
+                      <YAMLEditor
                         ref={this.monacoRef}
                         options={options}
                         showShortcuts={!genericYAML}
                         minHeight="100px"
-                        toolbarLinks={
-                          sidebarLink ? [tooltipCheckBox, sidebarLink] : [tooltipCheckBox]
-                        }
+                        toolbarLinks={sidebarLink ? [sidebarLink] : []}
                         onChange={onChange}
                         onSave={() => (allowMultiple ? this.saveAll() : this.save())}
                       />
@@ -816,7 +768,7 @@ export const EditYAML_ = connect(stateToProps)(
                     </div>
                   </div>
                   {hasSidebarContent && showSidebar && (
-                    <CodeEditorSidebar
+                    <YAMLEditorSidebar
                       editorRef={this.monacoRef}
                       model={model}
                       samples={create ? samples : []}

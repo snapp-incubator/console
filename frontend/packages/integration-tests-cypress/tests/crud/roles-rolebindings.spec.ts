@@ -135,7 +135,10 @@ describe('Roles and RoleBindings', () => {
       listPage.rows.clickRowByName(roleOrBindingName);
       detailsPage.isLoaded();
       projectDropdown.shouldContain(testName);
-      detailsPage.breadcrumb(0).contains(rolesOrBindings).click();
+      detailsPage
+        .breadcrumb(0)
+        .contains(rolesOrBindings)
+        .click();
       listPage.rows.shouldBeLoaded();
       projectDropdown.shouldContain(allProjectsDropdownLabel);
     });
@@ -150,7 +153,10 @@ describe('Roles and RoleBindings', () => {
       listPage.rows.clickRowByName(roleOrBindingName);
       detailsPage.isLoaded();
       projectDropdown.shouldContain(testName);
-      detailsPage.breadcrumb(0).contains(rolesOrBindings).click();
+      detailsPage
+        .breadcrumb(0)
+        .contains(rolesOrBindings)
+        .click();
       listPage.rows.shouldBeLoaded();
       projectDropdown.shouldContain(testName);
     });
@@ -165,7 +171,10 @@ describe('Roles and RoleBindings', () => {
       listPage.rows.clickRowByName(clusterRoleOrBindingName);
       detailsPage.isLoaded();
       projectDropdown.shouldNotExist();
-      detailsPage.breadcrumb(0).contains(rolesOrBindings).click();
+      detailsPage
+        .breadcrumb(0)
+        .contains(rolesOrBindings)
+        .click();
       listPage.rows.shouldBeLoaded();
       projectDropdown.shouldContain(allProjectsDropdownLabel);
     });
@@ -180,7 +189,10 @@ describe('Roles and RoleBindings', () => {
       listPage.rows.clickRowByName(clusterRoleOrBindingName);
       detailsPage.isLoaded();
       projectDropdown.shouldNotExist();
-      detailsPage.breadcrumb(0).contains(rolesOrBindings).click();
+      detailsPage
+        .breadcrumb(0)
+        .contains(rolesOrBindings)
+        .click();
       listPage.rows.shouldBeLoaded();
       projectDropdown.shouldContain(testName);
     });

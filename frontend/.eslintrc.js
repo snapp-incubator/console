@@ -7,7 +7,6 @@ module.exports = {
     es6: true,
     jasmine: true,
     jest: true,
-    node: true,
   },
   extends: [
     'eslint:recommended',
@@ -20,11 +19,13 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
+    comment: true,
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
+    ecmaVersion: 2017,
     extraFileExtensions: ['.json'],
+    sourceType: 'module',
     tsconfigRootDir: './',
   },
   plugins: ['react', 'react-hooks', '@typescript-eslint', 'graphql', 'eslint-plugin-tsdoc'],
@@ -52,9 +53,8 @@ module.exports = {
     'no-else-return': ['error'],
     'no-global-strict': 0,
     'no-irregular-whitespace': ['error'],
-    'no-prototype-builtins': 0, // Disable with eslint v6 update.
-    'no-shadow': 0,
-    '@typescript-eslint/no-shadow': 'error',
+    'no-prototype-builtins': 0, // Disable with exlint v6 update.
+    'no-shadow': ['error'],
     'no-underscore-dangle': 0,
     '@typescript-eslint/no-unused-vars': [
       'error',
@@ -97,13 +97,5 @@ module.exports = {
   },
   globals: {
     process: 'readonly',
-    React: true,
-    JSX: 'readonly',
-    NodeJS: 'readonly',
-    Subject: 'readonly',
-    Diff: 'readonly',
-    BlobPropertyBag: 'readonly',
-    VoidFunction: 'readonly',
-    RequestInit: 'readonly',
   },
 };

@@ -51,16 +51,24 @@ describe('RouteSection', () => {
   it('should show the Target port field if the create route checkbox is checked ', () => {
     const component = shallow(<RouteSection {...props} />);
     expect(component.find(PortInputField).exists()).toBe(true);
-    expect(component.find(PortInputField).dive().find(SelectInputField).props().label).toEqual(
-      'Target port',
-    );
+    expect(
+      component
+        .find(PortInputField)
+        .dive()
+        .find(SelectInputField)
+        .props().label,
+    ).toEqual('Target port');
   });
 
   it('should also show the Target port field if the create route checkbox is not checked ', () => {
     props.route.create = false;
     const component = shallow(<RouteSection {...props} />);
-    expect(component.find(PortInputField).dive().find(SelectInputField).props().label).toEqual(
-      'Target port',
-    );
+    expect(
+      component
+        .find(PortInputField)
+        .dive()
+        .find(SelectInputField)
+        .props().label,
+    ).toEqual('Target port');
   });
 });

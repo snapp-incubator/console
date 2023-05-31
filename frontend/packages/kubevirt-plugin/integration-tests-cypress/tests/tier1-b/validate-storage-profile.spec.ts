@@ -17,7 +17,7 @@ const vmData: VirtualMachineData = {
 
 declare global {
   namespace Cypress {
-    interface Chainable {
+    interface Chainable<Subject> {
       createStorageClass(): void;
       deleteStorageClass(): void;
       deleteStorageProfile(): void;
@@ -95,7 +95,9 @@ describe('ID(CNV-6923) Verify storageProfile with a fake storageClass', () => {
     cy.editStorageProfile(); // ensure SP has default properties for AccessMode and VolumeMode
     vm.create(vmData);
     cy.visitVMsList();
-    cy.byLegacyTestID(vmData.name).should('exist').click();
+    cy.byLegacyTestID(vmData.name)
+      .should('exist')
+      .click();
   });
 
   after(() => {
@@ -115,7 +117,9 @@ describe('ID(CNV-6923) Verify storageProfile with a fake storageClass', () => {
   it('ID(CNV-6921) Verify storageProfile in template add boot source modal', () => {
     cy.visitVMTemplatesList();
     listPage.rows.shouldBeLoaded();
-    cy.get('[data-test-template-name="rhel8-server-small"]').contains('Add source').click();
+    cy.get('[data-test-template-name="rhel8-server-small"]')
+      .contains('Add source')
+      .click();
     cy.contains('Advanced Storage settings').click();
     cy.validateSPSettings();
     cy.byLegacyTestID('modal-cancel-action').click();

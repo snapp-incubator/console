@@ -480,7 +480,8 @@ export const managePipelineResources = async (
 ): Promise<K8sResourceKind[]> => {
   const pipelineResources = [];
   if (!formData) return Promise.resolve([]);
-  const { name, git, pipeline, project, docker, image, build, labels } = formData;
+
+  const { name, git, pipeline, project, docker, image, build } = formData;
   let managedPipeline: PipelineKind;
   const pipelineName = pipelineData?.metadata?.name;
 
@@ -496,7 +497,6 @@ export const managePipelineResources = async (
       docker.dockerfilePath,
       image.tag,
       build.env,
-      labels,
     );
   } else if (pipeline.template) {
     managedPipeline = await createPipelineForImportFlow(
@@ -509,7 +509,6 @@ export const managePipelineResources = async (
       docker.dockerfilePath,
       image.tag,
       build.env,
-      labels,
     );
     pipelineResources.push(managedPipeline);
     try {
@@ -712,8 +711,7 @@ export const createOrUpdateResources = async (
 
   if (pipeline.type === PipelineType.PAC) {
     const pacRepository = formData?.pac?.repository;
-    const labels = formData?.labels;
-    const repo = await createRepositoryResources(pacRepository, namespace, labels, dryRun);
+    const repo = await createRepositoryResources(pacRepository, namespace, dryRun);
     responses.push(repo);
   }
 

@@ -9,7 +9,9 @@ export const createKnativeServing = () => {
   projectNameSpace.selectProject('knative-serving');
   cy.get('body').then(($body) => {
     if ($body.find(operatorsPO.installOperators.search)) {
-      cy.get(operatorsPO.installOperators.search).clear().type(operators.ServerlessOperator);
+      cy.get(operatorsPO.installOperators.search)
+        .clear()
+        .type(operators.ServerlessOperator);
     }
   });
   cy.get(operatorsPO.installOperators.knativeServingLink).click({ force: true });
@@ -40,7 +42,9 @@ export const createKnativeEventing = () => {
   projectNameSpace.selectProject('knative-eventing');
   cy.get('body').then(($body) => {
     if ($body.find(operatorsPO.installOperators.search)) {
-      cy.get(operatorsPO.installOperators.search).clear().type(operators.ServerlessOperator);
+      cy.get(operatorsPO.installOperators.search)
+        .clear()
+        .type(operators.ServerlessOperator);
     }
   });
   cy.get(operatorsPO.installOperators.knativeEventingLink).click({ force: true });
@@ -72,7 +76,9 @@ export const createKnativeKafka = () => {
   projectNameSpace.selectProject('knative-eventing');
   cy.get('body').then(($body) => {
     if ($body.find(operatorsPO.installOperators.search)) {
-      cy.get(operatorsPO.installOperators.search).clear().type(operators.ServerlessOperator);
+      cy.get(operatorsPO.installOperators.search)
+        .clear()
+        .type(operators.ServerlessOperator);
     }
   });
   cy.get(operatorsPO.installOperators.knativeKafkaLink).click({ force: true });

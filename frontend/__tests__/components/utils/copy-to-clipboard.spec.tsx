@@ -16,7 +16,10 @@ describe(CopyToClipboard.displayName, () => {
     await act(async () => {
       wrapper = mount(<CopyToClipboard value="FizzBuzz" />);
 
-      wrapper.find<any>(CTC).props().onCopy();
+      wrapper
+        .find<any>(CTC)
+        .props()
+        .onCopy();
 
       // re-render component created via React.memo
       wrapper.setProps({ value: 'FuzzBuzz' });
@@ -29,9 +32,15 @@ describe(CopyToClipboard.displayName, () => {
     await act(async () => {
       wrapper = mount(<CopyToClipboard value="FizzBuzz" />);
 
-      wrapper.find<any>(CTC).props().onCopy();
+      wrapper
+        .find<any>(CTC)
+        .props()
+        .onCopy();
 
-      wrapper.find('.co-copy-to-clipboard__btn').first().simulate('mouseenter');
+      wrapper
+        .find('.co-copy-to-clipboard__btn')
+        .first()
+        .simulate('mouseenter');
     });
 
     expect(wrapper.find(Tooltip).props().content[0].props.children).toEqual(`Copy to clipboard`);

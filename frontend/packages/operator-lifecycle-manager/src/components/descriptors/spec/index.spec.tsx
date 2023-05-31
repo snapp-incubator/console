@@ -65,7 +65,12 @@ describe('Spec descriptors', () => {
       'x-descriptors': [SpecCapability.podCount],
     };
     wrapper.setProps({ descriptor });
-    expect(wrapper.find('dd').find(Button).text()).toEqual(`${OBJ.spec.pods} pods`);
+    expect(
+      wrapper
+        .find('dd')
+        .find(Button)
+        .text(),
+    ).toEqual(`${OBJ.spec.pods} pods`);
 
     spyOn(configureSize, 'configureSizeModal').and.callFake((props) => {
       expect(props).toEqual({
@@ -76,7 +81,11 @@ describe('Spec descriptors', () => {
       });
       done();
     });
-    wrapper.find('dd').find(Button).props().onClick(null);
+    wrapper
+      .find('dd')
+      .find(Button)
+      .props()
+      .onClick(null);
   });
 
   it('renders an endpoints list', () => {
@@ -110,14 +119,34 @@ describe('Spec descriptors', () => {
     };
     wrapper.setProps({ descriptor });
 
-    expect(wrapper.find('dd').find('dt').at(0).text()).toEqual('Resource limits');
-    expect(wrapper.find('dd').find(ResourceRequirementsModalLink).at(0).prop('type')).toEqual(
-      'limits',
-    );
-    expect(wrapper.find('dd').find('dt').at(1).text()).toEqual('Resource requests');
-    expect(wrapper.find('dd').find(ResourceRequirementsModalLink).at(1).prop('type')).toEqual(
-      'requests',
-    );
+    expect(
+      wrapper
+        .find('dd')
+        .find('dt')
+        .at(0)
+        .text(),
+    ).toEqual('Resource limits');
+    expect(
+      wrapper
+        .find('dd')
+        .find(ResourceRequirementsModalLink)
+        .at(0)
+        .prop('type'),
+    ).toEqual('limits');
+    expect(
+      wrapper
+        .find('dd')
+        .find('dt')
+        .at(1)
+        .text(),
+    ).toEqual('Resource requests');
+    expect(
+      wrapper
+        .find('dd')
+        .find(ResourceRequirementsModalLink)
+        .at(1)
+        .prop('type'),
+    ).toEqual('requests');
   });
 
   it('renders a resource link to a Kubernetes object', () => {

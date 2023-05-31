@@ -66,25 +66,13 @@ export const hasDeprecationJSDoc = (node: ts.Declaration): boolean => {
   return getJSDoc(node).some((d) => d.tags && d.tags.find((t) => t.tagName.text === 'deprecated'));
 };
 
-const getCommentText = (comment: string | ts.NodeArray<ts.JSDocComment>): string => {
-  return typeof comment === 'string'
-    ? comment
-    : comment
-        .filter((c) => c.kind === ts.SyntaxKind.JSDocText)
-        .map((c) => c.text)
-        .join('\n');
-};
-
-export const getJSDocComments = (node: ts.Declaration): string[] => {
+export const getJSDocComments = (node: ts.Declaration) => {
   return _.compact(
     getJSDoc(node).map((d) => {
       if (d.tags) {
-        return d.tags
-          .map((t) => `@${t.tagName.text} ${getCommentText(t.comment ?? '')}`)
-          .join('\n');
+        return d.tags.map((t) => `@${t.tagName.text} ${t.comment}`).join('\n');
       }
-
-      return getCommentText(d.comment ?? '');
+      return d.comment;
     }),
   );
 };

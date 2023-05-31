@@ -96,7 +96,10 @@ describe('ToastProvider', () => {
     expect(alertActionLinks.length).toBe(1);
 
     act(() => {
-      alertActionLinks.at(0).find('button').simulate('click');
+      alertActionLinks
+        .at(0)
+        .find('button')
+        .simulate('click');
     });
 
     wrapper.update();
@@ -129,7 +132,12 @@ describe('ToastProvider', () => {
     expect(wrapper.find(Alert).length).toBe(1);
     const alertActionLinks = wrapper.find(AlertActionLink);
     expect(alertActionLinks.length).toBe(1);
-    expect(alertActionLinks.at(0).find('a').exists()).toBe(true);
+    expect(
+      alertActionLinks
+        .at(0)
+        .find('a')
+        .exists(),
+    ).toBe(true);
   });
 
   it('should dismiss toast on action on anchor click', () => {
@@ -156,7 +164,10 @@ describe('ToastProvider', () => {
     const alertActionLinks = wrapper.find(AlertActionLink);
     expect(alertActionLinks.length).toBe(1);
     act(() => {
-      alertActionLinks.at(0).find('a').simulate('click');
+      alertActionLinks
+        .at(0)
+        .find('a')
+        .simulate('click');
     });
 
     wrapper.update();

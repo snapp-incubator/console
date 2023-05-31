@@ -2,7 +2,9 @@ import { verifyAndInstallPipelinesOperator } from '@console/dev-console/integrat
 
 before(() => {
   cy.login();
-  cy.document().its('readyState').should('eq', 'complete');
+  cy.document()
+    .its('readyState')
+    .should('eq', 'complete');
   verifyAndInstallPipelinesOperator();
 });
 

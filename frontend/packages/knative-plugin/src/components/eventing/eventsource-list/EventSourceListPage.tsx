@@ -22,10 +22,9 @@ const EventSourceListPage: React.FC<React.ComponentProps<typeof MultiListPage>> 
   const { t } = useTranslation();
   const { loaded: modelsLoaded, eventSourceModels } = useEventSourceModels();
   const isKameletEnabled = useFlag(FLAG_CAMEL_KAMELETS);
-  const sourcesModel = React.useMemo(
-    () => (isKameletEnabled ? [...eventSourceModels, CamelKameletBindingModel] : eventSourceModels),
-    [isKameletEnabled, eventSourceModels],
-  );
+  const sourcesModel = isKameletEnabled
+    ? [...eventSourceModels, CamelKameletBindingModel]
+    : eventSourceModels;
   const flatten = (resources) =>
     modelsLoaded
       ? sourcesModel.flatMap((model) => resources[referenceForModel(model)]?.data ?? [])

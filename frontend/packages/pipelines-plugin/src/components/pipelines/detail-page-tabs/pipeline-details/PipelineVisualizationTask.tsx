@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
 import { Tooltip } from '@patternfly/react-core';
 import { createSvgIdUrl, useHover } from '@patternfly/react-topology';

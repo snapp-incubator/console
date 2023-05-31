@@ -19,7 +19,9 @@ export const roleBindings = {
       .click(),
   inputSubject: (subject: string) => cy.byTestID('subject-name').type(subject),
   clickSaveChangesButton: () => {
-    cy.byTestID('save-changes').should('be.visible').click();
+    cy.byTestID('save-changes')
+      .should('be.visible')
+      .click();
     cy.byTestID('loading-indicator').should('not.exist');
   },
 };
