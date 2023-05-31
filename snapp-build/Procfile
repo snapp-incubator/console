@@ -1,2 +1,0 @@
-frontend: sh -c 'cd snapp-frontend/ && yarn run dev'
-server: sh -c '../bin/bridge'
