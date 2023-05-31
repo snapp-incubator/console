@@ -10,7 +10,7 @@ import {
   FormFooter,
   FormHeader,
   SyncedEditorField,
-  YAMLEditorField,
+  CodeEditorField,
 } from '@console/shared/src';
 import { downloadYaml } from '@console/shared/src/components/editor/yaml-download-utils';
 import { EditorType } from '@console/shared/src/components/synced-editor/editor-toggle';
@@ -20,11 +20,13 @@ import { Resources } from '../import/import-types';
 import DeploymentFormEditor from './DeploymentFormEditor';
 import { convertDeploymentToEditForm, convertEditFormToDeployment } from './utils/deployment-utils';
 
-const EditDeploymentForm: React.FC<FormikProps<FormikValues> & {
-  heading: string;
-  resource: K8sResourceKind;
-  handleCancel: () => void;
-}> = ({
+const EditDeploymentForm: React.FC<
+  FormikProps<FormikValues> & {
+    heading: string;
+    resource: K8sResourceKind;
+    handleCancel: () => void;
+  }
+> = ({
   heading,
   resource,
   status,
@@ -49,7 +51,7 @@ const EditDeploymentForm: React.FC<FormikProps<FormikValues> & {
   const formEditor = <DeploymentFormEditor resourceType={resourceType} resourceObj={resource} />;
 
   const yamlEditor = (
-    <YAMLEditorField
+    <CodeEditorField
       name="yamlData"
       model={resourceType === Resources.OpenShift ? DeploymentConfigModel : DeploymentModel}
       showSamples={!resource}
