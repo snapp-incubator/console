@@ -62,7 +62,6 @@ export const loadActivePluginsForTestPurposes = (
     activePlugins.push({
       name: pkg.name,
       extensions: [
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
         ...require(`${pkg.name}/${pkg.consolePlugin.entry}`).default,
         ...extensionHook(pkg),
       ],

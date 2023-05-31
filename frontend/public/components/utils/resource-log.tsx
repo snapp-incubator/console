@@ -1,6 +1,6 @@
 import * as React from 'react';
 // FIXME upgrading redux types is causing many errors at this time
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import { useSelector } from 'react-redux';
 import { Base64 } from 'js-base64';
@@ -41,7 +41,7 @@ import { usePrevious } from '@console/shared/src/hooks/previous';
 import { Link } from 'react-router-dom';
 import { resourcePath } from './resource-link';
 import { isWindowsPod } from '../../module/k8s/pods';
-import { getActiveCluster } from '@console/dynamic-plugin-sdk'; // TODO remove multicluster
+import { getActiveCluster } from '@console/dynamic-plugin-sdk';
 
 export const STREAM_EOF = 'eof';
 export const STREAM_LOADING = 'loading';
@@ -83,7 +83,7 @@ const replaceVariables = (template: string, values: any): string => {
 
 // Build a log API url for a given resource
 const getResourceLogURL = (
-  cluster: string, // TODO remove multicluster
+  cluster: string,
   resource: K8sResourceKind,
   containerName?: string,
   tailLines?: number,
@@ -96,7 +96,7 @@ const getResourceLogURL = (
     ns: resource.metadata.namespace,
     path: 'log',
     queryParams: {
-      cluster, // TODO remove multicluster
+      cluster,
       container: containerName || '',
       ...(tailLines && { tailLines: `${tailLines}` }),
       ...(follow && { follow: `${follow}` }),
@@ -372,7 +372,7 @@ export const ResourceLog: React.FC<ResourceLogProps> = ({
   resourceStatus,
 }) => {
   const { t } = useTranslation();
-  const cluster = useSelector((state: RootState) => getActiveCluster(state)); // TODO remove multicluster
+  const cluster = useSelector((state: RootState) => getActiveCluster(state));
   const buffer = React.useRef(new LineBuffer()); // TODO Make this a hook
   const ws = React.useRef<any>(); // TODO Make this a hook
   const resourceLogRef = React.useRef();
@@ -395,8 +395,8 @@ export const ResourceLog: React.FC<ResourceLogProps> = ({
 
   const previousResourceStatus = usePrevious(resourceStatus);
   const previousTotalLineCount = usePrevious(totalLineCount);
-  const linkURL = getResourceLogURL(cluster, resource, containerName, null, false, logType); // TODO remove multicluster
-  const watchURL = getResourceLogURL(cluster, resource, containerName, null, true, logType); // TODO remove multicluster
+  const linkURL = getResourceLogURL(cluster, resource, containerName, null, false, logType);
+  const watchURL = getResourceLogURL(cluster, resource, containerName, null, true, logType);
   const [wrapLines, setWrapLines] = useUserSettings<boolean>(
     LOG_WRAP_LINES_USERSETTINGS_KEY,
     false,

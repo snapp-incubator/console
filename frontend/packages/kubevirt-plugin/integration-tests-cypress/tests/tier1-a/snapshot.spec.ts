@@ -35,7 +35,9 @@ describe('Test VM snapshot', () => {
   });
 
   it('ID(CNV-4717) Create/restore/delete VM snapshot', () => {
-    cy.byLegacyTestID(vmData.name).should('exist').click();
+    cy.byLegacyTestID(vmData.name)
+      .should('exist')
+      .click();
     tab.navigateToSnapshot();
 
     if (Cypress.env('STORAGE_CLASS') === 'ocs-storagecluster-ceph-rbd') {
@@ -49,7 +51,9 @@ describe('Test VM snapshot', () => {
       tab.navigateToDetails();
       vm.stop();
       tab.navigateToSnapshot();
-      cy.get('.pf-c-table__text').contains('Name').should('be.visible');
+      cy.get('.pf-c-table__text')
+        .contains('Name')
+        .should('be.visible');
 
       // restore snapshot
       cy.get(snapshotView.restoreBtn(snapshotName)).should('have.attr', 'aria-disabled', 'false');

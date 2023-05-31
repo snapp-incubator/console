@@ -59,9 +59,13 @@ const DataListRow: React.FC<DataListRowProps> = ({
   </DataListItem>
 );
 
-export const ColumnManagementModal: React.FC<
-  ColumnManagementModalProps & WithUserSettingsCompatibilityProps<object>
-> = ({ cancel, close, columnLayout, setUserSettingState: setTableColumns }) => {
+export const ColumnManagementModal: React.FC<ColumnManagementModalProps &
+  WithUserSettingsCompatibilityProps<object>> = ({
+  cancel,
+  close,
+  columnLayout,
+  setUserSettingState: setTableColumns,
+}) => {
   const { t } = useTranslation();
   const defaultColumns = columnLayout.columns.filter((column) => column.id && !column.additional);
   const additionalColumns = columnLayout.columns.filter((column) => column.additional);

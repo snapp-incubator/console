@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { chart_color_red_300 as knativeEventingColor } from '@patternfly/react-tokens/dist/js/chart_color_red_300';
 import * as _ from 'lodash';
-import isMultiClusterEnabled from '@console/app/src/utils/isMultiClusterEnabled'; // TODO remove multicluster
+import isMultiClusterEnabled from '@console/app/src/utils/isMultiClusterEnabled';
 import { useSafetyFirst } from '@console/dynamic-plugin-sdk';
 import { coFetch } from '@console/internal/co-fetch';
 import {
@@ -31,7 +31,6 @@ interface EventChannelData {
 export const getLabelPlural = (kind: string, plural: string) => kind + plural.slice(kind.length);
 
 export const fetchEventSourcesCrd = async () => {
-  // TODO remove multicluster
   if (isMultiClusterEnabled()) {
     eventSourceData.eventSourceModels = [];
     eventSourceData.loaded = true;
@@ -165,7 +164,6 @@ export const isDynamicEventSourceKind = (kind: string): boolean => {
 };
 
 export const fetchChannelsCrd = async () => {
-  // TODO remove multicluster
   if (isMultiClusterEnabled()) {
     eventSourceData.eventSourceChannels = [];
     return eventSourceData.eventSourceChannels;

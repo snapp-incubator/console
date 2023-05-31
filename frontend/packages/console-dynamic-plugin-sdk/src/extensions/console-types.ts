@@ -185,7 +185,7 @@ export type WatchK8sResource = {
   fieldSelector?: string;
   optional?: boolean;
   partialMetadata?: boolean;
-  cluster?: string; // TODO remove multicluster
+  cluster?: string;
 };
 
 export type ResourcesObject = { [key: string]: K8sResourceCommon | K8sResourceCommon[] };
@@ -256,7 +256,7 @@ export type ConsoleFetch = (
   url: string,
   options?: RequestInit,
   timeout?: number,
-  cluster?: string, // TODO remove multicluster
+  cluster?: string,
 ) => Promise<Response>;
 
 export type ConsoleFetchJSON<T = any> = {
@@ -265,35 +265,35 @@ export type ConsoleFetchJSON<T = any> = {
     method?: string,
     options?: RequestInit,
     timeout?: number,
-    cluster?: string, // TODO remove multicluster
+    cluster?: string,
   ): Promise<T>;
   delete(
     url: string,
     json?: any,
     options?: RequestInit,
     timeout?: number,
-    cluster?: string, // TODO remove multicluster
+    cluster?: string,
   ): Promise<T>;
   post(
     url: string,
     json: any,
     options?: RequestInit,
     timeout?: number,
-    cluster?: string, // TODO remove multicluster
+    cluster?: string,
   ): Promise<T>;
   put(
     url: string,
     json: any,
     options?: RequestInit,
     timeout?: number,
-    cluster?: string, // TODO remove multicluster
+    cluster?: string,
   ): Promise<T>;
   patch(
     url: string,
     json: any,
     options?: RequestInit,
     timeout?: number,
-    cluster?: string, // TODO remove multicluster
+    cluster?: string,
   ): Promise<T>;
 };
 
@@ -626,7 +626,7 @@ export type SelfSubjectAccessReviewKind = {
   };
 };
 
-export type CodeEditorProps = {
+export type YAMLEditorProps = {
   value?: string;
   language?: string;
   options?: object;
@@ -637,7 +637,7 @@ export type CodeEditorProps = {
   onSave?: () => void;
 };
 
-export type CodeEditorRef = {
+export type YAMLEditorRef = {
   editor?: MonacoEditor['editor'];
 };
 

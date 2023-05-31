@@ -258,7 +258,9 @@ describe('Github Service', () => {
     const gitSource: GitSource = { url: 'https://example.com/test/repo' };
     const gitService = new GithubService(gitSource);
 
-    const scope = nock('https://example.com/api/v3').get('/repos/test/repo').reply(200);
+    const scope = nock('https://example.com/api/v3')
+      .get('/repos/test/repo')
+      .reply(200);
 
     const status = await gitService.isRepoReachable();
     expect(status).toEqual(RepoStatus.Reachable);

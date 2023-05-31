@@ -11,49 +11,18 @@ module.exports = {
   //	Disallows awaiting a value that is not a Thenable
   '@typescript-eslint/await-thenable': 'error',
 
-  // Disallow `@ts-<directive>` comments or require descriptions after directives
-  '@typescript-eslint/ban-ts-comment': 'error',
+  // Bans “// @ts-ignore” comments from being used
+  '@typescript-eslint/ban-ts-ignore': 'error',
 
-  // Disallow certain types
-  '@typescript-eslint/ban-types': [
-    'error',
-    {
-      extendDefaults: true,
-      types: {
-        '{}': false,
-        Function: false,
-        object: false,
-      },
-    },
-  ],
+  // Enforces that types will not to be used
+  '@typescript-eslint/ban-types': 'error',
 
-  // Enforce naming conventions for everything across a codebase
+  // Enforce camelCase naming convention
   camelcase: 'off',
-  '@typescript-eslint/naming-convention': [
-    'error',
-    {
-      selector: 'default',
-      format: ['camelCase'],
-      leadingUnderscore: 'allowSingleOrDouble',
-    },
-    {
-      selector: ['variableLike', 'memberLike'],
-      format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
-      leadingUnderscore: 'allowSingleOrDouble',
-    },
-    {
-      selector: 'typeLike',
-      format: ['PascalCase'],
-    },
-    {
-      selector: ['enum', 'typeParameter'],
-      format: ['PascalCase', 'UPPER_CASE'],
-    },
-    {
-      selector: ['objectLiteralProperty', 'objectLiteralMethod', 'typeProperty'],
-      format: null,
-    },
-  ],
+  '@typescript-eslint/camelcase': 'error',
+
+  // Require PascalCased class and interface names
+  '@typescript-eslint/class-name-casing': 'error',
 
   // Require explicit return types on functions and class methods
   '@typescript-eslint/explicit-function-return-type': 'off',
@@ -65,6 +34,9 @@ module.exports = {
   'func-call-spacing': 'off',
   '@typescript-eslint/func-call-spacing': 'error',
 
+  // Enforces naming of generic type variables
+  '@typescript-eslint/generic-type-naming': 'off',
+
   // Enforce consistent indentation
   indent: 'off',
   '@typescript-eslint/indent': ['error', 2],
@@ -74,6 +46,9 @@ module.exports = {
 
   // Require a specific member delimiter style for interfaces and type literals
   '@typescript-eslint/member-delimiter-style': 'error',
+
+  // Enforces naming conventions for class members by visibility
+  '@typescript-eslint/member-naming': 'off',
 
   // Require a consistent member declaration order
   // FIXME Off for now to figure out how best to utilize this rule
@@ -192,10 +167,6 @@ module.exports = {
   // Disallow unnecessary constructors
   'no-useless-constructor': 'off',
   '@typescript-eslint/no-useless-constructor': 'error',
-
-  // Disallow variable declarations from shadowing variables declared in the outer scope
-  'no-shadow': 'off',
-  '@typescript-eslint/no-shadow': 'error',
 
   // Disallows the use of require statements except in import statements
   '@typescript-eslint/no-var-requires': 'error',

@@ -15,7 +15,7 @@ type ClientRectProp = { x: number; y: number; width?: number; height?: number };
 type Reference = Element | PopperJSReference | ClientRectProp;
 
 class VirtualReference implements PopperJSReference {
-  private rect: DOMRect;
+  private rect: ClientRect;
 
   constructor({ height = 0, width = 0, x, y }: ClientRectProp) {
     this.rect = {
@@ -25,10 +25,10 @@ class VirtualReference implements PopperJSReference {
       right: x + width,
       top: y,
       width,
-    } as DOMRect;
+    };
   }
 
-  getBoundingClientRect(): DOMRect {
+  getBoundingClientRect(): ClientRect {
     return this.rect;
   }
 

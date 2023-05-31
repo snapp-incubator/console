@@ -39,9 +39,7 @@ const PipelineRunCount: React.FC<PipelineMetricsGraphProps> = ({
     queryPrefix,
     metricsLevel,
   });
-  const pipelineRunResultData = React.useMemo(() => pipelineRunResult?.data?.result ?? [], [
-    pipelineRunResult,
-  ]);
+  const pipelineRunResultData = pipelineRunResult?.data?.result ?? [];
 
   React.useEffect(() => {
     if (!loaded && onInitialLoad) {

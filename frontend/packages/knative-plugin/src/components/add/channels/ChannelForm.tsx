@@ -10,7 +10,7 @@ import {
   FlexForm,
   useFormikValidationFix,
   FormBody,
-  CodeEditorField,
+  YAMLEditorField,
   SyncedEditorField,
 } from '@console/shared';
 import { safeJSToYAML } from '@console/shared/src/utils/yaml';
@@ -100,7 +100,7 @@ const ChannelForm: React.FC<FormikProps<FormikValues> & OwnProps> = ({
     );
   };
 
-  const yamlEditor = <CodeEditorField name="yamlData" showSamples onSave={handleSubmit} />;
+  const yamlEditor = <YAMLEditorField name="yamlData" showSamples onSave={handleSubmit} />;
 
   const formEditor = (
     <>

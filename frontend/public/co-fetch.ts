@@ -1,20 +1,38 @@
 import * as _ from 'lodash';
 import { HttpError, RetryError } from '@console/dynamic-plugin-sdk/src/utils/error/http-error';
 import { authSvc } from './module/auth';
-import { getActiveCluster } from '@console/dynamic-plugin-sdk/src'; // TODO remove multicluster
+import { getActiveCluster } from '@console/dynamic-plugin-sdk/src';
 import storeHandler from '@console/dynamic-plugin-sdk/src/app/storeHandler';
-import { getCSRFToken } from '@console/dynamic-plugin-sdk/src/utils/fetch/console-fetch-utils';
+
+// set required headers for console
+const getCSRFToken = () => {
+  const cookiePrefix = 'csrf-token=';
+  return (
+    document &&
+    document.cookie &&
+    document.cookie
+      .split(';')
+      .map((c) => _.trim(c))
+      .filter((c) => c.startsWith(cookiePrefix))
+      .map((c) => c.slice(cookiePrefix.length))
+      .pop()
+  );
+};
 
 export const applyConsoleHeaders = (url, options) => {
-  const token = getCSRFToken();
-  if (options.headers) {
-    options.headers['X-CSRFToken'] = token;
-  } else {
-    options.headers = { 'X-CSRFToken': token };
+  if (options.method !== 'GET') {
+    const token = getCSRFToken();
+    if (options.headers) {
+      options.headers['X-CSRFToken'] = token;
+    } else {
+      options.headers = { 'X-CSRFToken': token };
+    }
   }
 
-  // X-CSRFToken is used only for non-GET requests targeting bridge
-  if (options.method === 'GET' || url.indexOf('://') >= 0) {
+  // If the URL being requested is absolute (and therefore, not a local request),
+  // remove the authorization header to prevent credentials from leaking.
+  if (url.indexOf('://') >= 0 && options.headers) {
+    delete options.headers.Authorization;
     delete options.headers['X-CSRFToken'];
   }
   return options;
@@ -56,7 +74,7 @@ export const validateStatus = async (
   }
 
   if (response.status === 401 && shouldLogout(url)) {
-    authSvc.logout(window.location.pathname, getActiveCluster(storeHandler.getStore()?.getState())); // TODO remove multicluster
+    authSvc.logout(window.location.pathname, getActiveCluster(storeHandler.getStore()?.getState()));
   }
 
   const contentType = response.headers.get('content-type');

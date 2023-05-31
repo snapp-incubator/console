@@ -14,7 +14,7 @@ export * from '../../../integration-tests-cypress/support';
 
 declare global {
   namespace Cypress {
-    interface Chainable {
+    interface Chainable<Subject> {
       deleteResource(kind: string, name: string, namespace?: string): void;
       applyResource(resource: any): void;
       createResource(resource: any): void;

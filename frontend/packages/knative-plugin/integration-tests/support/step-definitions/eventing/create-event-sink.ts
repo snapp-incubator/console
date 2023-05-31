@@ -58,7 +58,9 @@ When('user selects Types as Event Sinks', () => {
 });
 
 When('user switches to YAML view', () => {
-  cy.get('[id="form-radiobutton-editorType-yaml-field"]').should('be.visible').click();
+  cy.get('[id="form-radiobutton-editorType-yaml-field"]')
+    .should('be.visible')
+    .click();
 });
 
 Given('user is at Topology page', () => {
@@ -71,6 +73,8 @@ When('user right clicks in empty space of topology', () => {
 });
 
 When('user selects {string} from Add to project', (option: string) => {
-  cy.get(topologyPO.graph.contextMenuOptions.addToProject).focus().trigger('mouseover');
+  cy.get(topologyPO.graph.contextMenuOptions.addToProject)
+    .focus()
+    .trigger('mouseover');
   cy.byTestActionID(option).click({ force: true });
 });

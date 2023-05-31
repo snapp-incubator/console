@@ -48,7 +48,12 @@ describe('KnativeOverview', () => {
 
     wrapper = shallow(<KnativeOverviewRevisionPodsRing item={item} />);
     expect(wrapper.find(PodRing)).toHaveLength(1);
-    expect(wrapper.find(PodRing).at(0).props().resourceKind).toEqual(RevisionModel);
+    expect(
+      wrapper
+        .find(PodRing)
+        .at(0)
+        .props().resourceKind,
+    ).toEqual(RevisionModel);
   });
 
   it('should render ResourceSummary', () => {

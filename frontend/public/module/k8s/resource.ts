@@ -13,7 +13,7 @@ export type Options = {
   name?: string;
   path?: string;
   queryParams?: QueryParams;
-  cluster?: string; // TODO remove multicluster
+  cluster?: string;
 };
 
 export const watchURL = (kind: K8sKind, options: Options): string => {
@@ -44,7 +44,7 @@ export const k8sListPartialMetadata = (
   kind: K8sKind,
   params: { [key: string]: any } = {},
   raw = false,
-  cluster?: string, // TODO remove multicluster
+  cluster?: string,
 ) => {
   return k8sList(
     kind,
@@ -56,7 +56,7 @@ export const k8sListPartialMetadata = (
           'application/json;as=PartialObjectMetadataList;v=v1beta1;g=meta.k8s.io,application/json',
       },
     },
-    cluster, // TODO remove multicluster
+    cluster,
   );
 };
 

@@ -22,9 +22,13 @@ function clickVisibleButton(el: string) {
 
 export function closeQuickStart() {
   cy.get(quickStartSidebarPO.quickStartSidebarBody).should('be.visible');
-  cy.get(quickStartSidebarPO.closePanel).should('be.visible').click();
+  cy.get(quickStartSidebarPO.closePanel)
+    .should('be.visible')
+    .click();
   cy.get(quickStartLeaveModalPO.leaveModal).should('be.visible');
-  cy.get(quickStartLeaveModalPO.leaveButton).should('be.visible').click();
+  cy.get(quickStartLeaveModalPO.leaveButton)
+    .should('be.visible')
+    .click();
 }
 
 export const quickStartsPage = {
@@ -32,18 +36,26 @@ export const quickStartsPage = {
     navigateTo(devNavigationMenu.Add);
     app.waitForDocumentLoad();
     cy.get(addPagePO.viewAllQuickStarts).click();
-    cy.get(quickStartsPO.quickStartTitle).scrollIntoView().should('be.visible');
+    cy.get(quickStartsPO.quickStartTitle)
+      .scrollIntoView()
+      .should('be.visible');
     catalogPage.isCardsDisplayed();
   },
   filterByKeyword: (filterName: string) => {
-    cy.get(quickStartsPO.filterKeyword).scrollIntoView().click();
+    cy.get(quickStartsPO.filterKeyword)
+      .scrollIntoView()
+      .click();
     cy.get(quickStartsPO.filterKeyword).type(filterName);
   },
   cardPresent: (cardName: string) => {
-    cy.get(cardName).scrollIntoView().should('be.visible');
+    cy.get(cardName)
+      .scrollIntoView()
+      .should('be.visible');
   },
   status: () => {
-    cy.get(quickStartsPO.statusFilter).scrollIntoView().click();
+    cy.get(quickStartsPO.statusFilter)
+      .scrollIntoView()
+      .click();
     app.waitForLoad();
     cy.get(quickStartsPO.statusDropdown).should('be.visible');
   },
@@ -55,7 +67,9 @@ export const quickStartsPage = {
           if ($el.text().includes('Complete')) {
             cy.log('quick start is complete');
           } else {
-            cy.get(quickStart).scrollIntoView().click();
+            cy.get(quickStart)
+              .scrollIntoView()
+              .click();
             app.waitForDocumentLoad();
             cy.get(quickStartSidebarPO.quickStartSidebarBody).should('be.visible');
             clickVisibleButton(quickStartSidebarPO.nextButton);
@@ -69,7 +83,9 @@ export const quickStartsPage = {
               .contains('Complete');
           }
         } else {
-          cy.get(quickStart).scrollIntoView().click();
+          cy.get(quickStart)
+            .scrollIntoView()
+            .click();
           app.waitForDocumentLoad();
           cy.get(quickStartSidebarPO.quickStartSidebarBody).should('be.visible');
           cy.get(quickStartSidebarPO.quickStartSidebarBody)
@@ -88,10 +104,14 @@ export const quickStartsPage = {
       });
   },
   leaveQuickStartIncomplete: (quickStart: string) => {
-    cy.get(quickStart).scrollIntoView().click();
+    cy.get(quickStart)
+      .scrollIntoView()
+      .click();
     app.waitForDocumentLoad();
     cy.get(quickStartSidebarPO.quickStartSidebarBody).should('be.visible');
-    cy.get(quickStartSidebarPO.quickStartSidebarBody).find(quickStartSidebarPO.startButton).click();
+    cy.get(quickStartSidebarPO.quickStartSidebarBody)
+      .find(quickStartSidebarPO.startButton)
+      .click();
     closeQuickStart();
   },
 };

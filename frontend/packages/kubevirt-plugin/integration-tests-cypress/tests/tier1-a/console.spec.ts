@@ -72,8 +72,12 @@ describe('Test VM console tab', () => {
     cy.reload();
     if (Cypress.env('DOWNSTREAM')) {
       tab.navigateToOverview();
-      cy.get(dashboardTab.detailsCardItem).eq(8).should('not.contain', noUserLoggedIn); // Active Users
-      cy.get(dashboardTab.detailsCardItem).eq(8).should('contain', oneActiveUser); // Active Users
+      cy.get(dashboardTab.detailsCardItem)
+        .eq(8)
+        .should('not.contain', noUserLoggedIn); // Active Users
+      cy.get(dashboardTab.detailsCardItem)
+        .eq(8)
+        .should('contain', oneActiveUser); // Active Users
       tab.navigateToConsole();
     }
     // verify warning showing on VM actions while user is logged in

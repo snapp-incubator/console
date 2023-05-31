@@ -2,7 +2,7 @@ import { ConfigMapKind } from '@console/internal/module/k8s';
 import { getVmwareConfigMap } from '../../k8s/requests/v2v/v2vvmware-configmap';
 import { VIRTIO_WIN_IMAGE } from './constants';
 
-type WinToolsContainerNamesResult = {
+type winToolsContainerNamesResult = {
   openshift: Promise<string> | string;
   ocp: Promise<string> | string;
   online: Promise<string> | string;
@@ -13,7 +13,7 @@ type WinToolsContainerNamesResult = {
 
 export const winToolsContainerNames = (images?: {
   [key: string]: string;
-}): WinToolsContainerNamesResult => {
+}): winToolsContainerNamesResult => {
   const configMapImages = async () => {
     let configMap: ConfigMapKind;
     try {

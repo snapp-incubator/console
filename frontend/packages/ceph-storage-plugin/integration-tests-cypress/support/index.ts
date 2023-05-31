@@ -15,7 +15,7 @@ import {
 
 declare global {
   namespace Cypress {
-    interface Chainable {
+    interface Chainable<Subject> {
       install(encrypted?: boolean): Chainable<Element>;
     }
   }

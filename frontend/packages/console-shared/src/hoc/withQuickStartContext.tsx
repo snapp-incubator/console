@@ -12,8 +12,7 @@ export const withQuickStartContext = <Props extends WithQuickStartContextProps>(
     const quickStartContext = React.useContext(QuickStartContext);
     return <WrappedComponent {...props} quickStartContext={quickStartContext} />;
   };
-  Component.displayName = `withQuickStartContext(${
-    WrappedComponent.displayName || WrappedComponent.name
-  })`;
+  Component.displayName = `withQuickStartContext(${WrappedComponent.displayName ||
+    WrappedComponent.name})`;
   return Component;
 };

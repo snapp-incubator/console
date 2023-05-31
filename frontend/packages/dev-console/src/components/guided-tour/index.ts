@@ -4,7 +4,6 @@ import {
   searchTourText,
   finishTourText,
   devPerspectiveTourText,
-  webTerminalGuidedTourText,
 } from './GuidedTourText';
 
 const getSelector = (id: string): string => `[data-tour-id="${id}"]`;
@@ -44,7 +43,9 @@ export const getGuidedTour = (): TourDataType => ({
       placement: 'bottom',
       // t('devconsole~Web Terminal')
       heading: '%devconsole~Web Terminal%',
-      content: webTerminalGuidedTourText,
+      // t('devconsole~Use command line tools directly from the Console. CLIs are pre-installed and fully authenticated when you need them.')
+      content:
+        '%devconsole~Use command line tools directly from the Console. CLIs are pre-installed and fully authenticated when you need them.%',
       selector: getSelector('tour-cloud-shell-button'),
     },
     {

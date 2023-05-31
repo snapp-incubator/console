@@ -28,9 +28,9 @@ import {
   YellowExclamationTriangleIcon,
 } from '@console/shared';
 import { formatNamespacedRouteForResource } from '@console/shared/src/utils';
-import CloudShellMastheadButton from '@console/webterminal-plugin/src/components/cloud-shell/CloudShellMastheadButton';
-import CloudShellMastheadAction from '@console/webterminal-plugin/src/components/cloud-shell/CloudShellMastheadAction';
-import isMultiClusterEnabled from '@console/app/src/utils/isMultiClusterEnabled'; // TODO remove multicluster
+import CloudShellMastheadButton from '@console/app/src/components/cloud-shell/CloudShellMastheadButton';
+import CloudShellMastheadAction from '@console/app/src/components/cloud-shell/CloudShellMastheadAction';
+import isMultiClusterEnabled from '@console/app/src/utils/isMultiClusterEnabled';
 import { getUser } from '@console/dynamic-plugin-sdk';
 import * as UIActions from '../actions/ui';
 import { connectToFlags } from '../reducers/connectToFlags';
@@ -67,8 +67,7 @@ const defaultHelpLinks = [
 
 const MultiClusterToolbarGroup = () => {
   const showMultiClusterToolbarGroup =
-    usePerspectiveExtension(ACM_PERSPECTIVE_ID) || isMultiClusterEnabled(); // TODO remove multicluster
-
+    usePerspectiveExtension(ACM_PERSPECTIVE_ID) || isMultiClusterEnabled();
   return (
     showMultiClusterToolbarGroup && (
       <ToolbarGroup spacer={{ default: 'spacerNone' }}>
@@ -179,7 +178,6 @@ class MastheadToolbarContents_ extends React.Component {
     const { flags, user } = this.props;
     clearTimeout(this.userInactivityTimeout);
     this.userInactivityTimeout = setTimeout(() => {
-      // TODO remove multicluster
       if (isMultiClusterEnabled()) {
         authSvc.logoutMulticluster();
       } else if (flags[FLAGS.OPENSHIFT]) {
@@ -399,7 +397,6 @@ class MastheadToolbarContents_ extends React.Component {
             fireTelemetryEvent('Documentation Clicked');
           },
         },
-        // TODO remove multicluster
         ...(isMultiClusterEnabled()
           ? [
               {
@@ -569,7 +566,6 @@ class MastheadToolbarContents_ extends React.Component {
     if (flags[FLAGS.AUTH_ENABLED]) {
       const logout = (e) => {
         e.preventDefault();
-        // TODO remove multicluster
         if (isMultiClusterEnabled()) {
           authSvc.logoutMulticluster();
         } else if (flags[FLAGS.OPENSHIFT]) {

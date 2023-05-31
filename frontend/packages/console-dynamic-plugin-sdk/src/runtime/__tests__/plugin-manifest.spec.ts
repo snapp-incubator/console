@@ -1,11 +1,11 @@
-import * as coFetchModule from '@console/dynamic-plugin-sdk/src/utils/fetch/console-fetch';
+import * as coFetchModule from '@console/internal/co-fetch';
 import { getPluginManifest } from '../../utils/test-utils';
 import { SchemaValidator } from '../../validation/SchemaValidator';
 import * as pluginManifestModule from '../plugin-manifest';
 
 const { fetchPluginManifest } = pluginManifestModule;
 
-const coFetch = jest.spyOn(coFetchModule, 'consoleFetch');
+const coFetch = jest.spyOn(coFetchModule, 'coFetch');
 
 const validatePluginManifestSchema = jest.spyOn(
   pluginManifestModule,

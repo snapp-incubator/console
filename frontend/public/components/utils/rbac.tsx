@@ -15,7 +15,7 @@ import {
   K8sVerb,
 } from '../../module/k8s';
 
-export { checkAccess };
+export { checkAccess } from '@console/dynamic-plugin-sdk';
 
 /** @deprecated - Use useAccessReview from \@console/dynamic-plugin-sdk instead. */
 export const useAccessReview2 = (

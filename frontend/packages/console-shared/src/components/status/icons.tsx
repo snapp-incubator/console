@@ -14,6 +14,7 @@ import { global_warning_color_100 as warningColor } from '@patternfly/react-toke
 import { ColoredIconProps } from '@console/dynamic-plugin-sdk';
 
 export {
+  ColoredIconProps,
   GreenCheckCircleIcon,
   RedExclamationCircleIcon,
   YellowExclamationTriangleIcon,

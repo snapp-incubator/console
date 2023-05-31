@@ -32,7 +32,7 @@ const menuActionRemove = (
   isDisabled: !!isDeleteDisabled,
   callback: () =>
     withProgress(
-      new Promise<void>((resolve) => {
+      new Promise((resolve) => {
         removeNIC(id);
         resolve();
       }),

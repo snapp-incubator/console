@@ -186,7 +186,12 @@ export const checkLogs = async () => {
   if (config.capabilities.browserName !== 'chrome') {
     return;
   }
-  (await browser.manage().logs().get('browser')).map((log) => {
+  (
+    await browser
+      .manage()
+      .logs()
+      .get('browser')
+  ).map((log) => {
     browserLogs.push(log);
     return log;
   });

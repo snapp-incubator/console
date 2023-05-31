@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
 import { Alert, Label, Popover, TreeView, TreeViewDataItem } from '@patternfly/react-core';
 import * as _ from 'lodash';

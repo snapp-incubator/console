@@ -104,7 +104,7 @@ export const labelForNodeKind = (kindString: string) => {
   return startCase(kindString);
 };
 
-export const getTitleForNodeKind = (kindString: string) => {
+export const labelKeyForNodeKind = (kindString: string) => {
   const model: K8sKind | undefined = modelFor(kindString);
   if (model) {
     if (model.labelKey) {

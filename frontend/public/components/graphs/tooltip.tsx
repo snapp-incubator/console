@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
 // Mostly just a copy-paste from patternfly.
 import * as React from 'react';
 import { defaults } from 'lodash';
@@ -23,12 +21,10 @@ import {
 
 import { DataPoint } from '.';
 
-export const ChartLegendTooltipContent: React.FunctionComponent<
-  ChartLegendTooltipContentProps & {
-    stack?: boolean;
-    mainDataName?: string;
-  }
-> = (props) => {
+export const ChartLegendTooltipContent: React.FunctionComponent<ChartLegendTooltipContentProps & {
+  stack?: boolean;
+  mainDataName?: string;
+}> = (props) => {
   const {
     activePoints,
     center,
@@ -220,14 +216,12 @@ export const ChartLegendTooltipLabel: React.FunctionComponent<ChartLegendLabelPr
 };
 ChartLegendTooltipLabel.displayName = 'ChartLegendTooltipLabel';
 
-export const ChartLegendTooltip: React.FunctionComponent<
-  Omit<ChartLegendTooltipProps, 'title'> & {
-    stack?: boolean;
-    formatDate: (data: DataPoint<Date>[]) => string;
-    getLabel?: (prop: { datum: DataPoint<Date> }) => string;
-    mainDataName: string;
-  }
-> = (props) => {
+export const ChartLegendTooltip: React.FunctionComponent<Omit<ChartLegendTooltipProps, 'title'> & {
+  stack?: boolean;
+  formatDate: (data: DataPoint<Date>[]) => string;
+  getLabel?: (prop: { datum: DataPoint<Date> }) => string;
+  mainDataName: string;
+}> = (props) => {
   const {
     activePoints,
     datum,

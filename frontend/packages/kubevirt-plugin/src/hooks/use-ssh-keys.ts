@@ -2,13 +2,13 @@ import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import { AUTHORIZED_SSH_KEYS } from '../components/ssh-service/SSHForm/ssh-form-utils';
 import { VMIKind, VMKind } from '../types';
-import useSecret, { UseSecretResult } from './use-secret';
-import useSSHSelectors, { UseSSHSelectorsResult } from './use-ssh-selectors';
+import useSecret, { useSecretResult } from './use-secret';
+import useSSHSelectors, { useSSHSelectorsResult } from './use-ssh-selectors';
 
-type UseSSHResult = UseSecretResult &
-  Omit<UseSSHSelectorsResult, 'globalKeys' | 'sshServices'> & { key: string };
+export type useSSHResult = useSecretResult &
+  Omit<useSSHSelectorsResult, 'globalKeys' | 'sshServices'> & { key: string };
 
-const useSSHKeys = (vm?: VMIKind | VMKind): UseSSHResult => {
+const useSSHKeys = (vm?: VMIKind | VMKind): useSSHResult => {
   const { metadata } = vm || {};
   const location = useLocation();
   const namespace = metadata?.namespace || new URLSearchParams(location?.search)?.get('namespace');

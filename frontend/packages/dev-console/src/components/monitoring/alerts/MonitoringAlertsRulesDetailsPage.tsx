@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import { useDispatch } from 'react-redux';
 import { match as RMatch } from 'react-router';

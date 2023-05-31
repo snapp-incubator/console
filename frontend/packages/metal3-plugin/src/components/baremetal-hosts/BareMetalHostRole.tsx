@@ -8,7 +8,13 @@ type BareMetalHostRoleProps = {
 };
 
 const BareMetalHostRole: React.FC<BareMetalHostRoleProps> = ({ machine, node }) => (
-  <>{getNodeRoles(node).sort().join(', ') || getMachineRole(machine) || DASH}</>
+  <>
+    {getNodeRoles(node)
+      .sort()
+      .join(', ') ||
+      getMachineRole(machine) ||
+      DASH}
+  </>
 );
 
 export default BareMetalHostRole;

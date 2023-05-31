@@ -1,8 +1,0 @@
-reviewers:
-  - mareklibra
-  - rawagner
-approvers:
-  - mareklibra
-  - rawagner
-labels:
-  - component/vsphere-plugin

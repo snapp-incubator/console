@@ -24,7 +24,10 @@ When('user searches and selects {string} card from catalog page', (cardName: str
 
 When('user searches and selects Template card {string} from catalog page', (cardName: string) => {
   catalogPage.search(cardName);
-  detailsPage.titleShouldContain(pageTitle.Templates).scrollIntoView().should('be.visible');
+  detailsPage
+    .titleShouldContain(pageTitle.Templates)
+    .scrollIntoView()
+    .should('be.visible');
   catalogPage.selectCardInCatalog(cardName);
 });
 
@@ -42,7 +45,9 @@ When('user enters workload name as {string}', (name: string) => {
 });
 
 When('user clicks Create Application button on side bar', () => {
-  cy.get(catalogPO.sidePane.createApplication).scrollIntoView().click({ force: true });
+  cy.get(catalogPO.sidePane.createApplication)
+    .scrollIntoView()
+    .click({ force: true });
 });
 
 When('user enters Git Repo url in s2i builder image page as {string}', (gitRepoUrl: string) => {
@@ -50,7 +55,9 @@ When('user enters Git Repo url in s2i builder image page as {string}', (gitRepoU
 });
 
 When('user clicks create button on Instantiate Template page', () => {
-  cy.get(catalogPO.create).scrollIntoView().click();
+  cy.get(catalogPO.create)
+    .scrollIntoView()
+    .click();
 });
 
 Then(
@@ -86,7 +93,9 @@ Then('user will be redirected to Operator Backed page from knative Serving page'
 });
 
 When('user enters Name as {string} in Instantiate Template page', (name: string) => {
-  cy.get('#NAME').clear().type(name);
+  cy.get('#NAME')
+    .clear()
+    .type(name);
 });
 
 When('user selects {string} card from catalog page', (cardName: string) => {

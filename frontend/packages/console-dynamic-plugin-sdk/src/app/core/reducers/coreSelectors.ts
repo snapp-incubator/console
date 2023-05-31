@@ -27,7 +27,6 @@ export const impersonateStateToProps = (state: SDKStoreState) => {
  */
 export const getUser: GetUser = (state) => state.sdkCore.user;
 
-// TODO remove multicluster
 /**
  * It provides current active cluster.
  * @param state the root state

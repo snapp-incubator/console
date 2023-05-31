@@ -8,7 +8,7 @@ import {
   DownloadButton,
   DownloadButtonProps,
 } from '../../../public/components/utils/download-button';
-import * as coFetchModule from '@console/dynamic-plugin-sdk/src/utils/fetch/console-fetch';
+import * as coFetch from '../../../public/co-fetch';
 
 describe(DownloadButton.displayName, () => {
   let wrapper: ReactWrapper<DownloadButtonProps>;
@@ -29,7 +29,7 @@ describe(DownloadButton.displayName, () => {
   });
 
   it('renders button which calls `coFetch` to download URL when clicked', (done) => {
-    spyAndExpect(spyOn(coFetchModule, 'consoleFetch'))(Promise.resolve()).then(([downloadURL]) => {
+    spyAndExpect(spyOn(coFetch, 'coFetch'))(Promise.resolve()).then(([downloadURL]) => {
       expect(downloadURL).toEqual(url);
       done();
     });
@@ -38,8 +38,13 @@ describe(DownloadButton.displayName, () => {
   });
 
   it('renders "Downloading..." if download is in flight', (done) => {
-    spyAndExpect(spyOn(coFetchModule, 'consoleFetch'))(Promise.resolve()).then(() => {
-      expect(wrapper.find(Button).text().trim()).toEqual('Downloading...');
+    spyAndExpect(spyOn(coFetch, 'coFetch'))(Promise.resolve()).then(() => {
+      expect(
+        wrapper
+          .find(Button)
+          .text()
+          .trim(),
+      ).toEqual('Downloading...');
       done();
     });
 

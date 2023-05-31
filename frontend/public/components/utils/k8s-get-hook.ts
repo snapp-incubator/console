@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { k8sGet, K8sKind, K8sResourceCommon } from '../../module/k8s';
-import { useActiveCluster } from '@console/shared/src/hooks/useActiveCluster'; // TODO remove multicluster
+import { useActiveCluster } from '@console/shared/src/hooks/useActiveCluster';
 
 export const useK8sGet = <R extends K8sResourceCommon = K8sResourceCommon>(
   kind: K8sKind,
@@ -8,7 +8,7 @@ export const useK8sGet = <R extends K8sResourceCommon = K8sResourceCommon>(
   namespace?: string,
   opts?: { [k: string]: string },
 ): [R, boolean, any] => {
-  const [cluster] = useActiveCluster(); // TODO remove multicluster
+  const [cluster] = useActiveCluster();
   const [data, setData] = React.useState<R>();
   const [loaded, setLoaded] = React.useState(false);
   const [loadError, setLoadError] = React.useState();

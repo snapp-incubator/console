@@ -7,11 +7,24 @@ import { topologyPO } from '../../pageObjects';
 import { navigateTo, perspective, topologyHelper, topologySidePane } from '../../pages';
 
 Given('user selects type as {string}', (type: string) => {
-  cy.byLegacyTestID('dropdown-button').should('be.visible').click();
-  cy.get('.pf-c-dropdown__menu').find('li').contains(type).should('be.visible').click();
+  cy.byLegacyTestID('dropdown-button')
+    .should('be.visible')
+    .click();
+  cy.get('.pf-c-dropdown__menu')
+    .find('li')
+    .contains(type)
+    .should('be.visible')
+    .click();
   cy.get('body').then(($el) => {
-    if ($el.find('[data-test-id="dropdown-button"]').text().includes('Container command')) {
-      cy.get('[placeholder="argument"]').should('be.visible').type('example');
+    if (
+      $el
+        .find('[data-test-id="dropdown-button"]')
+        .text()
+        .includes('Container command')
+    ) {
+      cy.get('[placeholder="argument"]')
+        .should('be.visible')
+        .type('example');
     }
   });
 });
@@ -20,7 +33,9 @@ When(
   'user searches and clicks on the workload {string} to open the sidebar',
   (workloadName: string) => {
     topologyHelper.search(workloadName);
-    cy.get(topologyPO.highlightNode, { timeout: 5000 }).should('be.visible').click();
+    cy.get(topologyPO.highlightNode, { timeout: 5000 })
+      .should('be.visible')
+      .click();
     topologySidePane.verify();
   },
 );
@@ -53,7 +68,9 @@ Then(
       `/k8s/ns/${Cypress.env('NAMESPACE')}/${type}/${name}/containers/${name}/health-checks`,
     );
     detailsPage.titleShouldContain('Edit health checks');
-    cy.get('.odc-heath-check-probe__successText').contains(`${probe} added`).should('be.visible');
+    cy.get('.odc-heath-check-probe__successText')
+      .contains(`${probe} added`)
+      .should('be.visible');
     perspective.switchTo(switchPerspective.Developer);
     guidedTour.close();
     nav.sidenav.switcher.shouldHaveText(switchPerspective.Developer);

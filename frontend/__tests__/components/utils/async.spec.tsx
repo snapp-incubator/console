@@ -80,7 +80,12 @@ describe('AsyncComponent', () => {
       new Promise<typeof Foo>((resolve) => {
         resolve(Foo);
         setTimeout(() => {
-          expect(wrapper.update().find(`#${fooId}`).exists()).toBe(true);
+          expect(
+            wrapper
+              .update()
+              .find(`#${fooId}`)
+              .exists(),
+          ).toBe(true);
           done();
         }, 10);
       });
@@ -94,7 +99,12 @@ describe('AsyncComponent', () => {
       new Promise<typeof Foo>((resolve) => {
         resolve(Foo);
         setTimeout(() => {
-          expect(wrapper.update().find(`#${fooId}`).props().className).toEqual(className);
+          expect(
+            wrapper
+              .update()
+              .find(`#${fooId}`)
+              .props().className,
+          ).toEqual(className);
           done();
         }, 10);
       });
@@ -110,7 +120,12 @@ describe('AsyncComponent', () => {
       new Promise<typeof Foo>((resolve) => {
         resolve(Foo);
         setTimeout(() => {
-          expect(wrapper.update().find(`#${fooId}`).exists()).toBe(true);
+          expect(
+            wrapper
+              .update()
+              .find(`#${fooId}`)
+              .exists(),
+          ).toBe(true);
         }, 10);
       });
 
@@ -118,7 +133,12 @@ describe('AsyncComponent', () => {
       new Promise<typeof Bar>((resolve) => {
         resolve(Bar);
         setTimeout(() => {
-          expect(wrapper.update().find(`#${barId}`).exists()).toBe(true);
+          expect(
+            wrapper
+              .update()
+              .find(`#${barId}`)
+              .exists(),
+          ).toBe(true);
           done();
         }, 10);
       });

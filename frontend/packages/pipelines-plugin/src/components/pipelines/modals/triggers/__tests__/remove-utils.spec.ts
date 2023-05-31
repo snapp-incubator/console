@@ -1,4 +1,4 @@
-import * as k8sResourceModule from '@console/dynamic-plugin-sdk/src/utils/k8s/k8s-resource';
+import * as k8s from '@console/internal/module/k8s';
 import { EventListenerModel, TriggerTemplateModel } from '../../../../../models';
 import {
   EventlistenerTestData,
@@ -18,12 +18,8 @@ describe('removeTrigger', () => {
   };
 
   beforeEach(() => {
-    jest
-      .spyOn(k8sResourceModule, 'k8sKill')
-      .mockImplementation((model, data) => Promise.resolve(data));
-    jest
-      .spyOn(k8sResourceModule, 'k8sPatch')
-      .mockImplementation((model, data) => Promise.resolve(data));
+    jest.spyOn(k8s, 'k8sKill').mockImplementation((model, data) => Promise.resolve(data));
+    jest.spyOn(k8s, 'k8sPatch').mockImplementation((model, data) => Promise.resolve(data));
   });
 
   afterEach(() => {
@@ -31,7 +27,7 @@ describe('removeTrigger', () => {
   });
   // setup mock API calls
   const setupJestMocks = (eventListener: EventListenerKind[]) =>
-    jest.spyOn(k8sResourceModule, 'k8sList').mockImplementation((model) => {
+    jest.spyOn(k8s, 'k8sList').mockImplementation((model) => {
       if (model.kind === EventListenerModel.kind) {
         return Promise.resolve(eventListener);
       }
@@ -39,23 +35,20 @@ describe('removeTrigger', () => {
     });
   // assertion helper for the remove trigger resources
   const expectAndDeleteElResources = (eventListener: EventListenerKind) => {
-    expect(jest.spyOn(k8sResourceModule, 'k8sKill')).toHaveBeenCalledWith(TriggerTemplateModel, {
+    expect(jest.spyOn(k8s, 'k8sKill')).toHaveBeenCalledWith(TriggerTemplateModel, {
       metadata: {
         name: values.selectedTrigger,
         namespace: pipelineData.pipeline.metadata.namespace,
       },
     });
-    expect(jest.spyOn(k8sResourceModule, 'k8sKill')).toHaveBeenCalledWith(
-      EventListenerModel,
-      eventListener,
-    );
+    expect(jest.spyOn(k8s, 'k8sKill')).toHaveBeenCalledWith(EventListenerModel, eventListener);
   };
 
   it('expect to remove the TT and EL resources when template.name is used in Eventlistener', async () => {
     try {
       setupJestMocks([EventlistenerTestData[EventlistenerTypes.BINDINGS_TEMPLATE_NAME]]);
       await removeTrigger(values, pipelineData.pipeline);
-      expect(jest.spyOn(k8sResourceModule, 'k8sKill')).toHaveBeenCalledTimes(2);
+      expect(jest.spyOn(k8s, 'k8sKill')).toHaveBeenCalledTimes(2);
       expectAndDeleteElResources(EventlistenerTestData[EventlistenerTypes.BINDINGS_TEMPLATE_NAME]);
     } catch (e) {
       fail(e);
@@ -66,7 +59,7 @@ describe('removeTrigger', () => {
     try {
       setupJestMocks([EventlistenerTestData[EventlistenerTypes.BINDINGS_TEMPLATE_REF]]);
       await removeTrigger(values, pipelineData.pipeline);
-      expect(jest.spyOn(k8sResourceModule, 'k8sKill')).toHaveBeenCalledTimes(2);
+      expect(jest.spyOn(k8s, 'k8sKill')).toHaveBeenCalledTimes(2);
       expectAndDeleteElResources(EventlistenerTestData[EventlistenerTypes.BINDINGS_TEMPLATE_REF]);
     } catch (e) {
       fail(e);
@@ -91,9 +84,9 @@ describe('removeTrigger', () => {
       };
       setupJestMocks([elWithMultipleTrigger]);
       await removeTrigger(values, pipelineData.pipeline);
-      expect(jest.spyOn(k8sResourceModule, 'k8sKill')).toHaveBeenCalledTimes(1);
-      expect(jest.spyOn(k8sResourceModule, 'k8sPatch')).toHaveBeenCalledTimes(1);
-      expect(jest.spyOn(k8sResourceModule, 'k8sPatch')).toHaveBeenLastCalledWith(
+      expect(jest.spyOn(k8s, 'k8sKill')).toHaveBeenCalledTimes(1);
+      expect(jest.spyOn(k8s, 'k8sPatch')).toHaveBeenCalledTimes(1);
+      expect(jest.spyOn(k8s, 'k8sPatch')).toHaveBeenLastCalledWith(
         EventListenerModel,
         elWithMultipleTrigger,
         [
@@ -116,7 +109,7 @@ describe('removeTrigger', () => {
         EventlistenerTestData[EventlistenerTypes.BINDINGS_TEMPLATE_NAME],
       ]);
       await removeTrigger(values, pipelineData.pipeline);
-      expect(jest.spyOn(k8sResourceModule, 'k8sKill')).toHaveBeenCalledTimes(3);
+      expect(jest.spyOn(k8s, 'k8sKill')).toHaveBeenCalledTimes(3);
     } catch (e) {
       fail(e);
     }

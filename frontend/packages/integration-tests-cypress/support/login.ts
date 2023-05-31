@@ -3,7 +3,7 @@ import { masthead } from '../views/masthead';
 
 declare global {
   namespace Cypress {
-    interface Chainable {
+    interface Chainable<Subject> {
       login(providerName?: string, username?: string, password?: string): Chainable<Element>;
       logout(): Chainable<Element>;
     }
@@ -34,7 +34,9 @@ Cypress.Commands.add('login', (provider: string, username: string, password: str
     cy.byLegacyTestID('login').should('be.visible');
     cy.get('body').then(($body) => {
       if ($body.text().includes(idp)) {
-        cy.contains(idp).should('be.visible').click();
+        cy.contains(idp)
+          .should('be.visible')
+          .click();
       }
     });
     cy.get('#inputUsername').type(username || KUBEADMIN_USERNAME);

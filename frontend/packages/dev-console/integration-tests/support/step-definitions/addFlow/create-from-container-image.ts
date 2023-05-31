@@ -33,7 +33,10 @@ Then(
 );
 
 Then('advanced option Create a route to the application is selected', () => {
-  cy.get(gitPO.advancedOptions.createRoute).scrollIntoView().should('be.visible').and('be.checked');
+  cy.get(gitPO.advancedOptions.createRoute)
+    .scrollIntoView()
+    .should('be.visible')
+    .and('be.checked');
   gitPage.clickCancel();
 });
 

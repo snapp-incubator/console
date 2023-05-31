@@ -22,8 +22,8 @@ import {
   GreenCheckCircleIcon,
   Modal,
   useUserSettingsCompatibility,
-  useActiveCluster, // TODO remove multicluster
-  HUB_CLUSTER_NAME, // TODO remove multicluster
+  useActiveCluster,
+  HUB_CLUSTER_NAME,
 } from '@console/shared';
 import { getURLWithParams } from '@console/shared/src/components/catalog/utils';
 import { isModifiedEvent } from '@console/shared/src/utils';
@@ -341,7 +341,9 @@ export const keywordCompare = (filterString, item) => {
 
   return (
     item.name.toLowerCase().includes(filterString) ||
-    _.get(item, 'obj.metadata.name', '').toLowerCase().includes(filterString) ||
+    _.get(item, 'obj.metadata.name', '')
+      .toLowerCase()
+      .includes(filterString) ||
     (item.description && item.description.toLowerCase().includes(filterString)) ||
     (item.tags && item.tags.includes(filterString)) ||
     keywords.includes(filterString)
@@ -397,20 +399,18 @@ const OperatorHubTile: React.FC<OperatorHubTileProps> = ({ item, onClick }) => {
 
 export const OperatorHubTileView: React.FC<OperatorHubTileViewProps> = (props) => {
   const { t } = useTranslation();
-  const [activeCluster] = useActiveCluster(); // TODO remove multicluster
+  const [activeCluster] = useActiveCluster();
   const [detailsItem, setDetailsItem] = React.useState(null);
   const [showDetails, setShowDetails] = React.useState(false);
   const [ignoreOperatorWarning, setIgnoreOperatorWarning, loaded] = useUserSettingsCompatibility<
     boolean
   >(userSettingsKey, storeKey, false);
   const filteredItems =
-    activeCluster === HUB_CLUSTER_NAME ? filterByArchAndOS(props.items) : props.items; // TODO remove multicluster
+    activeCluster === HUB_CLUSTER_NAME ? filterByArchAndOS(props.items) : props.items;
 
   React.useEffect(() => {
     const detailsItemID = new URLSearchParams(window.location.search).get('details-item');
-    const currentItem = _.find(filteredItems, {
-      uid: detailsItemID,
-    });
+    const currentItem = _.find(filteredItems, { uid: detailsItemID });
     setDetailsItem(currentItem);
     setShowDetails(!_.isNil(currentItem));
   }, [filteredItems]);
@@ -561,15 +561,9 @@ export const OperatorHubTileView: React.FC<OperatorHubTileViewProps> = (props) =
                   <Link
                     className={classNames(
                       'pf-c-button',
-                      {
-                        'pf-m-secondary': remoteWorkflowUrl,
-                      },
-                      {
-                        'pf-m-primary': !remoteWorkflowUrl,
-                      },
-                      {
-                        'pf-m-disabled': detailsItem.isInstalling,
-                      },
+                      { 'pf-m-secondary': remoteWorkflowUrl },
+                      { 'pf-m-primary': !remoteWorkflowUrl },
+                      { 'pf-m-disabled': detailsItem.isInstalling },
                       'co-catalog-page__overlay-action',
                     )}
                     data-test-id="operator-install-btn"

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
 import { compose } from 'redux';
 import { Trans, useTranslation } from 'react-i18next';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore: FIXME missing exports due to out-of-sync @types/react-redux version
 import { useDispatch } from 'react-redux';
 import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watch-hook';
@@ -15,12 +15,12 @@ import { getServicePort } from '../selectors/service/selectors';
 import { VMIKind, VMKind } from '../types';
 import useSSHSelectors from './use-ssh-selectors';
 
-type UseSSHServiceResult = {
+export type useSSHServiceResult = {
   sshServices: { running: boolean; port: number };
   createOrDeleteSSHService: (vm: VMKind | VMIKind) => void;
 };
 
-const useSSHService = (vm?: VMKind | VMIKind): UseSSHServiceResult => {
+const useSSHService = (vm?: VMKind | VMIKind): useSSHServiceResult => {
   const dispatch = useDispatch();
   const { metadata } = vm || {};
   const [activeNamespace] = useActiveNamespace();

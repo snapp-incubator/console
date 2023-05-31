@@ -38,9 +38,12 @@ describe('CommandLineTools', () => {
     });
 
     it('shows oc first', () => {
-      expect(wrapper.find('.co-section-heading').first().text()).toEqual(
-        'oc - OpenShift Command Line Interface (CLI)',
-      );
+      expect(
+        wrapper
+          .find('.co-section-heading')
+          .first()
+          .text(),
+      ).toEqual('oc - OpenShift Command Line Interface (CLI)');
     });
   });
 });

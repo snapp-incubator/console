@@ -1,7 +1,6 @@
 reviewers:
-  - florkbr
-  - jhadvig
+  - meysam-jeffrey
 approvers:
-  - florkbr
+  - meysam-jeffrey
 labels:
   - component/backend

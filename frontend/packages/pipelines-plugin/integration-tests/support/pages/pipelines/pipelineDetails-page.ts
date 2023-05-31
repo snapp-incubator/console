@@ -84,7 +84,9 @@ export const pipelineDetailsPage = {
   },
 
   selectPipelineRun: () => {
-    cy.get(pipelineDetailsPO.pipelineRuns.pipelineRunIcon).next('a').click();
+    cy.get(pipelineDetailsPO.pipelineRuns.pipelineRunIcon)
+      .next('a')
+      .click();
   },
   finallyNode: () => {
     return cy.get('[data-test="pipeline-visualization"] [data-test="finally-node"]');

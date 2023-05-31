@@ -2,7 +2,9 @@ import { helmPO } from '@console/dev-console/integration-tests/support/pageObjec
 
 export const rollBackHelmRelease = {
   selectRevision: () => {
-    cy.get('[id^=form-radiobutton-revision]').last().check();
+    cy.get('[id^=form-radiobutton-revision]')
+      .last()
+      .check();
   },
   clickOnRollBack: () => cy.get(helmPO.rollBackHelmRelease.rollBack).click(),
 };

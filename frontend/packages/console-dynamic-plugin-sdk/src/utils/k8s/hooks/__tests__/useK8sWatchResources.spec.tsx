@@ -45,7 +45,7 @@ beforeEach(() => {
       adminResources: [],
       allResources: [],
       configResources: [],
-      clusterOperatorConfigResources: [], // TODO remove multicluster
+      clusterOperatorConfigResources: [],
       namespacedSet: null,
       safeResources: [],
       groupVersionMap: {},
@@ -142,10 +142,10 @@ describe('useK8sWatchResource', () => {
     expect(k8sListMock).toHaveBeenCalledTimes(1);
     expect(k8sListMock.mock.calls[0]).toEqual([
       PodModel,
-      { cluster: 'local-cluster', limit: 250 }, // TODO remove multicluster
+      { cluster: 'local-cluster', limit: 250 },
       true,
       {},
-      'local-cluster', // TODO remove multicluster
+      'local-cluster',
     ]);
     k8sListMock.mockClear();
 
@@ -155,7 +155,7 @@ describe('useK8sWatchResource', () => {
     expect(k8sWatchMock).toHaveBeenCalledTimes(1);
     expect(k8sWatchMock.mock.calls[0]).toEqual([
       PodModel,
-      { cluster: 'local-cluster', resourceVersion: '123' }, // TODO remove multicluster
+      { cluster: 'local-cluster', resourceVersion: '123' },
       { timeout: 60000 },
     ]);
     k8sWatchMock.mockClear();
@@ -215,7 +215,7 @@ describe('useK8sWatchResource', () => {
       PodModel,
       'my-pod',
       undefined,
-      { cluster: 'local-cluster' }, // TODO remove multicluster
+      { cluster: 'local-cluster' },
       {},
     ]);
     k8sGetMock.mockClear();
@@ -226,7 +226,7 @@ describe('useK8sWatchResource', () => {
     expect(k8sWatchMock).toHaveBeenCalledTimes(1);
     expect(k8sWatchMock.mock.calls[0]).toEqual([
       PodModel,
-      { cluster: 'local-cluster', fieldSelector: 'metadata.name=my-pod' }, // TODO remove multicluster
+      { cluster: 'local-cluster', fieldSelector: 'metadata.name=my-pod' },
       { subprotocols: undefined },
     ]);
     k8sWatchMock.mockClear();
@@ -278,10 +278,10 @@ describe('useK8sWatchResource', () => {
     expect(k8sListMock).toHaveBeenCalledTimes(1);
     expect(k8sListMock.mock.calls[0]).toEqual([
       PodModel,
-      { cluster: 'local-cluster', limit: 250 }, // TODO remove multicluster
+      { cluster: 'local-cluster', limit: 250 },
       true,
       {},
-      'local-cluster', // TODO remove multicluster
+      'local-cluster',
     ]);
     k8sListMock.mockClear();
 
@@ -341,7 +341,7 @@ describe('useK8sWatchResource', () => {
       PodModel,
       'my-pod',
       undefined,
-      { cluster: 'local-cluster' }, // TODO remove multicluster
+      { cluster: 'local-cluster' },
       {},
     ]);
     k8sGetMock.mockClear();
@@ -350,7 +350,7 @@ describe('useK8sWatchResource', () => {
     expect(k8sWatchMock).toHaveBeenCalledTimes(1);
     expect(k8sWatchMock.mock.calls[0]).toEqual([
       PodModel,
-      { cluster: 'local-cluster', fieldSelector: 'metadata.name=my-pod' }, // TODO remove multicluster
+      { cluster: 'local-cluster', fieldSelector: 'metadata.name=my-pod' },
       { subprotocols: undefined },
     ]);
     k8sWatchMock.mockClear();
@@ -457,7 +457,7 @@ describe('useK8sWatchResource', () => {
     expect(k8sListMock).toHaveBeenCalledTimes(1);
     expect(k8sListMock.mock.calls[0]).toEqual([
       PodModel,
-      { cluster: 'local-cluster', limit: 250 }, // TODO remove multicluster
+      { cluster: 'local-cluster', limit: 250 },
       true,
       {},
       'local-cluster',
@@ -470,7 +470,7 @@ describe('useK8sWatchResource', () => {
     expect(k8sWatchMock).toHaveBeenCalledTimes(1);
     expect(k8sWatchMock.mock.calls[0]).toEqual([
       PodModel,
-      { cluster: 'local-cluster', resourceVersion: '123' }, // TODO remove multicluster
+      { cluster: 'local-cluster', resourceVersion: '123' },
       { timeout: 60000 },
     ]);
     k8sWatchMock.mockClear();
@@ -566,7 +566,7 @@ describe('useK8sWatchResource', () => {
       PodModel,
       'my-pod',
       undefined,
-      { cluster: 'local-cluster' }, // TODO remove multicluster
+      { cluster: 'local-cluster' },
       {},
     ]);
     k8sGetMock.mockClear();
@@ -577,7 +577,7 @@ describe('useK8sWatchResource', () => {
     expect(k8sWatchMock).toHaveBeenCalledTimes(1);
     expect(k8sWatchMock.mock.calls[0]).toEqual([
       PodModel,
-      { cluster: 'local-cluster', fieldSelector: 'metadata.name=my-pod' }, // TODO remove multicluster
+      { cluster: 'local-cluster', fieldSelector: 'metadata.name=my-pod' },
       { subprotocols: undefined },
     ]);
     k8sWatchMock.mockClear();

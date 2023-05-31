@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import * as _ from 'lodash-es';
 import * as React from 'react';
 import Helmet from 'react-helmet';
@@ -17,7 +16,7 @@ import {
 import SearchIcon from '@patternfly/react-icons/dist/js/icons/search-icon';
 
 // FIXME upgrading redux types is causing many errors at this time
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -899,10 +898,10 @@ export const PullSecret = (props) => {
 
   const secrets = () => {
     if (error) {
-      return <Alert variant="danger" isInline title={t('Error loading default pull Secrets')} />;
+      return (<Alert variant="danger" isInline title={t('Error loading default pull Secrets')} />);
     }
     return data.length > 0 ? (
-      data.map((secret) => (
+      (data.map((secret) => (
         <div key={secret.name}>
           <ResourceLink
             kind="Secret"
@@ -911,12 +910,12 @@ export const PullSecret = (props) => {
             linkTo={canViewSecrets}
           />
         </div>
-      ))
+      )))
     ) : (
-      <Button variant="link" type="button" isInline onClick={modal}>
+      (<Button variant="link" type="button" isInline onClick={modal}>
         {t('public~Not configured')}
         <PencilAltIcon className="co-icon-space-l pf-c-button-icon--plain" />
-      </Button>
+      </Button>)
     );
   };
 

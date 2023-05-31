@@ -51,7 +51,9 @@ export const ResourceQuotaCard = () => {
                 </StackItem>
               ))}
             </Stack>
-          ) : undefined}
+          ) : (
+            undefined
+          )}
         </ResourceQuotaBody>
       </CardBody>
       <CardHeader>
@@ -74,7 +76,9 @@ export const ResourceQuotaCard = () => {
                 </StackItem>
               ))}
             </Stack>
-          ) : undefined}
+          ) : (
+            undefined
+          )}
         </ResourceQuotaBody>
       </CardBody>
     </Card>

@@ -11,7 +11,7 @@ const userID = 'userID';
 const name = 'name';
 const email = 'email';
 const clearLocalStorageKeys = [userID, name, email];
-const lastClusterKey = 'bridge/last-cluster'; // TODO remove multicluster
+const lastClusterKey = 'bridge/last-cluster';
 
 const setNext = (next) => {
   if (!next) {
@@ -54,12 +54,11 @@ export const authSvc = {
   email: () => loginStateItem(email),
 
   // Avoid logging out multiple times if concurrent requests return unauthorized.
-  // TODO remove multicluster
   logout: _.once((next, cluster) => {
     setNext(next);
     clearLocalStorage(clearLocalStorageKeys);
     coFetch(
-      cluster ? `${window.SERVER_FLAGS.logoutURL}/${cluster}` : window.SERVER_FLAGS.logoutURL, // TODO remove multicluster
+      cluster ? `${window.SERVER_FLAGS.logoutURL}/${cluster}` : window.SERVER_FLAGS.logoutURL,
       { method: 'POST' },
     )
       // eslint-disable-next-line no-console
@@ -68,7 +67,7 @@ export const authSvc = {
         if (window.SERVER_FLAGS.logoutRedirect && !next) {
           window.location = window.SERVER_FLAGS.logoutRedirect;
         } else {
-          authSvc.login(cluster); // TODO remove multicluster
+          authSvc.login(cluster);
         }
       });
   }),
@@ -123,17 +122,15 @@ export const authSvc = {
       });
   },
 
-  // TODO remove multicluster
   logoutMulticluster: () => {
     clearLocalStorage([...clearLocalStorageKeys, lastClusterKey]);
     window.location = window.SERVER_FLAGS.multiclusterLogoutRedirect;
   },
 
-  // TODO remove multicluster
   login: (cluster) => {
     // Ensure that we don't redirect to the current URL in a loop
     // when using local bridge in development mode without authorization.
-    const loginURL = cluster // TODO remove multicluster
+    const loginURL = cluster
       ? `${window.SERVER_FLAGS.loginURL}/${cluster}`
       : window.SERVER_FLAGS.loginURL;
     if (![window.location.href, window.location.pathname].includes(loginURL)) {

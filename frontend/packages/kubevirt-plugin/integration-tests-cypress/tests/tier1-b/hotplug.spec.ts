@@ -122,7 +122,9 @@ const persHotplugDisk: Disk = {
 };
 
 export const verifyHotplugLabel = (name: string, tag: string) => {
-  cy.get(`[data-id="${name}"]`).should('exist').should('contain', tag);
+  cy.get(`[data-id="${name}"]`)
+    .should('exist')
+    .should('contain', tag);
 };
 
 export const verifyDiskAttached = (disk: Disk, tag: string) => {
@@ -138,7 +140,9 @@ xdescribe('Test UI for VM hotplug disks', () => {
     virtualization.vms.visit();
     vm.create(vmData);
     waitForStatus(VM_STATUS.Running);
-    cy.byLegacyTestID(vmData.name).should('exist').click();
+    cy.byLegacyTestID(vmData.name)
+      .should('exist')
+      .click();
     tab.navigateToDisk();
   });
 
@@ -151,7 +155,9 @@ xdescribe('Test UI for VM hotplug disks', () => {
     verifyDiskAttached(autoHotplugDisk, 'AutoDetachHotplug');
     verifyDiskAttached(persHotplugDisk, 'PersistingHotplug');
     selectActionFromDropdown(VM_ACTION.Stop, tags.actionButtons.actionDropdownButton);
-    cy.get(tags.warningAlert).should('exist').should('contain', autoHotplugDisk.name);
+    cy.get(tags.warningAlert)
+      .should('exist')
+      .should('contain', autoHotplugDisk.name);
     cy.get(tags.modalConfirm).click();
     waitForVMStatusLabel(VM_STATUS.Stopped, VM_ACTION_TIMEOUT.VM_BOOTUP);
     cy.get(`[data-id="${autoHotplugDisk.name}"]`).should('not.exist');
@@ -168,7 +174,9 @@ xdescribe('Test UI for VM hotplug disks', () => {
     verifyDiskAttached(autoHotplugDisk, 'AutoDetachHotplug');
     verifyDiskAttached(persHotplugDisk, 'PersistingHotplug');
     selectActionFromDropdown(VM_ACTION.Restart, tags.actionButtons.actionDropdownButton);
-    cy.get(tags.warningAlert).should('exist').should('contain', autoHotplugDisk.name);
+    cy.get(tags.warningAlert)
+      .should('exist')
+      .should('contain', autoHotplugDisk.name);
     cy.get(tags.modalConfirm).click();
     waitForVMStatusLabel(VM_STATUS.Running, VM_ACTION_TIMEOUT.VM_BOOTUP);
     cy.get(`[data-id="${autoHotplugDisk.name}"]`).should('not.exist');

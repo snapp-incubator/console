@@ -13,14 +13,22 @@ export const topologySidePane = {
       .parent('li')
       .should('have.class', 'co-m-horizontal-nav-item--active'),
   verifyTab: (tabName: string) =>
-    cy.get(topologyPO.sidePane.tabName).contains(tabName).should('be.visible'),
+    cy
+      .get(topologyPO.sidePane.tabName)
+      .contains(tabName)
+      .should('be.visible'),
   verifyTabNotVisible: (tabName: string) =>
-    cy.get(topologyPO.sidePane.tabName).contains(tabName).should('not.be.visible'),
+    cy
+      .get(topologyPO.sidePane.tabName)
+      .contains(tabName)
+      .should('not.be.visible'),
   verifyActionsDropDown: () => cy.get(topologyPO.sidePane.actionsDropDown).should('be.visible'),
   clickActionsDropDown: () => cy.get(topologyPO.sidePane.actionsDropDown).click(),
   selectTab: (tabName: string) => {
     app.waitForLoad(160000, true);
-    cy.get(topologyPO.sidePane.tabName).contains(tabName).click({ force: true });
+    cy.get(topologyPO.sidePane.tabName)
+      .contains(tabName)
+      .click({ force: true });
   },
   verifySection: (sectionTitle: string) => {
     cy.get(topologyPO.sidePane.dialog).within(() => {
@@ -34,7 +42,11 @@ export const topologySidePane = {
         expect(actions).toContain($el.text());
       });
   },
-  close: () => cy.get(topologyPO.sidePane.close).scrollIntoView().click(),
+  close: () =>
+    cy
+      .get(topologyPO.sidePane.close)
+      .scrollIntoView()
+      .click(),
   verifyFieldInDetailsTab: (fieldName: string) =>
     cy
       .get(`[data-test-selector="details-item-label__${fieldName}"]`)
@@ -50,9 +62,21 @@ export const topologySidePane = {
     cy
       .get(`[data-test-selector="details-item-value__${fieldName}"]`)
       .should('contain.text', fieldValue),
-  selectAddHealthChecks: () => cy.get('a').contains('Add Health Checks').click(),
-  scaleUpPodCount: () => cy.get(topologyPO.sidePane.podScale).eq(0).click(),
-  scaleDownPodCount: () => cy.get(topologyPO.sidePane.podScale).eq(1).click(),
+  selectAddHealthChecks: () =>
+    cy
+      .get('a')
+      .contains('Add Health Checks')
+      .click(),
+  scaleUpPodCount: () =>
+    cy
+      .get(topologyPO.sidePane.podScale)
+      .eq(0)
+      .click(),
+  scaleDownPodCount: () =>
+    cy
+      .get(topologyPO.sidePane.podScale)
+      .eq(1)
+      .click(),
   verifyPodText: (scaleNumber: string) => {
     cy.get(topologyPO.sidePane.podText, { timeout: 120000 }).should('contain.text', scaleNumber);
   },
@@ -60,7 +84,10 @@ export const topologySidePane = {
   verifyResourceQuotaAlert: () =>
     cy.get(topologyPO.sidePane.resourceQuotaAlert).should('be.visible'),
   verifyWorkloadInAppSideBar: (workloadName: string) =>
-    cy.get(topologyPO.sidePane.dialog).find('a').should('contain.text', workloadName),
+    cy
+      .get(topologyPO.sidePane.dialog)
+      .find('a')
+      .should('contain.text', workloadName),
   selectNodeAction: (action: nodeActions | string) => {
     cy.byLegacyTestID('actions-menu-button').click();
     topologyActions.selectAction(action);
@@ -79,7 +106,9 @@ export const topologySidePane = {
   },
   verifyNumberOfAnnotations: (num: string) => {
     cy.wait(3000);
-    cy.get(topologyPO.sidePane.detailsTab.annotations).scrollIntoView().should('be.visible');
+    cy.get(topologyPO.sidePane.detailsTab.annotations)
+      .scrollIntoView()
+      .should('be.visible');
     // eslint-disable-next-line promise/catch-or-return
     cy.get(topologyPO.sidePane.editAnnotations).then(($el) => {
       const res = $el.text().split(' ');
@@ -91,7 +120,9 @@ export const topologySidePane = {
     cy.byLegacyTestID(resourceName).should('be.visible');
   },
   clickStartLastRun: () => {
-    cy.get(topologyPO.sidePane.resourcesTab.startLastRun).should('be.enabled').click();
+    cy.get(topologyPO.sidePane.resourcesTab.startLastRun)
+      .should('be.enabled')
+      .click();
   },
   verifyPipelineRuns: () => {
     cy.get(topologyPO.sidePane.resourcesTab.pipelineRuns).should('be.visible');

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import * as React from 'react';
 import * as _ from 'lodash-es';
 import * as PropTypes from 'prop-types';

@@ -5,21 +5,6 @@ type ConsoleRequestHeaders = {
   'Impersonate-Group'?: string;
   'Impersonate-User'?: string;
   'X-Cluster'?: string;
-  'X-CSRFToken'?: string;
-};
-
-export const getCSRFToken = () => {
-  const cookiePrefix = 'csrf-token=';
-  return (
-    document &&
-    document.cookie &&
-    document.cookie
-      .split(';')
-      .map((c) => c.trim())
-      .filter((c) => c.startsWith(cookiePrefix))
-      .map((c) => c.slice(cookiePrefix.length))
-      .pop()
-  );
 };
 
 /**
@@ -32,11 +17,10 @@ export const getConsoleRequestHeaders = (targetCluster?: string): ConsoleRequest
   if (!store) return undefined;
   const state = store.getState();
 
-  // TODO remove multicluster
+  // Set X-Cluster header
   const cluster = getActiveCluster(state);
   const headers: ConsoleRequestHeaders = {
     'X-Cluster': targetCluster ?? cluster,
-    'X-CSRFToken': getCSRFToken(),
   };
 
   // Set impersonation headers

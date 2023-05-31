@@ -9,11 +9,16 @@ Given('user is at Deployments page', () => {
 });
 
 When('user clicks on Create Deployment', () => {
-  cy.get(pagePO.create).should('be.visible').click();
+  cy.get(pagePO.create)
+    .should('be.visible')
+    .click();
 });
 
 When('user enters name of deployment as {string}', (name: string) => {
-  cy.get(eventSourcePO.createPingSource.name).should('be.visible').clear().type(name);
+  cy.get(eventSourcePO.createPingSource.name)
+    .should('be.visible')
+    .clear()
+    .type(name);
 });
 
 When('user selects Strategy type as {string}', (strategy: string) => {
@@ -22,7 +27,9 @@ When('user selects Strategy type as {string}', (strategy: string) => {
     .should('be.visible')
     .click();
   const strategyType = strategy.replace(/\s/g, '');
-  cy.byTestDropDownMenu(strategyType).should('be.visible').click();
+  cy.byTestDropDownMenu(strategyType)
+    .should('be.visible')
+    .click();
 });
 
 When('user enters image as {string}', (imageName: string) => {
@@ -38,6 +45,8 @@ When('user clicks on Create button', () => {
 });
 
 Then('user sees {string} deployment created', (name: string) => {
-  cy.get(pagePO.breadcrumb).contains('Deployments').should('be.visible');
+  cy.get(pagePO.breadcrumb)
+    .contains('Deployments')
+    .should('be.visible');
   detailsPage.titleShouldContain(name);
 });

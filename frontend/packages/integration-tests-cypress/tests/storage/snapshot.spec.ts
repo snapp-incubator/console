@@ -40,9 +40,13 @@ if (Cypress.env('BRIDGE_AWS')) {
       nav.sidenav.clickNavLink(['Volume Snapshots']);
       listPage.clickCreateYAMLbutton();
       cy.byTestID('pvc-dropdown').click();
-      cy.get(dropdownFirstItem).first().click();
+      cy.get(dropdownFirstItem)
+        .first()
+        .click();
       cy.byTestID('snapshot-dropdown').click();
-      cy.get(dropdownFirstItem).first().click();
+      cy.get(dropdownFirstItem)
+        .first()
+        .click();
       modal.submit();
       cy.location('pathname').should(
         'include',
@@ -79,7 +83,9 @@ if (Cypress.env('BRIDGE_AWS')) {
       modal.shouldBeOpened();
       cy.byTestID('pvc-name').should('have.value', `${snapshotName}-restore`);
       cy.get(SnapshotDetails.scDropdown).click();
-      cy.get(dropdownFirstItem).eq(1).click();
+      cy.get(dropdownFirstItem)
+        .eq(1)
+        .click();
       modal.submit();
       modal.shouldBeClosed();
       cy.exec(

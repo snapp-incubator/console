@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import {
   FormFooter,
   SyncedEditorField,
-  CodeEditorField,
+  YAMLEditorField,
   FlexForm,
   FormBody,
 } from '@console/shared';
@@ -135,7 +135,7 @@ const PipelineBuilderForm: React.FC<PipelineBuilderFormProps> = (props) => {
   );
 
   const yamlEditor = (
-    <CodeEditorField
+    <YAMLEditorField
       name="yamlData"
       model={PipelineModel}
       showSamples={!existingPipeline}

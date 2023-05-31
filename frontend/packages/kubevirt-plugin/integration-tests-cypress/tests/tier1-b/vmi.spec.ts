@@ -32,7 +32,9 @@ describe('Test VMI', () => {
 
   describe('Test VMI details', () => {
     before(() => {
-      cy.byLegacyTestID(vmiName).should('exist').click();
+      cy.byLegacyTestID(vmiName)
+        .should('exist')
+        .click();
     });
 
     it('ID(CNV-4089) VMI status is running', () => {
@@ -86,7 +88,9 @@ describe('Test VMI', () => {
   describe('Delete VMI', () => {
     before(() => {
       cy.visitVMsList();
-      cy.byLegacyTestID(vmiName).should('exist').click();
+      cy.byLegacyTestID(vmiName)
+        .should('exist')
+        .click();
     });
 
     it('ID(CNV-3699) Delete VMI', () => {

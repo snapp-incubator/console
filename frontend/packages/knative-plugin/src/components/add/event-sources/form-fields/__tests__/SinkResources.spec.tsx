@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import * as coFetchModule from '@console/dynamic-plugin-sdk/src/utils/fetch/console-fetch';
+import * as coFetch from '@console/internal/co-fetch';
 import { ServiceModel } from '@console/internal/models';
 import { ResourceDropdownField } from '@console/shared';
 import { mockChannelCRDData } from '../../../../../utils/__mocks__/dynamic-channels-crd-mock';
@@ -19,7 +19,7 @@ jest.mock('formik', () => ({
 let wrapper: ShallowWrapper<any>;
 describe('SinkResources', () => {
   beforeEach(() => {
-    jest.spyOn(coFetchModule, 'consoleFetch').mockImplementation(() =>
+    jest.spyOn(coFetch, 'coFetch').mockImplementation(() =>
       Promise.resolve({
         json: () => mockChannelCRDData,
       }),

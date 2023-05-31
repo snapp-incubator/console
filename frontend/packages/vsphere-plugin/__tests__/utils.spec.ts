@@ -9,7 +9,6 @@ const config: ConnectionFormContextValues = {
   datacenter: 'my-datacenter',
   defaultDatastore: 'my-default-ds',
   folder: '/my/folder',
-  vCenterCluster: 'foo-cluster',
 };
 
 describe('mergeCloudProviderConfig', () => {

@@ -3,7 +3,7 @@ import { LongArrowAltRightIcon } from '@patternfly/react-icons';
 import { shallow } from 'enzyme';
 import { DeploymentConfigModel } from '@console/internal/models';
 import { PodKind } from '@console/internal/module/k8s';
-import * as usePodsWatcherModule from '../../../hooks/usePodsWatcher';
+import * as hooks from '../../../hooks';
 import { PodRCData } from '../../../types';
 import { samplePods } from '../../../utils/__tests__/test-resource-data';
 import PodRing from '../PodRing';
@@ -28,7 +28,7 @@ describe(PodRingSet.displayName, () => {
       isRollingOut: false,
     };
     obj = { kind: DeploymentConfigModel.kind };
-    jest.spyOn(usePodsWatcherModule, 'usePodsWatcher').mockImplementation(() => {
+    jest.spyOn(hooks, 'usePodsWatcher').mockImplementation(() => {
       return { loaded: true, loadError: '', podData };
     });
   });

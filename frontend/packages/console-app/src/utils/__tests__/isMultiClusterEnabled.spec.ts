@@ -1,4 +1,3 @@
-// TODO remove multicluster
 import isMultiClusterEnabled from '../isMultiClusterEnabled';
 
 describe('isMultiClusterEnabled', () => {

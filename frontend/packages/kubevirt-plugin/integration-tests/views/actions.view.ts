@@ -38,7 +38,10 @@ const selectDropdownItem = (getActionsDropdown) => async (action: string) => {
  * Performs action via list view kebab menu.
  */
 export const listViewAction = (name) => async (action: string, confirm?: boolean) => {
-  const getActionsDropdown = () => rowForName(name).$$(listViewKebabDropdown).first();
+  const getActionsDropdown = () =>
+    rowForName(name)
+      .$$(listViewKebabDropdown)
+      .first();
   await selectDropdownItem(getActionsDropdown)(action);
   if (confirm === true) {
     await confirmAction();
