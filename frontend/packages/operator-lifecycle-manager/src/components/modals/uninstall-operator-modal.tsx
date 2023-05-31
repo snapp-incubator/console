@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
 import { Alert, Progress, ProgressSize } from '@patternfly/react-core';
 import * as _ from 'lodash';
@@ -45,6 +46,12 @@ import { ClusterServiceVersionKind, SubscriptionKind } from '../../types';
 import { getClusterServiceVersionPlugins } from '../../utils';
 import { OperandLink } from '../operand/operand-link';
 import Timeout = NodeJS.Timeout;
+
+const deleteOptions = {
+  kind: 'DeleteOptions',
+  apiVersion: 'v1',
+  propagationPolicy: 'Foreground',
+};
 
 export const UninstallOperatorModal: React.FC<UninstallOperatorModalProps> = ({
   cancel,
@@ -123,12 +130,6 @@ export const UninstallOperatorModal: React.FC<UninstallOperatorModalProps> = ({
     subscriptionNamespace,
   );
 
-  const deleteOptions = {
-    kind: 'DeleteOptions',
-    apiVersion: 'v1',
-    propagationPolicy: 'Foreground',
-  };
-
   const uninstallOperator = React.useCallback(async () => {
     const patch = removePlugins
       ? getPatchForRemovingPlugins(consoleOperatorConfig, enabledPlugins)
@@ -181,7 +182,6 @@ export const UninstallOperatorModal: React.FC<UninstallOperatorModalProps> = ({
       });
   }, [
     consoleOperatorConfig,
-    deleteOptions,
     enabledPlugins,
     handleOperatorUninstallPromise,
     k8sKill,
@@ -299,10 +299,6 @@ export const UninstallOperatorModal: React.FC<UninstallOperatorModalProps> = ({
   const instructions = (
     <>
       <p>
-        <Trans t={t} ns="olm">
-          Operator <strong>{{ name }}</strong> will be removed from <strong>{{ namespace }}</strong>
-          .
-        </Trans>
         {showOperandsContent && (
           <>
             {' '}
@@ -321,12 +317,6 @@ export const UninstallOperatorModal: React.FC<UninstallOperatorModalProps> = ({
             count: enabledPlugins.length,
           })}
         </p>
-      )}
-      {uninstallMessage && (
-        <>
-          <h2>{t('olm~Message from Operator developer')}</h2>
-          <p>{uninstallMessage}</p>
-        </>
       )}
     </>
   );
@@ -392,10 +382,22 @@ export const UninstallOperatorModal: React.FC<UninstallOperatorModalProps> = ({
         <YellowExclamationTriangleIcon className="co-icon-space-r" /> {t('olm~Uninstall Operator?')}
       </ModalTitle>
       <ModalBody>
-        {showInstructions && !optedOut && (
+        {showInstructions && (
           <>
-            {instructions}
-            {operandsSection}
+            <p>
+              <Trans t={t} ns="olm">
+                Operator <strong>{{ name }}</strong> will be removed from{' '}
+                <strong>{{ namespace }}</strong>.
+              </Trans>
+            </p>
+            {!optedOut && <>{instructions}</>}
+            {uninstallMessage && (
+              <>
+                <h2>{t('olm~Message from Operator developer')}</h2>
+                <p>{uninstallMessage}</p>
+              </>
+            )}
+            {!optedOut && <>{operandsSection}</>}
           </>
         )}
         {operandsDeleteInProgress && (

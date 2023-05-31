@@ -73,6 +73,7 @@ const createTokenSecret = async (
 export const createRepositoryResources = async (
   values: RepositoryFormValues,
   namespace: string,
+  labels: { [key: string]: string } = {},
   dryRun?: boolean,
 ): Promise<K8sResourceKind> => {
   const {
@@ -103,12 +104,13 @@ export const createRepositoryResources = async (
     metadata: {
       name,
       namespace,
+      ...(labels || {}),
     },
     spec: {
       url: gitUrl,
       ...(secretRef || gitHost !== 'github.com'
         ? {
-            // eslint-disable-next-line @typescript-eslint/camelcase
+            // eslint-disable-next-line @typescript-eslint/naming-convention
             git_provider: {
               ...(gitHost !== 'github.com' ? { url: gitHost } : {}),
               ...(secretRef
@@ -117,7 +119,7 @@ export const createRepositoryResources = async (
                       name: secretRef?.metadata?.name,
                       key: 'provider.token',
                     },
-                    // eslint-disable-next-line @typescript-eslint/camelcase
+                    // eslint-disable-next-line @typescript-eslint/naming-convention
                     webhook_secret: {
                       name: secretRef?.metadata?.name,
                       key: 'webhook.secret',
@@ -177,10 +179,7 @@ export const recommendRepositoryName = (url: string): string | undefined => {
   if (!gitUrlRegex.test(url)) {
     return undefined;
   }
-  const name = url
-    .replace(/\/$/, '')
-    .split('/')
-    .pop();
+  const name = url.replace(/\/$/, '').split('/').pop();
   return createRepositoryName(name);
 };
 
