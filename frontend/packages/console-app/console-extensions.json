@@ -753,7 +753,8 @@
         "version": "v1",
         "kind": "DaemonSet"
       }
-    }
+    },
+    "flags": { "required": ["CAN_LIST_NS"] }
   },
   {
     "type": "console.navigation/resource-ns",
@@ -812,7 +813,8 @@
         "version": "v1",
         "kind": "PodDisruptionBudget"
       }
-    }
+    },
+    "flags": { "required": ["CAN_LIST_NS"] }
   },
   {
     "type": "console.navigation/resource-ns",
@@ -944,7 +946,8 @@
         "version": "v1",
         "kind": "VolumeSnapshotClass"
       }
-    }
+    },
+    "flags": { "required": ["CAN_LIST_NS"] }
   },
   {
     "type": "console.navigation/resource-ns",
