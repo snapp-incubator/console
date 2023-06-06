@@ -11,8 +11,11 @@ RUN mkdir -p /go/src/github.com/openshift/console/
 ADD . /go/src/github.com/openshift/console/
 WORKDIR /go/src/github.com/openshift/console/
 RUN ./build-backend.sh
-RUN ./build-frontend.sh
-
+RUN cd frontend
+RUN cd frontend && \
+    yarn config set registry ${NPM_PROXY_ADDRESS} && \
+    yarn install
+RUN cd frontend && yarn run build
 
 
 ##################################################
@@ -39,3 +42,4 @@ LABEL \
         io.k8s.display-name="OpenShift Console" \
         vendor="Red Hat" \
         io.openshift.tags="openshift,console"
+                                            
