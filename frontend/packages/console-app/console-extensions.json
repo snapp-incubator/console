@@ -430,7 +430,8 @@
         "label": "%console-app~Enable exact string match%",
         "trueValue": true,
         "falseValue": false,
-        "defaultValue": false      }
+        "defaultValue": false
+      }
     }
   },
   {
@@ -464,12 +465,69 @@
     }
   },
   {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "add",
+      "perspective": "admin",
+      "name": "%console-app~+Add%",
+      "href": "/add",
+      "namespaced": true,
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-add",
+        "data-test-id": "+Add-header"
+      }
+    },
+    "flags": {
+      "required": ["OPENSHIFT"]
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "topology",
+      "perspective": "admin",
+      "section": "top",
+      "name": "%console~Topology%",
+      "href": "/topology",
+      "namespaced": true,
+      "insertAfter": "home",
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-topology",
+        "data-test-id": "topology-header"
+      }
+    },
+    "flags": {
+      "required": ["OPENSHIFT"]
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "observe",
+      "perspective": "admin",
+      "section": "top",
+      "name": "%console~Observe%",
+      "href": "/dev-monitoring",
+      "namespaced": true,
+      "insertAfter": "topology",
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-monitoring",
+        "data-tour-id": "tour-monitoring-nav",
+        "data-test-id": "monitoring-header"
+      }
+    },
+    "flags": {
+      "required": ["OPENSHIFT", "MONITORING"]
+    }
+  },
+  {
     "type": "console.navigation/section",
     "properties": {
       "perspective": "admin",
       "id": "home",
       "name": "%console-app~Home%",
-      "dataAttributes": { "data-quickstart-id": "qs-nav-home" }
+      "dataAttributes": { "data-quickstart-id": "qs-nav-home" },
+      "insertAfter": "observe"
     }
   },
   {
@@ -947,7 +1005,8 @@
         "version": "v1",
         "kind": "VolumeSnapshot"
       }
-    }
+    },
+    "flags": { "required": ["CAN_LIST_NS"] }
   },
   {
     "type": "console.navigation/resource-cluster",
