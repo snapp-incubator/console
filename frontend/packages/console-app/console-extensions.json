@@ -995,7 +995,8 @@
         "version": "v1",
         "kind": "VolumeSnapshot"
       }
-    }
+    },
+    "flags": { "required": ["CAN_LIST_NS"] }
   },
   {
     "type": "console.navigation/resource-cluster",
