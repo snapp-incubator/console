@@ -478,7 +478,8 @@
       "perspective": "admin",
       "id": "home",
       "name": "%console-app~Home%",
-      "dataAttributes": { "data-quickstart-id": "qs-nav-home" }
+      "dataAttributes": { "data-quickstart-id": "qs-nav-home" },
+      "insertAfter": "observe"
     }
   },
   {
