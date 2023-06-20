@@ -516,7 +516,7 @@
       "id": "home",
       "name": "%console-app~Home%",
       "dataAttributes": { "data-quickstart-id": "qs-nav-home" },
-      "insertAfter": "observe"
+      "insertAfter": "add"
     }
   },
   {
@@ -526,7 +526,7 @@
       "id": "operators",
       "name": "%console-app~Operators%",
       "dataAttributes": { "data-quickstart-id": "qs-nav-operators" },
-      "insertAfter": "home"
+      "insertAfter": "observe"
     }
   },
   {
