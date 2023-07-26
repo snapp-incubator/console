@@ -3,15 +3,15 @@
     --pf-c-simple-list__item-link--focus--FontWeight: normal;
     --pf-c-simple-list__item-link--active--FontWeight: normal;
     --pf-c-simple-list__item-link--hover--FontWeight: normal;
-    background-color: #25272d !important;
+    background-color: var(--co-added--bg--Color) !important;
     padding: var(--pf-global--spacer--lg) var(--pf-global--spacer--lg) var(--pf-global--spacer--lg)
       var(--pf-global--spacer--lg) !important;
     .pf-c-label.pf-m-blue {
       margin-left: var(--pf-global--spacer--md);
-      background: #313744;
+      background: var(--co-added--label--Color);
     }
     &:hover {
-      background: #232732 !important;
+      background: var(--co-added-hover--bg--Color) !important;
     }
   }
 
