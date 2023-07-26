@@ -5,6 +5,7 @@
   "Operator Backed Services": "Operator Backed Services",
   "OperatorHub": "OperatorHub",
   "Installed Operators": "Installed Operators",
+  "Managed Services": "Managed Services",
   "Edit {{item}}": "Edit {{item}}",
   "Delete {{item}}": "Delete {{item}}",
   "Disable": "Disable",

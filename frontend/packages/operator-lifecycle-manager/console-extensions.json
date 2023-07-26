@@ -46,13 +46,25 @@
     "properties": {
       "id": "operators",
       "section": "operators",
-      "name": "%olm~Installed Operators%",
+      "name": "%olm~Installed Services%",
       "model": {
         "kind": "ClusterServiceVersion",
         "version": "v1alpha1",
         "group": "operators.coreos.com"
       },
       "startsWith": ["operators.coreos.com", "clusterserviceversions"]
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "managed-operators",
+      "section": "operators",
+      "name": "%olm~Managed Operators%",
+      "href": "/catalog?catalogType=OperatorBackedService"
+    },
+    "flags": {
+      "required": ["DEVELOPER_CATALOG", "OPERATOR_BACKED_SERVICE_CATALOG_TYPE"]
     }
   },
   {
