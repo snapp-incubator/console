@@ -108,7 +108,7 @@ type QuickStarts struct {
 }
 
 type TutorialUrls struct {
-	Sections []string `json:"disabled,omitempty" yaml:"disabled,omitempty"`
+	Sections []string `json:"sections,omitempty" yaml:"sections,omitempty"`
 }
 
 // ProjectAccess contains options for project access roles
