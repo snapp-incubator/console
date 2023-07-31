@@ -114,7 +114,7 @@ type TutorialUrls struct {
 
 type TutorialUrlsTypesState struct {
 	ID string `json:"id" yaml:"id"`
-	Label string `json:"label" yaml:"label"`
+	URL string `json:"url" yaml:"url"`
 }
 
 // ProjectAccess contains options for project access roles
