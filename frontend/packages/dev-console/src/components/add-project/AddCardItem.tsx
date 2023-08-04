@@ -13,23 +13,45 @@ type AddCardItemProps = {
   namespace: string;
 };
 
-const handleLink = (e) => {
-  e.preventDefault();
-  // Prevents event from bubbling up to parent
-  e.stopPropagation();
-  const { href } = e.target;
-  window.open(href, '_blank');
-};
+type GuideLinksType = { id: string; url: string }[];
 
 const AddCardItem: React.FC<AddCardItemProps> = ({
   action: {
-    properties: { id, label, icon, href, callback, description },
+    properties: { id, label, icon, href: listItemHref, callback, description },
   },
   namespace,
 }) => {
   const fireTelemetryEvent = useTelemetry();
   const [showDetails] = useShowAddCardItemDetails();
   const toast = useToast();
+  const [guideLinks, setGuideLinks] = React.useState<GuideLinksType | null>(null);
+
+  const handleLink = (e) => {
+    e.preventDefault();
+    // Prevents event from bubbling up to parent
+    e.stopPropagation();
+    const { href } = e.target;
+    window.open(href, '_blank');
+  };
+
+  const getTutorialUrls = (idTutorial: string): string => {
+    if (guideLinks) {
+      const resultItem = guideLinks.find((url) => url.id === idTutorial);
+      return resultItem ? resultItem.url : '#';
+    }
+    return '#';
+  };
+
+  React.useEffect(() => {
+    try {
+      const { tutorialUrls } = window.SERVER_FLAGS;
+      const tutorialUrlsParser = JSON.parse(tutorialUrls);
+      setGuideLinks(tutorialUrlsParser.sections);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to parse tutorial URLs', error);
+    }
+  }, []);
 
   const actionIcon = (): JSX.Element => {
     if (typeof icon === 'string') {
@@ -58,14 +80,14 @@ const AddCardItem: React.FC<AddCardItemProps> = ({
       componentProps={{
         'data-test': `item ${id}`,
       }}
-      href={href ? resolvedHref(href, namespace) : null}
+      href={listItemHref ? resolvedHref(listItemHref, namespace) : null}
       onClick={(e: React.SyntheticEvent) => {
         fireTelemetryEvent('Add Item Selected', {
           id,
           name: label,
         });
-        if (href) {
-          navigateTo(e, resolvedHref(href, namespace));
+        if (listItemHref) {
+          navigateTo(e, resolvedHref(listItemHref, namespace));
         } else if (callback) {
           callback({ namespace, toast });
         }
@@ -76,7 +98,7 @@ const AddCardItem: React.FC<AddCardItemProps> = ({
         {label}
       </Title>
       <Label
-        href={'https://docs.snappcloud.io'}
+        href={getTutorialUrls(`add-${id}`)}
         onClick={handleLink}
         className="pf-c-label-md"
         color="blue"
