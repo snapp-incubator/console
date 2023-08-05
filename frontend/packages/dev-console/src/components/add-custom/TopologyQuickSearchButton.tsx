@@ -23,7 +23,7 @@ const TopologyQuickSearchButton: React.FC<QuickSearchButtonProps> = ({ onClick }
         aria-label={t('topology~Add to Project')}
       >
         <i className="fa fa-search pf-u-pr-sm" />
-        {t('topology~Search / Add to Project')}
+        {t('devconsole~Search / Add to Project')}
       </Button>
     </Tooltip>
   );
