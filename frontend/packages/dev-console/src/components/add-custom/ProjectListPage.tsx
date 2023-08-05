@@ -17,7 +17,7 @@ const ProjectListPage: React.FC<ProjectListPageProps> = ({
   listComponent,
   ...listPageProps
 }) => (
-  <div className="odc-add-project-list-page">
+  <div className="odc-add-custom-list-page">
     <PageHeading title={title} badge={badge}>
       {children}
     </PageHeading>

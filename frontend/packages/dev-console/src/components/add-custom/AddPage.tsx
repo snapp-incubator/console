@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { Trans, useTranslation } from 'react-i18next';
 import { match as RMatch } from 'react-router';
-import { withStartGuide } from '../../../../../public/components/start-guide';
+import { withStartGuide } from '@console/internal/components/start-guide';
 import CreateProjectListPage, { CreateAProjectButton } from '../projects/CreateProjectListPage';
 import AddPageLayout from './AddPageLayout';
 import NamespacedPage, { NamespacedPageVariants } from './NamespacedPage';
