@@ -151,6 +151,7 @@ func main() {
 	fManagedClusterConfigs := fs.String("managed-clusters", "", "List of managed cluster configurations. (JSON as string)")
 	fHubConsoleURL := fs.String("hub-console-url", "", "URL of the hub cluster's console in a multi cluster environment.")
 	// TODO Remove multicluster
+	fTutorialUrls := fs.String("tutorial-urls", "", "Allow customization of available tutorial urls in console. (JSON as string)")
 
 	if err := serverconfig.Parse(fs, os.Args[1:], "BRIDGE"); err != nil {
 		fmt.Fprintln(os.Stderr, err.Error())
@@ -320,6 +321,7 @@ func main() {
 		AuthMetrics:                  auth.NewMetrics(),
 		K8sMode:                      *fK8sMode,
 		CopiedCSVsDisabled:           *fCopiedCSVsDisabled,
+		TutorialUrls:                 *fTutorialUrls,
 	}
 
 	// TODO remove multicluster

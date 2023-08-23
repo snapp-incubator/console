@@ -89,10 +89,11 @@ type Auth struct {
 
 // Customization holds configuration such as what logo to use.
 type Customization struct {
-	Branding             string `yaml:"branding,omitempty"`
-	DocumentationBaseURL string `yaml:"documentationBaseURL,omitempty"`
-	CustomProductName    string `yaml:"customProductName,omitempty"`
-	CustomLogoFile       string `yaml:"customLogoFile,omitempty"`
+	Branding             string       `yaml:"branding,omitempty"`
+	DocumentationBaseURL string       `yaml:"documentationBaseURL,omitempty"`
+	CustomProductName    string       `yaml:"customProductName,omitempty"`
+	CustomLogoFile       string       `yaml:"customLogoFile,omitempty"`
+	TutorialUrls         TutorialUrls `yaml:"tutorialUrls,omitempty"`
 	// developerCatalog allows to configure the shown developer catalog categories and it's types.
 	DeveloperCatalog DeveloperConsoleCatalogCustomization `yaml:"developerCatalog,omitempty"`
 	QuickStarts      QuickStarts                          `yaml:"quickStarts,omitempty"`
@@ -105,6 +106,16 @@ type Customization struct {
 // QuickStarts contains options for ConsoleQuickStarts resource
 type QuickStarts struct {
 	Disabled []string `json:"disabled,omitempty" yaml:"disabled,omitempty"`
+}
+
+type TutorialUrls struct {
+	Sections []TutorialUrlsTypesState `json:"sections,omitempty" yaml:"sections,omitempty"`
+	Types    TutorialUrlsTypesState   `json:"types,omitempty" yaml:"types,omitempty"`
+}
+
+type TutorialUrlsTypesState struct {
+	ID  string `json:"id" yaml:"id"`
+	URL string `json:"url" yaml:"url"`
 }
 
 // ProjectAccess contains options for project access roles

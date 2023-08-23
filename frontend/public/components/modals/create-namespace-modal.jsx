@@ -127,6 +127,15 @@ const CreateNamespaceModalWithTranslation_ = (props) => {
     [deny]: t('public~Deny all inbound traffic'),
   };
 
+  const NameHint = () => {
+    const type = props.createProject ? t('public~Project') : t('public~Namespace');
+    const nameFormat = t(
+      "public~A {{type}} name must consist of lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name' or '123-abc').",
+      { type },
+    );
+    return <p>{nameFormat}</p>;
+  };
+
   const popoverText = () => {
     const type = props.createProject ? t('public~Project') : t('public~Namespace');
     const nameFormat = t(
@@ -194,6 +203,7 @@ const CreateNamespaceModalWithTranslation_ = (props) => {
               autoFocus
               required
             />
+            <NameHint />
           </div>
         </div>
         {props.createProject && (

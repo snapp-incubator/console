@@ -134,6 +134,7 @@ type jsGlobals struct {
 	StatuspageID                    string                     `json:"statuspageID"`
 	Telemetry                       serverconfig.MultiKeyValue `json:"telemetry"`
 	ThanosPublicURL                 string                     `json:"thanosPublicURL"`
+	TutorialUrls                    string                     `json:"tutorialUrls"`
 	UserSettingsLocation            string                     `json:"userSettingsLocation"`
 	K8sMode                         string                     `json:"k8sMode"`
 }
@@ -201,6 +202,7 @@ type Server struct {
 	ThanosPublicURL                     *url.URL
 	ThanosTenancyProxyConfig            *proxy.Config
 	ThanosTenancyProxyForRulesConfig    *proxy.Config
+	TutorialUrls                        string
 	UserSettingsLocation                string
 }
 
@@ -826,6 +828,7 @@ func (s *Server) indexHandler(w http.ResponseWriter, r *http.Request) {
 		CopiedCSVsDisabled:         s.CopiedCSVsDisabled,
 		HubConsoleURL:              s.HubConsoleURL.String(), // TODO remove multicluster
 		K8sMode:                    s.K8sMode,
+		TutorialUrls:               s.TutorialUrls,
 	}
 
 	localAuther := s.getLocalAuther() // TODO remove multicluster
