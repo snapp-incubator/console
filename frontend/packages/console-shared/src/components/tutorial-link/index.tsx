@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Label } from '@patternfly/react-core';
+import { useTranslation } from 'react-i18next';
 
 type GuideLinksType = { id: string; url: string }[];
 
@@ -18,6 +19,8 @@ const TutorialLink: React.FC<TutorialLinkProps> = ({
   color = 'blue',
   icon,
 }) => {
+  const { t } = useTranslation();
+
   const handleLink = (e) => {
     e.preventDefault();
     // Prevents event from bubbling up to parent
@@ -68,7 +71,7 @@ const TutorialLink: React.FC<TutorialLinkProps> = ({
       color={color}
       icon={icon}
     >
-      Cloud Doc
+      {t('public~Cloud Doc')}
     </Label>
   );
 };
