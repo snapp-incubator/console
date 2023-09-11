@@ -16,6 +16,7 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
+import InfoCircleIcon from '@patternfly/react-icons/dist/esm/icons/info-circle-icon';
 import { ResourceStatus } from '@console/dynamic-plugin-sdk';
 import { RootState } from '@console/internal/redux';
 import {
@@ -42,6 +43,7 @@ import {
   referenceForModel,
 } from '../../module/k8s';
 import { ManagedByOperatorLink } from './managed-by';
+import TutorialLink from '@console/shared/src/components/tutorial-link';
 
 export const ResourceItemDeleting = () => {
   const { t } = useTranslation();
@@ -136,6 +138,14 @@ export const PageHeading = connectToModel((props: PageHeadingProps) => {
   const resourceStatus = hasData && getResourceStatus ? getResourceStatus(data) : null;
   const showHeading = props.icon || kind || resourceTitle || resourceStatus || badge || showActions;
   const showBreadcrumbs = breadcrumbs || (breadcrumbsFor && !_.isEmpty(data));
+
+  const getResourceTitleString = (pageTitle: any): string => {
+    if (typeof pageTitle === 'string') {
+      return pageTitle.toString().toLowerCase();
+    }
+    return '';
+  };
+
   return (
     <>
       {showBreadcrumbs && (
@@ -212,6 +222,11 @@ export const PageHeading = connectToModel((props: PageHeadingProps) => {
                   : customActionMenu}
               </div>
             )}
+            <TutorialLink
+              type="pages"
+              id={`page-${getResourceTitleString(resourceTitle)}`}
+              icon={<InfoCircleIcon />}
+            />
           </Text>
         )}
         {helpText && (
