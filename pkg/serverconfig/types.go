@@ -109,7 +109,7 @@ type QuickStarts struct {
 
 type TutorialUrls struct {
 	Sections []TutorialUrlsTypesState `json:"sections,omitempty" yaml:"sections,omitempty"`
-	Types TutorialUrlsTypesState `json:"types,omitempty" yaml:"types,omitempty"`
+	Pages []TutorialUrlsTypesState `json:"pages,omitempty" yaml:"pages,omitempty"`
 }
 
 type TutorialUrlsTypesState struct {

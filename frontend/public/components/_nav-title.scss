@@ -1,12 +1,13 @@
 .co-actions {
   align-items: flex-end;
   display: flex;
-  @media(max-width: $screen-xs){
+  padding-left: 0.5rem;
+  @media (max-width: $screen-xs) {
     flex-direction: column;
   }
 }
 
-@media(max-width: $screen-xs){
+@media (max-width: $screen-xs) {
   .co-action-buttons__btn {
     margin-bottom: 10px;
   }

@@ -1,0 +1,41 @@
+apiVersion: console.openshift.io/v1beta1
+kind: ConsoleConfig
+customization:
+  branding: okd
+  documentationBaseURL: https://docs.snappcloud.io/
+  tutorialUrls:
+    sections:
+      - id:  add-operator-backed
+        url: https://docs.snappcloud.io/docs/quickstart/deploy/deploy-catalog
+      - id:  add-import-from-git
+        url: https://docs.snappcloud.io/docs/cicd/gitlab/ssh-keys
+      - id:  add-deploy-image
+        url: https://docs.snappcloud.io/docs
+      - id:  operator-redis
+        url: https://docs.snappcloud.io/docs/databases/redis
+      - id:  operator-postgres
+        url: https://docs.snappcloud.io/docs/databases/postgres
+      - id:  operator-mongo
+        url: https://docs.snappcloud.io/docs/databases/mongodb
+    pages:
+      - id:  page-observe
+        url: https://docs.snappcloud.io/docs/observability/centralized-logging     
+      - id:  page-pods
+        url: https://docs.snappcloud.io/docs/management/automation/pod-scheduling
+
+  developerCatalog:
+    categories:
+    - id: databases
+      label: Databases 
+      docs: https://docs.snappcloud.io/docs
+      subcategories:   
+      - id: postgres
+        label: Postgres 
+        tags:
+          - postgres
+        docs: https://docs.snappcloud.io/docs  
+      - id: redis
+        label: Redis
+        tags:
+          - Redis
+        docs: https://docs.snappcloud.io/docs
