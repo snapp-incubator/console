@@ -14,7 +14,7 @@ import {
   ArrayFieldTemplate as DefaultArrayFieldTemplate,
   ErrorTemplate as DefaultErrorTemplate,
 } from './templates';
-import { getSchemaErrors } from './utils';
+import { getSchemaErrors, replaceAnyOfWithFirstType } from './utils';
 import defaultWidgets from './widgets';
 import './styles.scss';
 
@@ -42,6 +42,7 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
 }) => {
   const { t } = useTranslation();
   const schemaErrors = getSchemaErrors(schema);
+  replaceAnyOfWithFirstType(schema);
   // IF the top level schema is unsupported, don't render a form at all.
   if (schemaErrors.length) {
     // eslint-disable-next-line no-console
