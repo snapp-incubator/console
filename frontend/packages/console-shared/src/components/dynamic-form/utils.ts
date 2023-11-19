@@ -286,3 +286,29 @@ const pruneRecursive = (current: any, sample: any): any => {
 export const prune = (obj: any, sample?: any): any => {
   return pruneRecursive(_.cloneDeep(obj), sample);
 };
+
+export const replaceAnyOfWithFirstType = (obj) => {
+  if (obj && typeof obj === 'object') {
+    if (Array.isArray(obj)) {
+      // If it's an array, iterate through the items
+      for (let i = 0; i < obj.length; i++) {
+        obj[i] = replaceAnyOfWithFirstType(obj[i]);
+      }
+    } else {
+      // If it's an object, iterate through its properties
+      for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          // Recursively process nested objects
+          obj[key] = replaceAnyOfWithFirstType(obj[key]);
+
+          // Replace 'anyOf' with the type of the first value
+          if (key === 'anyOf' && Array.isArray(obj[key]) && obj[key].length > 0) {
+            obj.type = obj[key][0].type;
+            delete obj[key];
+          }
+        }
+      }
+    }
+  }
+  return obj;
+};
