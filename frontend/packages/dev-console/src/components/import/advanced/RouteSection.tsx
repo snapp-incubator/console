@@ -15,12 +15,12 @@ const RouteSection: React.FC<RouteSectionProps> = ({ route, resources }) => {
   const { defaultUnknownPort, disable, create } = route;
 
   // Disable Route Component: Allow disabling route creation via env var
-  const hideRouteCreation = process.env.HIDE_ROUTE_CREATION === 'true';
+  const showRouteCreation = process.env.HIDE_ROUTE_CREATION !== 'true';
 
   return (
     <>
       <PortInputField defaultPort={defaultUnknownPort} />
-      {!hideRouteCreation && (
+      {showRouteCreation ? (
         <>
           <CheckboxField
             name="route.create"
@@ -30,6 +30,8 @@ const RouteSection: React.FC<RouteSectionProps> = ({ route, resources }) => {
           />
           <AdvancedRouteOptions canCreateRoute={create} resources={resources} />
         </>
+      ) : (
+        ''
       )}
     </>
   );
