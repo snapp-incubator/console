@@ -10,7 +10,7 @@ import {
   PersistentVolumeClaimModel,
   ServiceModel,
   StatefulSetModel,
-  RouteModel,
+  HTTPProxyModel,
   ConfigMapModel,
   SecretModel,
   VolumeSnapshotModel,
@@ -168,7 +168,7 @@ export const InventoryCard = () => {
             mapper={getPVCStatusGroups}
           />
           <ProjectInventoryItem projectName={projectName} model={ServiceModel} />
-          <ProjectInventoryItem projectName={projectName} model={RouteModel} />
+          <ProjectInventoryItem projectName={projectName} model={HTTPProxyModel} />
           <ProjectInventoryItem projectName={projectName} model={ConfigMapModel} />
           {canListSecrets && <ProjectInventoryItem projectName={projectName} model={SecretModel} />}
           <ProjectInventoryItem
