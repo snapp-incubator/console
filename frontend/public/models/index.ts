@@ -491,6 +491,23 @@ export const RouteModel: K8sKind = {
   id: 'route',
 };
 
+export const HTTPProxyModel: K8sKind = {
+  label: 'HTTPProxy',
+  // t('public~HTTPProxy')
+  labelKey: 'public~HTTPProxy',
+  labelPlural: 'HTTPProxies',
+  // t('public~HTTPProxies')
+  labelPluralKey: 'public~HTTPProxies',
+  apiGroup: 'projectcontour.io',
+  apiVersion: 'v1',
+  plural: 'httpproxies',
+  abbr: 'HP',
+  namespaced: true,
+  kind: 'HTTPProxy',
+  id: 'httpproxy',
+  crd: true,
+};
+
 export const ConfigMapModel: K8sKind = {
   apiVersion: 'v1',
   label: 'ConfigMap',
