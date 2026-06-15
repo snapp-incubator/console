@@ -1,0 +1,63 @@
+name: Build and Push Console Image
+
+on:
+  push:
+    branches:
+      - master
+      - main
+      - release-**
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: Optional extra image tag, for example v1.0.0
+        required: false
+        type: string
+
+env:
+  REGISTRY: quay.io
+  IMAGE_NAME: snapp/console
+  DOCKERFILE: Dockerfile.snapp
+
+jobs:
+  build-and-push:
+    name: Build and push
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Quay
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix=sha-
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=${{ inputs.image_tag }},enable=${{ github.event_name == 'workflow_dispatch' && inputs.image_tag != '' }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ${{ env.DOCKERFILE }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            NPM_PROXY_ADDRESS=${{ vars.NPM_PROXY_ADDRESS || 'https://repo.snapp.tech/repository/npm-proxy' }}
