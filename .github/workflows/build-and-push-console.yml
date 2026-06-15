@@ -3,9 +3,7 @@ name: Build and Push Console Image
 on:
   push:
     branches:
-      - master
-      - main
-      - release-**
+      - '**'
   workflow_dispatch:
     inputs:
       image_tag:
