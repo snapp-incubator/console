@@ -27,6 +27,10 @@ const POLLs = {};
 const apiDiscovery = 'apiDiscovery';
 
 type K8sEvent = { type: 'ADDED' | 'DELETED' | 'MODIFIED'; object: K8sResourceKind };
+type CRDDiscoveryEvent = K8sResourceKind | K8sEvent;
+
+const isAPIChangeEvent = (event: CRDDiscoveryEvent): event is K8sEvent =>
+  'type' in event && (event.type === 'ADDED' || event.type === 'DELETED');
 
 export const getResources = () => (dispatch: Dispatch) => {
   dispatch(getResourcesInFlight());
@@ -60,15 +64,19 @@ export const startAPIDiscovery = () => (dispatch) => {
       if (res.status.allowed) {
         // eslint-disable-next-line no-console
         console.log('API discovery method: Watching');
+        // Always dispatch an initial call.
+        dispatch(getResources());
         // Watch CRDs and dispatch refreshAPI action whenever an event is received
         dispatch(
           watchK8sList(
             reduxID,
             {},
             CustomResourceDefinitionModel,
-            // Only re-run API discovery on added or removed CRDs.
-            (_id: string, events: K8sEvent[]) =>
-              events.some((e) => e.type !== 'MODIFIED') ? getResources() : _.noop,
+            // Re-run API discovery on added or removed CRDs. This callback is initially called
+            // with all CRD resources and later with watch events.
+            (_id: string, crdsOrEvents: CRDDiscoveryEvent[]) =>
+              crdsOrEvents.some(isAPIChangeEvent) ? getResources() : _.noop,
+            true,
           ),
         );
       } else {

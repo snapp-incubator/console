@@ -32,7 +32,8 @@ describe('startAPIDiscovery', () => {
     const crdReduxID = makeReduxID(CustomResourceDefinitionModel, {});
     const dispatch = jest.fn();
     jest.spyOn(console, 'log');
-    jest.spyOn(sdkK8sActions, 'watchK8sList').mockImplementation(() => {});
+    const getResources = jest.spyOn(k8sActions, 'getResources').mockImplementation(() => {});
+    const watchK8sList = jest.spyOn(sdkK8sActions, 'watchK8sList').mockImplementation(() => {});
     await k8sActions.startAPIDiscovery()(dispatch);
     expect(sdkK8sActions.watchK8sList).toHaveBeenCalledTimes(1);
     expect(sdkK8sActions.watchK8sList).toHaveBeenCalledWith(
@@ -40,7 +41,22 @@ describe('startAPIDiscovery', () => {
       {},
       CustomResourceDefinitionModel,
       expect.any(Function),
+      true,
     );
+    expect(getResources).toHaveBeenCalledTimes(1);
+
+    const extraAction = watchK8sList.mock.calls[0][3];
+    extraAction(crdReduxID, [{ metadata: { name: 'foo.example.com' } }]);
+    extraAction(crdReduxID, [
+      { type: 'MODIFIED', object: { metadata: { name: 'foo.example.com' } } },
+    ]);
+    expect(getResources).toHaveBeenCalledTimes(1);
+
+    extraAction(crdReduxID, [
+      { type: 'ADDED', object: { metadata: { name: 'foo.example.com' } } },
+    ]);
+    expect(getResources).toHaveBeenCalledTimes(2);
+
     // eslint-disable-next-line no-console
     expect(console.log).toHaveBeenLastCalledWith('API discovery method: Watching');
   });
