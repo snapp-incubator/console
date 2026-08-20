@@ -73,7 +73,8 @@ const DeleteModal = withHandlePromise((props: DeleteModalProps & HandlePromisePr
         // eslint-disable-next-line no-console
         console.error('Could not fetch CSVs', e);
       });
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.resource]);
 
   const { kind, resource, message, errorMessage } = props;
   return (
