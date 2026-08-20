@@ -25,12 +25,16 @@ export const useClusterServiceVersion = (
   });
   const [globalCSV, globalCSVLoaded, globalCSVLoadError] = useK8sWatchResource<
     ClusterServiceVersionKind
-  >({
-    groupVersionKind,
-    name,
-    namespace: GLOBAL_COPIED_CSV_NAMESPACE,
-    optional: window.SERVER_FLAGS.copiedCSVsDisabled,
-  });
+  >(
+    window.SERVER_FLAGS.copiedCSVsDisabled
+      ? {
+          groupVersionKind,
+          name,
+          namespace: GLOBAL_COPIED_CSV_NAMESPACE,
+          optional: true,
+        }
+      : null,
+  );
 
   return React.useMemo(() => {
     if (window.SERVER_FLAGS.copiedCSVsDisabled && Boolean(namespacedCSVLoadError)) {

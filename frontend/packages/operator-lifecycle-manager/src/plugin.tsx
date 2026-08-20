@@ -262,6 +262,7 @@ const plugin: Plugin<ConsumedExtensions> = [
           kind: referenceForModel(models.ClusterServiceVersionModel),
           isList: true,
           prop: 'clusterServiceVersions',
+          selector: { matchExpressions: [{ key: 'olm.copiedFrom', operator: 'DoesNotExist' }] },
         },
         {
           kind: referenceForModel(models.SubscriptionModel),
