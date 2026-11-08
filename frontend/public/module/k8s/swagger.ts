@@ -24,7 +24,11 @@ export const getDefinitionKey = _.memoize(
 let swaggerDefinitions: SwaggerDefinitions;
 export const getSwaggerDefinitions = (): SwaggerDefinitions => swaggerDefinitions;
 
-export const fetchSwagger = async (): Promise<SwaggerDefinitions> => {
+// The OpenAPI document is large (tens of MB on clusters with many CRDs), so concurrent callers
+// share one in-flight request instead of each downloading and parsing their own copy.
+let swaggerRequest: Promise<SwaggerDefinitions> = null;
+
+const requestSwagger = async (): Promise<SwaggerDefinitions> => {
   // Remove any old definitions from `localSotrage`. We rely on the browser cache now.
   // TODO: We should be able to remove this in a future release.
   localStorage.removeItem(SWAGGER_LOCAL_STORAGE_KEY);
@@ -42,6 +46,15 @@ export const fetchSwagger = async (): Promise<SwaggerDefinitions> => {
     console.error('Could not get OpenAPI definitions', e);
     return null;
   }
+};
+
+export const fetchSwagger = (): Promise<SwaggerDefinitions> => {
+  if (!swaggerRequest) {
+    swaggerRequest = requestSwagger().finally(() => {
+      swaggerRequest = null;
+    });
+  }
+  return swaggerRequest;
 };
 
 export const definitionFor = _.memoize((model: K8sKind): SwaggerDefinition => {

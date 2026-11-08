@@ -32,7 +32,32 @@ type CRDDiscoveryEvent = K8sResourceKind | K8sEvent;
 const isAPIChangeEvent = (event: CRDDiscoveryEvent): event is K8sEvent =>
   'type' in event && (event.type === 'ADDED' || event.type === 'DELETED');
 
+export const SWAGGER_REFRESH_DELAY = 10000;
+export const SWAGGER_REFRESH_MAX_WAIT = 60000;
+
+// Refresh OpenAPI definitions once discovery settles. Several discovery runs in a row (e.g. a
+// burst of CRD changes) result in a single fetch of the large OpenAPI document.
+const refreshSwagger = _.debounce(
+  () =>
+    fetchSwagger().catch((e) => {
+      // eslint-disable-next-line no-console
+      console.error('Could not fetch OpenAPI yaml after fetching all resources.', e);
+    }),
+  SWAGGER_REFRESH_DELAY,
+  { maxWait: SWAGGER_REFRESH_MAX_WAIT },
+);
+
+let discoveryInFlight = false;
+let discoveryRequested = false;
+
 export const getResources = () => (dispatch: Dispatch) => {
+  // Coalesce overlapping discovery runs: while one is in flight, remember that another was
+  // requested and run it once after the current one completes.
+  if (discoveryInFlight) {
+    discoveryRequested = true;
+    return;
+  }
+  discoveryInFlight = true;
   dispatch(getResourcesInFlight());
 
   getResources_()
@@ -44,12 +69,12 @@ export const getResources = () => (dispatch: Dispatch) => {
     // eslint-disable-next-line no-console
     .catch((err) => console.error('Fetching resource failed:', err))
     .finally(() => {
-      setTimeout(() => {
-        fetchSwagger().catch((e) => {
-          // eslint-disable-next-line no-console
-          console.error('Could not fetch OpenAPI yaml after fetching all resources.', e);
-        });
-      }, 10000);
+      discoveryInFlight = false;
+      refreshSwagger();
+      if (discoveryRequested) {
+        discoveryRequested = false;
+        getResources()(dispatch);
+      }
     });
 };
 
