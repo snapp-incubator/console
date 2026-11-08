@@ -146,12 +146,12 @@ func main() {
 	fNodeArchitectures := fs.String("node-architectures", "", "List of node architectures. Example --node-architecture=amd64,arm64")
 	fNodeOperatingSystems := fs.String("node-operating-systems", "", "List of node operating systems. Example --node-operating-system=linux,windows")
 	fCopiedCSVsDisabled := fs.Bool("copied-csvs-disabled", false, "Flag to indicate if OLM copied CSVs are disabled.")
+	fTutorialUrls := fs.String("tutorial-urls", "", "Allow customization of available tutorial urls in console. (JSON as string)")
 
 	// TODO Remove multicluster
 	fManagedClusterConfigs := fs.String("managed-clusters", "", "List of managed cluster configurations. (JSON as string)")
 	fHubConsoleURL := fs.String("hub-console-url", "", "URL of the hub cluster's console in a multi cluster environment.")
 	// TODO Remove multicluster
-	fTutorialUrls := fs.String("tutorial-urls", "", "Allow customization of available tutorial urls in console. (JSON as string)")
 
 	if err := serverconfig.Parse(fs, os.Args[1:], "BRIDGE"); err != nil {
 		fmt.Fprintln(os.Stderr, err.Error())
