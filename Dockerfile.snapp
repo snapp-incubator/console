@@ -1,30 +1,46 @@
 ##################################################
 #
-# go backend build
+# Snapp console image, based on upstream release-4.14 Dockerfile.
+# Upstream uses registry.ci.openshift.org builder images (CI credentials
+# required); these are the public equivalents.
 ARG NPM_PROXY_ADDRESS="https://repo.snapp.tech/repository/npm-proxy"
 
-FROM quay.io/coreos/tectonic-console-builder:v25 AS gobuilder
-#ENV http_proxy=
-#ENV https_proxy=
-RUN yarn config set registry ${NPM_PROXY_ADDRESS}
+##################################################
+#
+# go backend build
+FROM docker.io/library/golang:1.20 AS gobuilder
+ENV CGO_ENABLED=0
 RUN mkdir -p /go/src/github.com/openshift/console/
 ADD . /go/src/github.com/openshift/console/
 WORKDIR /go/src/github.com/openshift/console/
-RUN ./build-backend.sh
-RUN cd frontend
-RUN cd frontend && \
-    yarn config set registry ${NPM_PROXY_ADDRESS} && \
-    yarn install
-RUN cd frontend && yarn run build
+RUN git config --global --add safe.directory /go/src/github.com/openshift/console && \
+    ./build-backend.sh
 
+##################################################
+#
+# nodejs frontend build (yarn 4 is vendored in frontend/.yarn/releases)
+FROM docker.io/library/node:18 AS nodebuilder
+ARG NPM_PROXY_ADDRESS
+
+# prevent download of chromedriver, geckodriver, and the cypress binary as part of module installs
+ENV CHROMEDRIVER_SKIP_DOWNLOAD=true \
+    GECKODRIVER_SKIP_DOWNLOAD=true \
+    CYPRESS_INSTALL_BINARY=0 \
+    YARN_NPM_REGISTRY_SERVER=${NPM_PROXY_ADDRESS}
+
+ADD . /opt/app-root/src
+WORKDIR /opt/app-root/src/frontend
+
+RUN node .yarn/releases/yarn-4.12.0.cjs install --immutable && \
+    node .yarn/releases/yarn-4.12.0.cjs build
 
 ##################################################
 #
 # actual base image for final product
-FROM openshift/origin-base
+FROM registry.access.redhat.com/ubi8/ubi-minimal
 RUN mkdir -p /opt/bridge/bin
 COPY --from=gobuilder /go/src/github.com/openshift/console/bin/bridge /opt/bridge/bin
-COPY --from=gobuilder /go/src/github.com/openshift/console/frontend/public/dist /opt/bridge/static
+COPY --from=nodebuilder /opt/app-root/src/frontend/public/dist /opt/bridge/static
 COPY --from=gobuilder /go/src/github.com/openshift/console/pkg/graphql/schema.graphql /pkg/graphql/schema.graphql
 
 WORKDIR /
