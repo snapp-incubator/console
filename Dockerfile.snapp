@@ -3,7 +3,9 @@
 # Snapp console image, based on upstream release-4.14 Dockerfile.
 # Upstream uses registry.ci.openshift.org builder images (CI credentials
 # required); these are the public equivalents.
-ARG NPM_PROXY_ADDRESS="https://repo.snapp.tech/repository/npm-proxy"
+# Optional npm registry/proxy for yarn (e.g. https://repo.snapp.tech/repository/npm-proxy).
+# Empty = yarn default registry. GitHub-hosted runners cannot rely on the internal proxy.
+ARG NPM_PROXY_ADDRESS=""
 
 ##################################################
 #
@@ -25,13 +27,13 @@ ARG NPM_PROXY_ADDRESS
 # prevent download of chromedriver, geckodriver, and the cypress binary as part of module installs
 ENV CHROMEDRIVER_SKIP_DOWNLOAD=true \
     GECKODRIVER_SKIP_DOWNLOAD=true \
-    CYPRESS_INSTALL_BINARY=0 \
-    YARN_NPM_REGISTRY_SERVER=${NPM_PROXY_ADDRESS}
+    CYPRESS_INSTALL_BINARY=0
 
 ADD . /opt/app-root/src
 WORKDIR /opt/app-root/src/frontend
 
-RUN node .yarn/releases/yarn-4.12.0.cjs install --immutable && \
+RUN if [ -n "${NPM_PROXY_ADDRESS}" ]; then export YARN_NPM_REGISTRY_SERVER="${NPM_PROXY_ADDRESS}"; fi && \
+    node .yarn/releases/yarn-4.12.0.cjs install --immutable && \
     node .yarn/releases/yarn-4.12.0.cjs build
 
 ##################################################

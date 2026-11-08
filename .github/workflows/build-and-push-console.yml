@@ -58,4 +58,4 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            NPM_PROXY_ADDRESS=${{ vars.NPM_PROXY_ADDRESS || 'https://repo.snapp.tech/repository/npm-proxy' }}
+            NPM_PROXY_ADDRESS=${{ vars.NPM_PROXY_ADDRESS }}
