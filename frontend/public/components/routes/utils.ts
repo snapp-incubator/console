@@ -116,7 +116,6 @@ export const convertEditFormToRoute = (
     {
       router: routeType,
     },
-
   );
 
   // If the port is unnamed, there is only one port. Use the port number.

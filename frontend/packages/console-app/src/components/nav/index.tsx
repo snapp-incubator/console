@@ -12,7 +12,6 @@ type NavigationProps = {
 export const Navigation: React.FC<NavigationProps> = React.memo(function Navigation({
   isNavOpen,
   onNavSelect,
-  onPerspectiveSelected,
 }) {
   const { t } = useTranslation();
   return (

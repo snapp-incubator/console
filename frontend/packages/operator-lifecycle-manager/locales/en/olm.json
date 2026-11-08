@@ -4,8 +4,8 @@
   "**Operator backed** includes a variety of services managed by Kubernetes controllers.": "**Operator backed** includes a variety of services managed by Kubernetes controllers.",
   "Operator Backed Services": "Operator Backed Services",
   "OperatorHub": "OperatorHub",
-  "Installed Operators": "Installed Operators",
   "Managed Services": "Managed Services",
+  "Installed Operators": "Installed Operators",
   "Edit {{item}}": "Edit {{item}}",
   "Delete {{item}}": "Delete {{item}}",
   "Disable": "Disable",
@@ -412,7 +412,5 @@
   "Hide operator description": "Hide operator description",
   "Show operator description": "Show operator description",
   "Operator description": "Operator description",
-  "This resource is provided by {{operatorName}}, a Kubernetes Operator enabled by the Operator Lifecycle Manager.": "This resource is provided by {{operatorName}}, a Kubernetes Operator enabled by the Operator Lifecycle Manager.",
-  "Installed Services": "Installed Services",
-  "Managed Operators": "Managed Operators"
+  "This resource is provided by {{operatorName}}, a Kubernetes Operator enabled by the Operator Lifecycle Manager.": "This resource is provided by {{operatorName}}, a Kubernetes Operator enabled by the Operator Lifecycle Manager."
 }

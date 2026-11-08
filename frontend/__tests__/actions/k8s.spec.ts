@@ -33,6 +33,8 @@ describe('startAPIDiscovery', () => {
     const dispatch = jest.fn();
     jest.spyOn(console, 'log');
     const getResources = jest.spyOn(k8sActions, 'getResources').mockImplementation(() => {});
+    // The polling test above already called the same spy.
+    getResources.mockClear();
     const watchK8sList = jest.spyOn(sdkK8sActions, 'watchK8sList').mockImplementation(() => {});
     await k8sActions.startAPIDiscovery()(dispatch);
     expect(sdkK8sActions.watchK8sList).toHaveBeenCalledTimes(1);
@@ -52,9 +54,7 @@ describe('startAPIDiscovery', () => {
     ]);
     expect(getResources).toHaveBeenCalledTimes(1);
 
-    extraAction(crdReduxID, [
-      { type: 'ADDED', object: { metadata: { name: 'foo.example.com' } } },
-    ]);
+    extraAction(crdReduxID, [{ type: 'ADDED', object: { metadata: { name: 'foo.example.com' } } }]);
     expect(getResources).toHaveBeenCalledTimes(2);
 
     // eslint-disable-next-line no-console
