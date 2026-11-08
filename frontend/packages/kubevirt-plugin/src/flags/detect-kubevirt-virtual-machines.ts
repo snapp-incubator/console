@@ -1,5 +1,5 @@
 import { SetFeatureFlag } from '@console/dynamic-plugin-sdk';
-import { fetchSwagger } from '@console/internal/module/k8s';
+import { fetchSwagger, getSwaggerDefinitions } from '@console/internal/module/k8s';
 import {
   FLAG_KUBEVIRT,
   FLAG_KUBEVIRT_HAS_PRINTABLESTATUS,
@@ -13,9 +13,12 @@ export const detectKubevirtVirtualMachines = async (setFeatureFlag: SetFeatureFl
   let hasPrintableStatus = false;
   let id = null;
 
-  // Get swagger schema
+  // Get swagger schema. Reuse the definitions the console already keeps up to date (fetched on
+  // start, after API discovery and every 5 minutes) instead of downloading the whole OpenAPI
+  // document on every 10 second tick.
   const updateKubevirtFlags = () => {
-    fetchSwagger()
+    const swaggerDefinitions = getSwaggerDefinitions();
+    (swaggerDefinitions ? Promise.resolve(swaggerDefinitions) : fetchSwagger())
       .then((yamlOpenAPI) => {
         // Check for known apiVersions
         hasV1APIVersion = !!yamlOpenAPI['io.kubevirt.v1.VirtualMachine'];
