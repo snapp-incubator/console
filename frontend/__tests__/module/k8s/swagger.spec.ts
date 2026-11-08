@@ -5,7 +5,7 @@ jest.mock('../../../public/co-fetch', () => ({
   coFetchJSON: jest.fn(),
 }));
 
-const coFetchJSONMock = coFetchJSON as jest.Mock;
+const coFetchJSONMock = (coFetchJSON as unknown) as jest.Mock;
 
 Object.defineProperty(window, 'localStorage', {
   value: { removeItem: jest.fn() },

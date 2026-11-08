@@ -1,19 +1,18 @@
 import * as k8sActions from '../../public/actions/k8s';
 import { getResources as getResources_ } from '../../public/module/k8s/get-resources';
-import { fetchSwagger } from '../../public/module/k8s';
+import { fetchSwagger } from '../../public/module/k8s/swagger';
 
 jest.mock('../../public/module/k8s/get-resources', () => ({
   getResources: jest.fn(),
   cacheResources: jest.fn(),
 }));
 
-jest.mock('../../public/module/k8s', () => ({
-  ...jest.requireActual('../../public/module/k8s'),
+jest.mock('../../public/module/k8s/swagger', () => ({
   fetchSwagger: jest.fn(() => Promise.resolve({})),
 }));
 
-const getResourcesMock = getResources_ as jest.Mock;
-const fetchSwaggerMock = fetchSwagger as jest.Mock;
+const getResourcesMock = (getResources_ as unknown) as jest.Mock;
+const fetchSwaggerMock = (fetchSwagger as unknown) as jest.Mock;
 
 const flushPromises = () => new Promise((resolve) => setImmediate(resolve));
 
