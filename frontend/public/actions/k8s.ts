@@ -49,12 +49,17 @@ const refreshSwagger = _.debounce(
 
 let discoveryInFlight = false;
 let discoveryRequested = false;
+let openAPIRefreshRequested = false;
 
-export const getResources = () => (dispatch: Dispatch) => {
+// `refreshOpenAPI` is false only for the initial discovery run: the console fetches the OpenAPI
+// definitions on start already, so refreshing them again right after would parse the same large
+// document twice per page load.
+export const getResources = (refreshOpenAPI = true) => (dispatch: Dispatch) => {
   // Coalesce overlapping discovery runs: while one is in flight, remember that another was
   // requested and run it once after the current one completes.
   if (discoveryInFlight) {
     discoveryRequested = true;
+    openAPIRefreshRequested = openAPIRefreshRequested || refreshOpenAPI;
     return;
   }
   discoveryInFlight = true;
@@ -70,10 +75,14 @@ export const getResources = () => (dispatch: Dispatch) => {
     .catch((err) => console.error('Fetching resource failed:', err))
     .finally(() => {
       discoveryInFlight = false;
-      refreshSwagger();
+      if (refreshOpenAPI) {
+        refreshSwagger();
+      }
       if (discoveryRequested) {
+        const refreshAfterNextRun = openAPIRefreshRequested;
         discoveryRequested = false;
-        getResources()(dispatch);
+        openAPIRefreshRequested = false;
+        getResources(refreshAfterNextRun)(dispatch);
       }
     });
 };
@@ -89,8 +98,8 @@ export const startAPIDiscovery = () => (dispatch) => {
       if (res.status.allowed) {
         // eslint-disable-next-line no-console
         console.log('API discovery method: Watching');
-        // Always dispatch an initial call.
-        dispatch(getResources());
+        // Always dispatch an initial call. OpenAPI definitions are already fetched on start.
+        dispatch(getResources(false));
         // Watch CRDs and dispatch refreshAPI action whenever an event is received
         dispatch(
           watchK8sList(
